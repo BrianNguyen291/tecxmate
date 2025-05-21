@@ -9,7 +9,7 @@ export function useMobile() {
     const checkIfMobile = () => {
       setIsMobile(window.innerWidth < 768)
     }
-
+//
     // Initial check
     checkIfMobile()
 
