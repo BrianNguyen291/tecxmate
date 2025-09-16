@@ -6,10 +6,28 @@ import { ThemeProvider } from "@/components/theme-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
+
 export const metadata: Metadata = {
   title: "Tecxmate - think, solve, & build",
   description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
-    generator: 'v0.dev'
+  generator: 'v0.dev',
+  metadataBase: new URL(baseUrl),
+  alternates: {
+    canonical: baseUrl,
+  },
+  openGraph: {
+    title: "Tecxmate - think, solve, & build",
+    description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
+    url: baseUrl,
+    siteName: "Tecxmate",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Tecxmate - think, solve, & build",
+    description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
+  },
 }
 
 export default function RootLayout({

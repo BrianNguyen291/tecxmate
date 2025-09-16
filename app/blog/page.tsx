@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { BlogListing } from "@/components/blog-listing"
-import { EnvChecker } from "@/components/env-checker"
 
 export default function BlogPage() {
   return (
@@ -21,7 +20,6 @@ export default function BlogPage() {
 
         <section className="py-12 md:py-16">
           <div className="container px-4 md:px-6">
-            <EnvChecker />
             <BlogListing />
           </div>
         </section>

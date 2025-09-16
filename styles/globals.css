@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+/* WordPress content styling */
+.wp-content {
+  @apply prose prose-neutral md:prose-lg max-w-none;
+}
+
+/* Make images responsive and centered */
+.wp-content img {
+  @apply mx-auto h-auto max-w-full rounded-lg;
+}
+
+/* Gutenberg figure captions */
+.wp-content figure {
+  @apply my-6;
+}
+
+.wp-content figcaption {
+  @apply mt-2 text-center text-sm text-gray-500;
+}
+
+/* Headings spacing */
+.wp-content h2 {
+  @apply mt-10 border-b pb-2;
+}
+
+.wp-content ul, .wp-content ol {
+  @apply my-6 pl-6;
+}
+
+.wp-content a {
+  @apply text-primary underline underline-offset-2 hover:opacity-80;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
 }

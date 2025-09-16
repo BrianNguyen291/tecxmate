@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Calendar, Clock, ArrowRight, Search } from "lucide-react"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
-import type { BlogPost } from "@/lib/notion"
+import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 
 export function BlogListing() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])

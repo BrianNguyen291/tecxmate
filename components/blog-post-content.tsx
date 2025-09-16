@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
 import Link from "next/link"
-import type { BlogPost } from "@/lib/notion"
-import ReactMarkdown from "react-markdown"
+import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 import { useRouter } from "next/navigation"
 
 interface BlogPostContentProps {
@@ -102,9 +101,7 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
             <ArrowLeft className="h-4 w-4" /> Back to all posts
           </Link>
 
-          <div className="prose prose-lg max-w-none">
-            <ReactMarkdown>{post.content || ""}</ReactMarkdown>
-          </div>
+          <div className="wp-content prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content || "" }} />
         </div>
       </div>
     </article>
