@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getAllPosts } from "@/lib/notion"
+import { wpGetAllPosts } from "@/lib/wordpress"
 
 // Fallback data in case Notion API fails
 const fallbackPosts = [
@@ -37,29 +37,10 @@ const fallbackPosts = [
 
 export async function GET() {
   try {
-    console.log("API route: Attempting to fetch blog posts")
-
-    // Check if environment variables are set
-    if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
-      console.log("API route: Environment variables missing, returning fallback data")
-      return NextResponse.json(fallbackPosts)
-    }
-
-    // Try to fetch posts from Notion
-    const posts = await getAllPosts()
-
-    // If we got posts, return them
-    if (posts && posts.length > 0) {
-      console.log(`API route: Successfully fetched ${posts.length} posts from Notion`)
-      return NextResponse.json(posts)
-    }
-
-    // If no posts were returned, use fallback data
-    console.log("API route: No posts returned from Notion, using fallback data")
+    const posts = await wpGetAllPosts()
+    if (posts && posts.length > 0) return NextResponse.json(posts)
     return NextResponse.json(fallbackPosts)
   } catch (error) {
-    console.error("API route error:", error)
-    console.log("API route: Error occurred, returning fallback data")
     return NextResponse.json(fallbackPosts)
   }
 }

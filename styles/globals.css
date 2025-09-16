@@ -84,6 +84,54 @@ body {
   }
 }
 
+/* Basic formatting for WordPress HTML */
+.wp-content {
+  color: #111827;
+  line-height: 1.75;
+}
+.wp-content h1,.wp-content h2,.wp-content h3,.wp-content h4,.wp-content h5,.wp-content h6{
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+.wp-content h1{font-size:2rem}
+.wp-content h2{font-size:1.5rem}
+.wp-content h3{font-size:1.25rem}
+.wp-content h4{font-size:1.125rem}
+.wp-content p { margin: 1rem 0; }
+.wp-content ul { list-style: disc; padding-left: 1.25rem; margin: 1rem 0; }
+.wp-content ol { list-style: decimal; padding-left: 1.25rem; margin: 1rem 0; }
+.wp-content img { display: block; margin: 1.5rem auto; border-radius: 0.5rem; max-width: 100%; height: auto; }
+.wp-content blockquote { border-left: 4px solid #e5e7eb; padding-left: 1rem; color: #374151; margin: 1rem 0; }
+.wp-content a { color: #8c52ff; text-decoration: underline; }
+
+/* WordPress/Gutenberg alignment helpers */
+.wp-content .aligncenter { display:block; margin-left:auto; margin-right:auto; }
+.wp-content .alignleft { float:left; margin-right:1rem; }
+.wp-content .alignright { float:right; margin-left:1rem; }
+.wp-content::after{content:"";display:block;clear:both}
+
+/* Figure + caption */
+.wp-content figure { margin: 1.5rem 0; }
+.wp-content figcaption { color:#6b7280; font-size:0.875rem; text-align:center; margin-top:0.5rem; }
+
+/* Tables */
+.wp-content table { width:100%; border-collapse: collapse; margin: 1.25rem 0; }
+.wp-content table th,
+.wp-content table td { border:1px solid #e5e7eb; padding:0.5rem 0.75rem; }
+.wp-content table th { background:#f9fafb; font-weight:600; }
+
+/* Code blocks */
+.wp-content pre { background:#0b1020; color:#e5e7eb; padding:1rem; border-radius:0.5rem; overflow:auto; }
+.wp-content code { background:#f3f4f6; padding:0.125rem 0.375rem; border-radius:0.25rem; }
+
+/* Horizontal rule */
+.wp-content hr { border:0; border-top:1px solid #e5e7eb; margin:2rem 0; }
+
+/* Responsive embeds (YouTube, etc.) */
+.wp-content iframe { max-width:100%; width:100%; }
+
 @layer base {
   * {
     @apply border-border;
