@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
+import React from "react"
 import { useRouter } from "next/navigation"
 
 interface BlogPostContentProps {

@@ -10,100 +10,86 @@ export type WPBlogPost = {
   content?: string
 }
 
-function getWordpressSite(): string {
-  return process.env.WORDPRESS_SITE || "phucphanblog.wordpress.com"
+import { WORDPRESS_API_URL } from "./wp-config"
+
+function stripHtml(html: string) {
+  return html.replace(/<[^>]*>/g, "").replace(/\s+/g, " ").trim()
 }
 
-function computeReadTimeFromHtml(html: string): string {
-  const text = html.replace(/<[^>]*>/g, " ")
-  const words = text.trim().split(/\s+/).filter(Boolean).length
+function decodeHtmlEntities(text: string) {
+  if (!text) return ""
+  // Named entities
+  const named = {
+    '&nbsp;': ' ',
+    '&amp;': '&',
+    '&lt;': '<',
+    '&gt;': '>',
+    '&quot;': '"',
+    '&#39;': "'",
+  }
+  let result = text.replace(/&nbsp;|&amp;|&lt;|&gt;|&quot;|&#39;/g, (m) => (named as any)[m] || m)
+  // Numeric decimal entities
+  result = result.replace(/&#(\d+);/g, (_, d) => String.fromCharCode(parseInt(d, 10)))
+  // Numeric hex entities
+  result = result.replace(/&#x([0-9a-fA-F]+);/g, (_, h) => String.fromCharCode(parseInt(h, 16)))
+  return result
+}
+
+function estimateReadTime(text: string) {
+  const words = text.split(/\s+/).length
   const minutes = Math.max(1, Math.round(words / 200))
   return `${minutes} min read`
 }
 
-function mapWpPostToBlogPost(post: any): WPBlogPost {
-  const rawTitle = post.title?.rendered || "Untitled"
-  const title = decodeHtmlEntities(rawTitle)
-  const excerptHtml = post.excerpt?.rendered || ""
-  const contentHtml = post.content?.rendered || ""
-  const date = post.date ? new Date(post.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }) : ""
-  const readTime = computeReadTimeFromHtml(contentHtml || excerptHtml)
-
-  let coverImage = "/placeholder.svg?height=600&width=1200"
-  try {
-    const media = post._embedded?.["wp:featuredmedia"]?.[0]
-    if (media?.source_url) coverImage = media.source_url
-  } catch {}
-
-  // Fallback: extract first image from content if no featured image
-  if (!coverImage || coverImage.includes("placeholder")) {
-    const match = contentHtml.match(/<img[^>]+src=["']([^"']+)["']/i)
-    if (match && match[1]) {
-      coverImage = match[1]
-    }
-  }
-
-  let category = "Blog"
-  try {
-    const cats = post._embedded?.["wp:term"]?.flat()?.filter((t: any) => t.taxonomy === "category")
-    if (cats && cats.length > 0 && cats[0].name) category = cats[0].name
-  } catch {}
-
-  return {
-    id: post.id,
-    slug: post.slug,
-    title,
-    excerpt: decodeHtmlEntities(excerptHtml.replace(/<[^>]*>/g, " ").trim()),
-    date,
-    readTime,
-    category,
-    coverImage,
-    content: decodeHtmlEntities(contentHtml),
-  }
+function wpFeaturedImage(post: any) {
+  const media = post._embedded?.["wp:featuredmedia"]?.[0]
+  if (media?.source_url) return media.source_url
+  if (post.jetpack_featured_media_url) return post.jetpack_featured_media_url
+  if (typeof post.featured_image === "string" && post.featured_image) return post.featured_image
+  return "/placeholder.svg?height=200&width=400"
 }
 
-function decodeHtmlEntities(html: string): string {
-  // Basic named entities
-  let decoded = html
-    .replace(/&lt;/g, "<")
-    .replace(/&gt;/g, ">")
-    .replace(/&amp;/g, "&")
-    .replace(/&quot;/g, '"')
-    .replace(/&#039;/g, "'")
-    .replace(/&nbsp;/g, " ")
-
-  // Numeric entities (decimal)
-  decoded = decoded.replace(/&#(\d+);/g, (_m, dec) => {
-    const code = parseInt(dec, 10)
-    return Number.isFinite(code) ? String.fromCharCode(code) : _m
-  })
-
-  // Numeric entities (hex)
-  decoded = decoded.replace(/&#x([0-9a-fA-F]+);/g, (_m, hex) => {
-    const code = parseInt(hex, 16)
-    return Number.isFinite(code) ? String.fromCharCode(code) : _m
-  })
-
-  return decoded
+function wpPrimaryCategory(post: any) {
+  const cat = post._embedded?.["wp:term"]?.[0]?.[0]
+  return cat?.name || "Uncategorized"
 }
 
 export async function wpGetAllPosts(): Promise<WPBlogPost[]> {
-  const site = getWordpressSite()
-  const url = `https://public-api.wordpress.com/wp/v2/sites/${site}/posts?per_page=20&_embed`
+  const url = `${WORDPRESS_API_URL}/posts?per_page=20&_embed=1`
   const res = await fetch(url, { next: { revalidate: 300 } })
   if (!res.ok) return []
   const data = await res.json()
-  return Array.isArray(data) ? data.map(mapWpPostToBlogPost) : []
+  return data.map((p: any) => ({
+    id: p.id,
+    slug: p.slug,
+    title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
+    excerpt: decodeHtmlEntities(stripHtml(p.excerpt?.rendered || "")),
+    date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    readTime: estimateReadTime(stripHtml(p.content?.rendered || "")),
+    category: wpPrimaryCategory(p),
+    coverImage: wpFeaturedImage(p),
+  }))
 }
 
 export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> {
-  const site = getWordpressSite()
-  const url = `https://public-api.wordpress.com/wp/v2/sites/${site}/posts?slug=${encodeURIComponent(slug)}&_embed`
+  const url = `${WORDPRESS_API_URL}/posts?slug=${encodeURIComponent(slug)}&_embed=1`
   const res = await fetch(url, { next: { revalidate: 300 } })
   if (!res.ok) return null
-  const data = await res.json()
-  if (!Array.isArray(data) || data.length === 0) return null
-  return mapWpPostToBlogPost(data[0])
+  const arr = await res.json()
+  const p = arr?.[0]
+  if (!p) return null
+  const contentHtml = p.content?.rendered || ""
+  return {
+    id: p.id,
+    slug: p.slug,
+    title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
+    excerpt: decodeHtmlEntities(stripHtml(p.excerpt?.rendered || "")),
+    date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+    readTime: estimateReadTime(stripHtml(contentHtml)),
+    category: wpPrimaryCategory(p),
+    coverImage: wpFeaturedImage(p),
+    content: contentHtml,
+  }
 }
 
 

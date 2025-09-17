@@ -5,42 +5,38 @@ import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { AlertCircle } from "lucide-react"
 
 export function EnvChecker() {
-  const [envStatus, setEnvStatus] = useState<{
-    notionApiKey: boolean
-    notionDatabaseId: boolean
+  const [status, setStatus] = useState<{
+    ok: boolean
+    message?: string
   } | null>(null)
 
   useEffect(() => {
-    async function checkEnv() {
+    async function checkWordPress() {
       try {
-        const response = await fetch("/api/check-env")
-        const data = await response.json()
-        setEnvStatus(data)
-      } catch (error) {
-        console.error("Error checking environment variables:", error)
+        const res = await fetch("/api/blog/posts")
+        if (!res.ok) throw new Error(`Status ${res.status}`)
+        const data = await res.json()
+        if (Array.isArray(data) && data.length > 0) {
+          setStatus({ ok: true })
+        } else {
+          setStatus({ ok: false, message: "No posts found from WordPress yet." })
+        }
+      } catch (e) {
+        setStatus({ ok: false, message: "Cannot fetch posts from WordPress API." })
       }
     }
 
-    checkEnv()
+    checkWordPress()
   }, [])
 
-  if (!envStatus) return null
-
-  if (envStatus.notionApiKey && envStatus.notionDatabaseId) return null
+  if (!status || status.ok) return null
 
   return (
     <Alert variant="destructive" className="mb-6">
       <AlertCircle className="h-4 w-4" />
-      <AlertTitle>Environment Variable Issue</AlertTitle>
+      <AlertTitle>Blog data not loaded</AlertTitle>
       <AlertDescription>
-        <p>The following environment variables are missing:</p>
-        <ul className="mt-2 list-inside list-disc">
-          {!envStatus.notionApiKey && <li>NOTION_API_KEY</li>}
-          {!envStatus.notionDatabaseId && <li>NOTION_DATABASE_ID</li>}
-        </ul>
-        <p className="mt-2">
-          Please make sure these environment variables are properly set to enable Notion integration.
-        </p>
+        {status.message || "Unable to load blog posts."}
       </AlertDescription>
     </Alert>
   )
