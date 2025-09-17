@@ -2,11 +2,12 @@ import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { BlogPostContent } from "@/components/blog-post-content"
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
+export default async function BlogPostPage(context: { params: Promise<{ slug: string }> }) {
+  const { slug } = await context.params
   return (
     <div className="min-h-screen bg-white">
       <Navbar />
-      <BlogPostContent slug={params.slug} />
+      <BlogPostContent slug={slug} />
       <Footer />
     </div>
   )

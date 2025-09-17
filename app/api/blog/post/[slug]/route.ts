@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import { getPostBySlug } from "@/lib/notion"
+import { wpGetPostBySlug } from "@/lib/wordpress"
 
 // Fallback data for specific posts
 const getFallbackPost = (slug: string) => {
@@ -17,28 +17,14 @@ const getFallbackPost = (slug: string) => {
   }
 }
 
-export async function GET(request: Request, { params }: { params: { slug: string } }) {
+export async function GET(request: Request, context: { params: Promise<{ slug: string }> }) {
   try {
-    const slug = params.slug
-    console.log(`API route: Fetching blog post with slug: ${slug}`)
-
-    // Check if environment variables are set
-    if (!process.env.NOTION_API_KEY || !process.env.NOTION_DATABASE_ID) {
-      console.log("API route: Environment variables missing, returning fallback post")
-      return NextResponse.json(getFallbackPost(slug))
-    }
-
-    const post = await getPostBySlug(slug)
-
-    if (!post) {
-      return NextResponse.json({ error: "Post not found" }, { status: 404 })
-    }
-
-    console.log(`API route: Successfully fetched post: ${post.title}`)
+    const { slug } = await context.params
+    const post = await wpGetPostBySlug(slug)
+    if (!post) return NextResponse.json({ error: "Post not found" }, { status: 404 })
     return NextResponse.json(post)
   } catch (error) {
-    console.error("API route error:", error)
-    console.log("API route: Error occurred, returning fallback post")
-    return NextResponse.json(getFallbackPost(params.slug))
+    const { slug } = await context.params
+    return NextResponse.json(getFallbackPost(slug))
   }
 }
