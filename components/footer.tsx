@@ -3,104 +3,104 @@ import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react"
 
 export function Footer() {
   return (
-    <footer className="bg-[#F6F3F1] py-12 md:py-16">
-      <div className="container px-4 md:px-6">
+    <footer className="bg-alt-black py-20 md:py-24">
+      <div className="container px-4 md:px-6 max-w-6xl">
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="space-y-4">
+          <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold tracking-tighter text-primary">TECXMATE</span>
+              <span className="text-2xl font-mono font-normal tracking-tighter text-white">tecxmate corporation.</span>
             </Link>
-            <p className="text-sm text-gray-500">
-              Empowering SMEs and Founders with premier technology consultancy and solutions.
+            <p className="text-sm text-gray-300 leading-relaxed">
+              Got an idea? Let's build it with tecxmate!
             </p>
             <div className="flex gap-4">
-              <Link href="#" className="text-gray-500 hover:text-primary">
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-primary">
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                 <Twitter className="h-5 w-5" />
                 <span className="sr-only">Twitter</span>
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-primary">
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-primary">
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
               </Link>
-              <Link href="#" className="text-gray-500 hover:text-primary">
+              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
                 <Github className="h-5 w-5" />
                 <span className="sr-only">GitHub</span>
               </Link>
             </div>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">Services</h3>
-            <ul className="space-y-2 text-sm text-gray-500">
+            <h3 className="text-lg font-semibold text-white">Services</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <Link href="#services" className="hover:text-primary">
+                <Link href="#services" className="hover:text-white transition-colors duration-200">
                   MVP Development
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-primary">
+                <Link href="#services" className="hover:text-white transition-colors duration-200">
                   Software Development
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-primary">
+                <Link href="#services" className="hover:text-white transition-colors duration-200">
                   Mobile App Development
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-primary">
+                <Link href="#services" className="hover:text-white transition-colors duration-200">
                   Market Research & Consultancy
                 </Link>
               </li>
               <li>
-                <Link href="#services" className="hover:text-primary">
+                <Link href="#services" className="hover:text-white transition-colors duration-200">
                   UI/UX & Graphics Design
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">Company</h3>
-            <ul className="space-y-2 text-sm text-gray-500">
+            <h3 className="text-lg font-semibold text-white">Company</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <Link href="#team" className="hover:text-primary">
+                <Link href="#team" className="hover:text-white transition-colors duration-200">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="#team" className="hover:text-primary">
+                <Link href="#team" className="hover:text-white transition-colors duration-200">
                   Our Team
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="hover:text-primary">
+                <Link href="/blog" className="hover:text-white transition-colors duration-200">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="hover:text-primary">
+                <Link href="/contact" className="hover:text-white transition-colors duration-200">
                   Contact Us
                 </Link>
               </li>
               <li>
-                <Link href="#" className="hover:text-primary">
+                <Link href="#" className="hover:text-white transition-colors duration-200">
                   Privacy Policy
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-4">
-            <h3 className="text-lg font-bold">Contact</h3>
-            <ul className="space-y-2 text-sm text-gray-500">
+            <h3 className="text-lg font-semibold text-white">Contact</h3>
+            <ul className="space-y-3 text-sm text-gray-300">
               <li>
-                <a href="mailto:tecxmate@gmail.com" className="hover:text-primary">
+                <a href="mailto:tecxmate@gmail.com" className="hover:text-white transition-colors duration-200">
                   Email: tecxmate@gmail.com
                 </a>
               </li>
@@ -112,7 +112,7 @@ export function Footer() {
                   href="https://cal.com/nikolasdoan/30min"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="hover:text-primary"
+                  className="hover:text-white transition-colors duration-200"
                 >
                   Book a Discovery Call
                 </a>
@@ -120,7 +120,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-12 border-t border-gray-200 pt-6 text-center text-sm text-gray-500">
+        <div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
           <p>© {new Date().getFullYear()} Tecxmate. All rights reserved.</p>
         </div>
       </div>

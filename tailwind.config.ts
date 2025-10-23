@@ -53,6 +53,18 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // ALT Agency style colors
+        alt: {
+          black: "#000000",
+          gray: {
+            100: "#F4F4F4",
+            200: "#E5E5E5",
+            300: "#CCCCCC",
+            400: "#999999",
+            500: "#666666",
+            600: "#333333",
+          },
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

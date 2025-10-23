@@ -1,11 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { Card, CardContent } from "@/components/ui/card"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Quote } from "lucide-react"
 
 export function TestimonialsSection() {
   const testimonials = [
@@ -45,93 +41,51 @@ export function TestimonialsSection() {
 
   const [current, setCurrent] = useState(0)
 
-  const next = () => {
-    setCurrent((current + 1) % testimonials.length)
-  }
-
-  const previous = () => {
-    setCurrent((current - 1 + testimonials.length) % testimonials.length)
-  }
-
   return (
-    <section className="bg-[#F6F3F1] py-20">
-      <div className="container px-4 md:px-6">
-        <div className="flex flex-col items-center justify-center space-y-4 text-center">
-          <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Our Clients</h2>
-          <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed">
+    <section className="bg-white py-20 md:py-24 lg:py-28">
+      <div className="container px-4 md:px-6 max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="mb-6">Our Clients</h2>
+          <p className="text-alt-gray-500 max-w-2xl mx-auto">
             Hear from businesses we've helped with our technology solutions
           </p>
         </div>
 
-        <div className="mx-auto mt-16 max-w-4xl">
-          <div className="relative overflow-hidden px-4 py-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={current}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="relative"
-              >
-                <Card className="border-none bg-white shadow-lg">
-                  <CardContent className="p-6 sm:p-10">
-                    <Quote className="mb-6 h-12 w-12 text-primary/20" />
-                    <p className="mb-6 text-lg italic text-gray-700 md:text-xl">{testimonials[current].quote}</p>
-                    <div className="flex items-center gap-4">
-                      <Avatar className="h-12 w-12 border-2 border-primary/10">
-                        <AvatarImage
-                          src={testimonials[current].avatar || "/placeholder.svg"}
-                          alt={testimonials[current].author}
-                        />
-                        <AvatarFallback className="bg-primary/10 text-primary">
-                          {testimonials[current].author.charAt(0)}
-                        </AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h4 className="font-semibold">{testimonials[current].author}</h4>
-                        <p className="text-sm text-gray-500">
-                          {testimonials[current].position && `${testimonials[current].position}, `}
-                          {testimonials[current].company}
-                        </p>
-                      </div>
-                    </div>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </AnimatePresence>
-
-            <div className="mt-8 flex justify-center gap-2">
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-primary/20 hover:bg-primary/5 hover:text-primary"
-                onClick={previous}
-              >
-                <ChevronLeft className="h-5 w-5" />
-                <span className="sr-only">Previous testimonial</span>
-              </Button>
-              {testimonials.map((_, index) => (
-                <Button
-                  key={index}
-                  variant="ghost"
-                  size="icon"
-                  className={`h-2.5 w-2.5 rounded-full p-0 ${index === current ? "bg-primary" : "bg-primary/20"}`}
-                  onClick={() => setCurrent(index)}
-                >
-                  <span className="sr-only">Go to testimonial {index + 1}</span>
-                </Button>
-              ))}
-              <Button
-                variant="outline"
-                size="icon"
-                className="rounded-full border-primary/20 hover:bg-primary/5 hover:text-primary"
-                onClick={next}
-              >
-                <ChevronRight className="h-5 w-5" />
-                <span className="sr-only">Next testimonial</span>
-              </Button>
+        <div className="text-center">
+          <blockquote className="text-xl md:text-2xl italic text-alt-black mb-8 leading-relaxed">
+            "{testimonials[current].quote}"
+          </blockquote>
+          
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <Avatar className="h-12 w-12">
+              <AvatarImage
+                src={testimonials[current].avatar || "/placeholder.svg"}
+                alt={testimonials[current].author}
+              />
+              <AvatarFallback className="bg-alt-gray-100 text-alt-black">
+                {testimonials[current].author.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <div className="text-left">
+              <h4 className="font-semibold text-alt-black">{testimonials[current].author}</h4>
+              <p className="text-sm text-alt-gray-500">
+                {testimonials[current].position && `${testimonials[current].position}, `}
+                {testimonials[current].company}
+              </p>
             </div>
+          </div>
+
+          <div className="flex justify-center gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+                  index === current ? "bg-primary" : "bg-alt-gray-300"
+                }`}
+                onClick={() => setCurrent(index)}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
       </div>

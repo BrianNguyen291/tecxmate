@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] })
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
 export const metadata: Metadata = {
-  title: "Tecxmate - think, solve, & build",
+  title: "tecxmate - build the future",
   description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
   generator: 'v0.dev',
   metadataBase: new URL(baseUrl),
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: baseUrl,
   },
   openGraph: {
-    title: "Tecxmate - think, solve, & build",
+    title: "tecxmate - build the future",
     description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
     url: baseUrl,
     siteName: "Tecxmate",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Tecxmate - think, solve, & build",
+    title: "tecxmate - build the future",
     description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
   },
 }

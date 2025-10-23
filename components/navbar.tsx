@@ -4,8 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { Globe } from "lucide-react"
 import { usePathname } from "next/navigation"
 
 export function Navbar() {
@@ -20,7 +18,7 @@ export function Navbar() {
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-[#F6F3F1]/80 backdrop-blur-md">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-bold tracking-tighter text-primary">TECXMATE</span>
+          <span className="text-2xl font-mono font-normal tracking-tighter text-primary">tecxmate</span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link
@@ -29,14 +27,11 @@ export function Navbar() {
           >
             Home
           </Link>
-          <Link href="#services" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link href="/#services" className="text-sm font-medium hover:text-primary transition-colors">
             Services
           </Link>
-          <Link href="#process" className="text-sm font-medium hover:text-primary transition-colors">
-            Process
-          </Link>
-          <Link href="#portfolio" className="text-sm font-medium hover:text-primary transition-colors">
-            Portfolio
+          <Link href="/#portfolio" className="text-sm font-medium hover:text-primary transition-colors">
+            Projects
           </Link>
           <Link
             href="/blog"
@@ -44,27 +39,8 @@ export function Navbar() {
           >
             Blog
           </Link>
-          <Link
-            href="/contact"
-            className={`text-sm font-medium transition-colors ${isActive("/contact") ? "text-primary" : "hover:text-primary"}`}
-          >
-            Contact
-          </Link>
         </nav>
         <div className="flex items-center gap-4">
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="icon" className="rounded-full">
-                <Globe className="h-5 w-5" />
-                <span className="sr-only">Language</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuItem>English</DropdownMenuItem>
-              <DropdownMenuItem>Chinese</DropdownMenuItem>
-              <DropdownMenuItem>Vietnamese</DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
           <Button className="hidden md:flex" asChild>
             <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
               Book a Call
@@ -87,25 +63,18 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              href="#services"
+              href="/#services"
               className="text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
               Services
             </Link>
             <Link
-              href="#process"
+              href="/#portfolio"
               className="text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
             >
-              Process
-            </Link>
-            <Link
-              href="#portfolio"
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Portfolio
+              Projects
             </Link>
             <Link
               href="/blog"
@@ -113,13 +82,6 @@ export function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Blog
-            </Link>
-            <Link
-              href="/contact"
-              className={`text-sm font-medium transition-colors ${isActive("/contact") ? "text-primary" : "hover:text-primary"}`}
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Contact
             </Link>
             <Button className="w-full" onClick={() => setIsMenuOpen(false)} asChild>
               <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
