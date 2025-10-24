@@ -17,27 +17,33 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const [isActive, setIsActive] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [isAndroid, setIsAndroid] = useState(false)
+  const [isMobile, setIsMobile] = useState(false)
 
   useEffect(() => {
     setMounted(true)
     // Detect Android for performance optimizations
     const userAgent = navigator.userAgent.toLowerCase()
     setIsAndroid(userAgent.includes('android'))
+    setIsMobile(window.innerWidth <= 768)
     
     const handleMouseEnter = () => setIsActive(true)
     const handleMouseLeave = () => setIsActive(false)
+    const handleResize = () => setIsMobile(window.innerWidth <= 768)
 
     const container = containerRef.current
     if (container) {
       container.addEventListener("mouseenter", handleMouseEnter)
       container.addEventListener("mouseleave", handleMouseLeave)
     }
+    
+    window.addEventListener("resize", handleResize)
 
     return () => {
       if (container) {
         container.removeEventListener("mouseenter", handleMouseEnter)
         container.removeEventListener("mouseleave", handleMouseLeave)
       }
+      window.removeEventListener("resize", handleResize)
     }
   }, [])
 
@@ -47,11 +53,12 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
     <div 
       id="hero" 
       ref={containerRef} 
-      className="min-h-[100dvh] bg-white relative overflow-hidden snap-start -mt-16 pt-16"
+      className="min-h-screen md:min-h-[100dvh] bg-white relative overflow-hidden snap-start -mt-16 pt-16"
       style={{
         transform: 'translateZ(0)', // Force hardware acceleration
-        willChange: 'transform',
-        backfaceVisibility: 'hidden'
+        willChange: 'auto', // Reduce will-change for better performance
+        backfaceVisibility: 'hidden',
+        WebkitOverflowScrolling: 'touch' // Smooth scrolling on iOS
       }}
     >
       <svg className="absolute inset-0 w-0 h-0">
@@ -81,8 +88,8 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
         </defs>
       </svg>
 
-      {/* Conditional rendering for Android performance */}
-      {!isAndroid ? (
+      {/* Conditional rendering for mobile performance */}
+      {!isAndroid && !isMobile ? (
         <>
           <MeshGradient
             className="absolute inset-0 w-full h-full"
@@ -97,7 +104,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
           />
         </>
       ) : (
-        /* Fallback gradient for Android */
+        /* Fallback gradient for mobile and Android */
         <div 
           className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-purple-50 to-blue-50"
           style={{
