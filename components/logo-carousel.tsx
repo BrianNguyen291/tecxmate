@@ -31,7 +31,7 @@ export function LogoCarousel() {
   ]
 
   return (
-    <div className="absolute left-0 right-0 bottom-8 md:bottom-4">
+    <div className="absolute left-0 right-0 bottom-4 md:bottom-2">
       <div className="text-center mb-2">
         <p className="text-sm text-gray-600 font-medium">with partners from</p>
       </div>

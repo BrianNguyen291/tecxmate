@@ -3,7 +3,7 @@
 export default function HeroContent() {
   return (
     <main 
-      className="absolute top-16 bottom-40 md:bottom-36 left-4 right-4 md:left-8 md:right-auto z-20 max-w-lg flex items-end"
+      className="absolute top-16 bottom-48 md:bottom-44 left-4 right-4 md:left-8 md:right-auto z-20 max-w-lg flex items-end"
       style={{
         transform: 'translateZ(0)', // Hardware acceleration
         willChange: 'transform'
