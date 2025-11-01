@@ -6,7 +6,7 @@ export function DemoProductsSection() {
   const products: Gallery4Item[] = [
     {
       id: "tecxmate-website",
-      title: "Tecxmate Official Website",
+      title: "tecxmate Official Website",
       description: "Company homepage showcasing our services and portfolio with modern design and seamless user experience",
       href: "https://www.tecxmate.com/en",
       image: "/placeholder.svg",

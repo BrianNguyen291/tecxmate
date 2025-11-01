@@ -11,7 +11,7 @@ export default function HeroContent() {
     >
       <div className="text-left">
         <h1 className="text-4xl md:text-6xl md:leading-16 tracking-tight text-black mb-4 flex items-center md:whitespace-nowrap leading-tight">
-          <span className="font-mono font-normal">build the future</span>
+          <span className="font-accent font-normal">build the future</span>
         </h1>
       </div>
     </main>

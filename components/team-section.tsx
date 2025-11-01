@@ -120,7 +120,7 @@ export function TeamSection() {
             transition={{ duration: 0.5 }}
             viewport={{ once: true }}
           >
-            <h2 className="text-3xl font-mono font-normal md:text-4xl lg:text-5xl">Meet Our Experts</h2>
+            <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl">Meet Our Experts</h2>
           </motion.div>
 
           <div className="mt-16 overflow-x-auto overflow-y-hidden scrollbar-hide">

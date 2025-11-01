@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     title: "tecxmate - build the future",
     description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
     url: baseUrl,
-    siteName: "Tecxmate",
+    siteName: "tecxmate",
     type: "website",
   },
   twitter: {

@@ -120,7 +120,7 @@ export function Footer() {
           transition={{ duration: 0.5, delay: 0.4 }}
           viewport={{ once: true }}
         >
-          <p>© {new Date().getFullYear()} Tecxmate. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} tecxmate. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

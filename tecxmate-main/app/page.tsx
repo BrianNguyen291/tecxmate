@@ -22,7 +22,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "Organization",
-            "name": "Tecxmate",
+            "name": "tecxmate",
             "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com",
             "logo": (process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com") + "/logo.png",
             "sameAs": [
@@ -38,7 +38,7 @@ export default function Home() {
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "WebSite",
-            "name": "Tecxmate",
+            "name": "tecxmate",
             "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com",
             "potentialAction": {
               "@type": "SearchAction",

@@ -7,7 +7,7 @@ export function TestimonialsSection() {
   const testimonials = [
     {
       quote:
-        "Tecxmate delivered an exceptional solution for our business needs. Their team was professional, responsive, and delivered on time.",
+        "tecxmate delivered an exceptional solution for our business needs. Their team was professional, responsive, and delivered on time.",
       author: "Shawn",
       position: "Founder",
       company: "SparkLift Inc., NYC, USA",
@@ -15,7 +15,7 @@ export function TestimonialsSection() {
     },
     {
       quote:
-        "Working with Tecxmate was a great experience. They understood our requirements perfectly and provided innovative solutions.",
+        "Working with tecxmate was a great experience. They understood our requirements perfectly and provided innovative solutions.",
       author: "Paolo",
       position: "",
       company: "Harvard Kennedy School, Boston, USA",
@@ -23,7 +23,7 @@ export function TestimonialsSection() {
     },
     {
       quote:
-        "Tecxmate helped us transform our business with their technology solutions. Highly recommended for any startup or SME.",
+        "tecxmate helped us transform our business with their technology solutions. Highly recommended for any startup or SME.",
       author: "Jesse",
       position: "",
       company: "ClassZ Ltd., Hong Kong",
@@ -31,7 +31,7 @@ export function TestimonialsSection() {
     },
     {
       quote:
-        "The team at Tecxmate provided excellent support for our educational platform. Their expertise in EdTech was invaluable.",
+        "The team at tecxmate provided excellent support for our educational platform. Their expertise in EdTech was invaluable.",
       author: "ChiChi",
       position: "",
       company: "Vietnamese Education, Vietnam",

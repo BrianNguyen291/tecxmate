@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-4">
           <div className="space-y-6">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-mono font-normal tracking-tighter text-white">tecxmate inc.</span>
+              <span className="text-2xl font-accent font-normal tracking-tighter text-white">tecxmate inc.</span>
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
               Got an idea? Let's build it with tecxmate!
@@ -41,27 +41,22 @@ export function Footer() {
             <ul className="space-y-3 text-sm text-gray-300">
               <li>
                 <Link href="#services" className="hover:text-white transition-colors duration-200">
-                  MVP Development
+                  AI Application Development
                 </Link>
               </li>
               <li>
                 <Link href="#services" className="hover:text-white transition-colors duration-200">
-                  Software Development
+                  Business Automation
                 </Link>
               </li>
               <li>
                 <Link href="#services" className="hover:text-white transition-colors duration-200">
-                  Mobile App Development
+                  AI Integration & Consulting
                 </Link>
               </li>
               <li>
                 <Link href="#services" className="hover:text-white transition-colors duration-200">
-                  Market Research & Consultancy
-                </Link>
-              </li>
-              <li>
-                <Link href="#services" className="hover:text-white transition-colors duration-200">
-                  UI/UX & Graphics Design
+                  Custom Workflow Solutions
                 </Link>
               </li>
             </ul>
@@ -121,7 +116,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-16 border-t border-gray-700 pt-8 text-center text-sm text-gray-400">
-          <p>© {new Date().getFullYear()} Tecxmate. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} tecxmate. All rights reserved.</p>
         </div>
       </div>
     </footer>

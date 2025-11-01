@@ -5,9 +5,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 export function FaqSection() {
   const faqs = [
     {
-      question: "What services does Tecxmate offer?",
+      question: "What services does tecxmate offer?",
       answer:
-        "Tecxmate offers a comprehensive range of technology services including MVP development, software development for websites and mobile apps, market research and consultancy, UI/UX design, and graphics design services tailored for SMEs and Founders.",
+        "tecxmate specializes in AI application development and business automation. We build intelligent applications powered by machine learning, automate business workflows, provide AI integration consulting, and create custom automation solutions tailored for SMEs and Founders.",
     },
     {
       question: "How long does it take to complete a project?",
@@ -30,7 +30,7 @@ export function FaqSection() {
         "Yes, we have a global presence with a focus on US, Hong Kong, and Taiwan markets, and are expanding to EU and Australia. We work with clients from across the globe and have experience managing projects remotely with effective communication and collaboration tools.",
     },
     {
-      question: "How can I get started with Tecxmate?",
+      question: "How can I get started with tecxmate?",
       answer:
         "You can get started by contacting us through email at tecxmate@gmail.com, messaging us on WhatsApp, Line, or WeChat at nikolasdoan, or booking a discovery call through our website. We'll discuss your project needs and guide you through our process.",
     },
