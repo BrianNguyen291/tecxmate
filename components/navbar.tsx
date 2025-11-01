@@ -15,10 +15,10 @@ export function Navbar() {
   }
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-[#F6F3F1]/80 backdrop-blur-md">
+    <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-[#F6F3F1]/30 backdrop-blur-lg">
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl font-accent font-normal tracking-tighter text-primary">tecxmate 凰龜科技</span>
+          <span className="text-2xl font-accent font-normal tracking-tighter text-primary">tecxmate </span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link
