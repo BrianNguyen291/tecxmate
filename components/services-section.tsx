@@ -47,7 +47,7 @@ export function ServicesSection() {
             return (
               <div
                 key={service.id}
-                className="bg-white p-8 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 group flex flex-col h-full"
+                className="bg-white p-8 rounded-lg border border-alt-gray-200 shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 group flex flex-col h-full"
               >
                 <div className="mb-6 flex-1">
                   <div className="w-12 h-12 bg-alt-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors duration-200">

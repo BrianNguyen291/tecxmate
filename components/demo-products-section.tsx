@@ -78,13 +78,17 @@ export function DemoProductsSection() {
       </div>
       
       {/* Gradient Overlay at bottom for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-0"></div>
       
       {/* Content at bottom */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6">
-        <div className="space-y-2">
-          <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
-          <p className="text-white/90 text-sm leading-relaxed line-clamp-2 drop-shadow-md">{project.description}</p>
+      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:opacity-0">
+        <div>
+          <div className="h-[3.5rem] flex items-start mt-6">
+            <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
+          </div>
+          <div className="h-[3rem] flex items-start">
+            <p className="text-white/90 text-sm leading-relaxed line-clamp-2 drop-shadow-md">{project.description}</p>
+          </div>
           <Link
             href={project.link}
             target="_blank"
