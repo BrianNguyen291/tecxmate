@@ -47,8 +47,8 @@ export default function Home() {
         }}
       />
       <HeroSection />
-      <ServicesSection />
       <DemoProductsSection />
+      <ServicesSection />
       <TeamSection />
       <Footer />
     </main>
