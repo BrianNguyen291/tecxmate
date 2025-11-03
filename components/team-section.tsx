@@ -25,15 +25,6 @@ export function TeamSection() {
       linkedin: 'https://www.linkedin.com/in/brian-nguyen-587825235/'
     },
     {
-      id: 'jane',
-      name: 'Jane Liu',
-      role: 'Chief Designer',
-      photo: '/avatars/jane_avatar.jpeg',
-      description: 'Creative director with expertise in UI/UX design and brand identity development.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/jane-liu/'
-    },
-    {
       id: 'ellis',
       name: 'Ellis Wu',
       role: 'Chief Business Developer',
@@ -43,13 +34,13 @@ export function TeamSection() {
       linkedin: 'https://www.linkedin.com/in/ellis-wu/'
     },
     {
-      id: 'edgar',
-      name: 'Edgar Effendi',
-      role: 'System Architect',
-      photo: '/avatars/edgar_avatar.jpeg',
-      description: 'System architecture expert with deep knowledge in scalable infrastructure and cloud solutions.',
+      id: 'jane',
+      name: 'Jane Liu',
+      role: 'Chief Designer',
+      photo: '/avatars/jane_avatar.jpeg',
+      description: 'Creative director with expertise in UI/UX design and brand identity development.',
       twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/edgar-effendi/'
+      linkedin: 'https://www.linkedin.com/in/jane-liu/'
     },
     {
       id: 'linh',
@@ -86,15 +77,6 @@ export function TeamSection() {
       description: 'Web development specialist with expertise in modern frameworks and responsive design.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.linkedin.com/in/ddh/'
-    },
-    {
-      id: 'phuc',
-      name: 'PHUC',
-      role: 'Web Developer',
-      photo: '/avatars/tecxmate-logo-light.png',
-      description: 'Full-stack web developer with experience in both frontend and backend technologies.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/phuc/'
     }
   ]
 

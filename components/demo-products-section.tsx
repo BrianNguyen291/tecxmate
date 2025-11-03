@@ -7,6 +7,62 @@ export function DemoProductsSection() {
   // Combine all projects into a single array
   const allProjects = [
     {
+      title: "TailU",
+      description: "Taiwan No.1 AI Pet Care Platform",
+      link: "#",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "ClassZ",
+      description: "Hong Kong’s No.1 Afterschool Center Management System",
+      link: "#",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "Crypted",
+      description: "Pioneering Blockchain Education Platform",
+      link: "https://www.crypted.vc",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Visit",
+    },
+    {
+      title: "Mindmaxer",
+      description: "Motivational AI for High Performance Athletes",
+      link: "https://maxers.tech",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "HealthMaxers",
+      description: "Performance health insights at scale",
+      link: "https://healthmaxers.com",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Visit",
+    },
+    {
+      title: "Chi Chi Vietnamese",
+      description: "Premier Vietnamese Language Education for Mandarin speakers",
+      link: "https://chichivietnamese.com",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Visit",
+    },
+    {
+      title: "Mandarin",
+      description: "AI Chinese Learning Platform",
+      link: "#",
+      image: "/placeholder.svg?height=300&width=400",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
       title: "tecxmate Official Website",
       description: "Company homepage showcasing our services and portfolio",
       link: "https://www.tecxmate.com/en",
@@ -16,8 +72,8 @@ export function DemoProductsSection() {
     },
     {
       title: "WaterWise",
-      description: "Water conservation and management platform",
-      link: "https://waterwise-eta.vercel.app/",
+      description: "National Water tax management system concept",
+      link: "http://waterwise-eta.vercel.app",
       image: "/placeholder.svg?height=300&width=400",
       icon: ExternalLink,
       actionText: "Visit",
@@ -30,34 +86,11 @@ export function DemoProductsSection() {
       icon: ExternalLink,
       actionText: "Visit",
     },
-    {
-      title: "WaterWise Android App",
-      description: "Mobile application for water conservation and management",
-      link: "https://qr-codes.io/EsjC4w",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: Smartphone,
-      actionText: "Download",
-    },
+    
     {
       title: "Graphics Design Portfolio 1",
       description: "Creative design work for various clients",
       link: "https://www.canva.com/design/DAFhgUPXfoc/ZJVtFbStYA2yB3o83Hiofg/view?utm_content=DAFhgUPXfoc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: Palette,
-      actionText: "View Design",
-    },
-    {
-      title: "Graphics Design Portfolio 2",
-      description: "Brand identity and marketing materials",
-      link: "https://www.canva.com/design/DAFU0RyNH_Q/FPgbEVt6_QsmnA2g53q8HQ/view?utm_content=DAFU0RyNH_Q&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: Palette,
-      actionText: "View Design",
-    },
-    {
-      title: "Graphics Design Portfolio 3",
-      description: "UI/UX design concepts and implementations",
-      link: "https://www.canva.com/design/DAFtEVNaL2Q/SFBqoBIWngdRQ3tx57YTmA/view?utm_content=DAFtEVNaL2Q&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h",
       image: "/placeholder.svg?height=300&width=400",
       icon: Palette,
       actionText: "View Design",
@@ -67,7 +100,13 @@ export function DemoProductsSection() {
   const ProjectCard = ({ project }: { project: typeof allProjects[0] }) => {
     const Icon = project.icon
     return (
-    <div className="relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-full overflow-hidden aspect-[4/5]">
+    <Link
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-full overflow-hidden aspect-[4/5] cursor-pointer"
+      aria-label={project.title}
+    >
       {/* Background Image */}
       <div className="absolute inset-0">
         <img
@@ -89,18 +128,13 @@ export function DemoProductsSection() {
           <div className="h-[3rem] flex items-start">
             <p className="text-white/90 text-sm leading-relaxed line-clamp-2 drop-shadow-md">{project.description}</p>
           </div>
-          <Link
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center text-white font-medium hover:gap-2 transition-all duration-200 mt-3 group/link"
-          >
+          <div className="inline-flex items-center text-white font-medium mt-3">
             <span className="drop-shadow-lg">{project.actionText}</span>
-            <Icon className="w-4 h-4 ml-1 group-hover/link:translate-x-1 transition-transform drop-shadow-lg" />
-          </Link>
+            <Icon className="w-4 h-4 ml-1 transition-transform drop-shadow-lg" />
+          </div>
         </div>
       </div>
-    </div>
+    </Link>
     )
   }
 

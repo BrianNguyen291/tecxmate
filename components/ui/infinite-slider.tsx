@@ -28,6 +28,8 @@ export function InfiniteSlider({
   const [height, setHeight] = useState(0);
   const translation = useMotionValue(0);
   const [key, setKey] = useState(0);
+  const [isVisible, setIsVisible] = useState(true);
+  const animationControlsRef = useRef<any>(null);
 
   // Measure dimensions
   useEffect(() => {
@@ -51,7 +53,30 @@ export function InfiniteSlider({
     };
   }, []);
 
+  // Pause animation when not visible
   useEffect(() => {
+    if (!ref.current) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          setIsVisible(entry.isIntersecting);
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(ref.current);
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    // Don't animate if not visible
+    if (!isVisible) return;
+
     let controls;
     const size = direction === 'horizontal' ? width : height;
     const contentSize = size + gap;
@@ -69,16 +94,22 @@ export function InfiniteSlider({
       },
     });
 
-    return controls?.stop;
+    animationControlsRef.current = controls;
+
+    return () => {
+      controls?.stop();
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     key,
-    translation,
     currentDuration,
     width,
     height,
     gap,
     direction,
     reverse,
+    isVisible,
+    // translation intentionally excluded - MotionValue is stable and causes infinite loops
   ]);
 
   const hoverProps = durationOnHover

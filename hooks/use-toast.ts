@@ -182,7 +182,7 @@ function useToast() {
         listeners.splice(index, 1)
       }
     }
-  }, [state])
+  }, []) // Fix: Remove state dependency to prevent infinite loop
 
   return {
     ...state,

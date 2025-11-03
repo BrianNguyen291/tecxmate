@@ -14,36 +14,32 @@ interface ShaderBackgroundProps {
 
 export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [isActive, setIsActive] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [isAndroid, setIsAndroid] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [disableWebGL, setDisableWebGL] = useState(true) // Disable WebGL by default for M1 Mac performance
 
   useEffect(() => {
     setMounted(true)
-    // Detect Android for performance optimizations
+    // Detect platform for performance optimizations
     const userAgent = navigator.userAgent.toLowerCase()
     setIsAndroid(userAgent.includes('android'))
     setIsMobile(window.innerWidth <= 768)
     
-    const handleMouseEnter = () => setIsActive(true)
-    const handleMouseLeave = () => setIsActive(false)
-    const handleResize = () => setIsMobile(window.innerWidth <= 768)
-
-    const container = containerRef.current
-    if (container) {
-      container.addEventListener("mouseenter", handleMouseEnter)
-      container.addEventListener("mouseleave", handleMouseLeave)
+    // Debounce resize handler
+    let resizeTimeout: NodeJS.Timeout
+    const handleResize = () => {
+      clearTimeout(resizeTimeout)
+      resizeTimeout = setTimeout(() => {
+        setIsMobile(window.innerWidth <= 768)
+      }, 250)
     }
-    
+
     window.addEventListener("resize", handleResize)
 
     return () => {
-      if (container) {
-        container.removeEventListener("mouseenter", handleMouseEnter)
-        container.removeEventListener("mouseleave", handleMouseLeave)
-      }
       window.removeEventListener("resize", handleResize)
+      clearTimeout(resizeTimeout)
     }
   }, [])
 
@@ -89,22 +85,14 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
       </svg>
 
       {/* Conditional rendering for mobile performance */}
-      {!isAndroid && !isMobile ? (
-        <>
-          <MeshGradient
-            className="absolute inset-0 w-full h-full"
-            colors={["#ffffff", "#e9d5ff", "#dbeafe", "#fde68a", "#f3e8ff"]}
-            speed={0.3}
-          />
-          <MeshGradient
-            className="absolute inset-0 w-full h-full opacity-60"
-            colors={["#ffffff", "#e9d5ff", "#c4b5fd", "#ffffff"]}
-            speed={0.2}
-            wireframe="true"
-          />
-        </>
+      {!isAndroid && !isMobile && !disableWebGL ? (
+        <MeshGradient
+          className="absolute inset-0 w-full h-full"
+          colors={["#ffffff", "#e9d5ff", "#dbeafe", "#fde68a", "#f3e8ff"]}
+          speed={0.15}
+        />
       ) : (
-        /* Fallback gradient for mobile and Android */
+        /* Fallback gradient for mobile and Android - CSS gradient for better performance */
         <div 
           className="absolute inset-0 w-full h-full bg-gradient-to-br from-white via-purple-50 to-blue-50"
           style={{
