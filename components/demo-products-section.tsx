@@ -71,7 +71,7 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[4/3]"
+      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
     >
       {/* Background Image */}
@@ -115,7 +115,7 @@ export function DemoProductsSection() {
         <div className="overflow-x-auto pb-4 scrollbar-hide">
           <div className="flex gap-8 min-w-max">
             {allProjects.map((project, index) => (
-              <div key={index} className="flex-shrink-0 w-[500px]">
+              <div key={index} className="flex-shrink-0 w-[280px] md:w-[500px]">
                 <ProjectCard project={project} />
               </div>
             ))}
