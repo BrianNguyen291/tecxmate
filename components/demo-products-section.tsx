@@ -7,42 +7,26 @@ export function DemoProductsSection() {
   // Combine all projects into a single array
   const allProjects = [
     {
-      title: "TailU",
-      description: "Taiwan's Premier AI Pet Care Platform",
+      title: "Rising Star Startup Competition",
+      description: "Startup competition platform and showcase",
       link: "#",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/risingstar.jpg",
       icon: ExternalLink,
       actionText: "Learn More",
     },
     {
-      title: "ClassZ",
-      description: "Hong Kong’s Premier Afterschool Center Management System",
-      link: "#",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: ExternalLink,
-      actionText: "Learn More",
-    },
-    {
-      title: "Crypted",
+      title: "Crypted - Harvard Innovation Labs",
       description: "Pioneering Blockchain Education Platform",
       link: "https://www.crypted.vc",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/crypted.png",
       icon: ExternalLink,
       actionText: "Visit",
-    },
-    {
-      title: "Mindmaxer",
-      description: "Motivational AI for High Performance Athletes",
-      link: "https://maxers.tech",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: ExternalLink,
-      actionText: "Learn More",
     },
     {
       title: "HealthMaxers",
       description: "Performance health insights at scale",
       link: "https://healthmaxers.com",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/healthmaxer.png",
       icon: ExternalLink,
       actionText: "Visit",
     },
@@ -50,15 +34,23 @@ export function DemoProductsSection() {
       title: "Chi Chi Vietnamese",
       description: "Premier Vietnamese Language Education for Mandarin speakers",
       link: "https://chichivietnamese.com",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/chichi.png",
       icon: ExternalLink,
       actionText: "Visit",
     },
     {
-      title: "Mandarin",
-      description: "AI Chinese Learning Platform",
+      title: "TailU",
+      description: "Taiwan's Premier AI Pet Care Platform",
       link: "#",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/tailu1.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "ClassZ",
+      description: "Hong Kong's Premier Afterschool Center Management System",
+      link: "#",
+      image: "/products/classz.jpg",
       icon: ExternalLink,
       actionText: "Learn More",
     },
@@ -66,15 +58,31 @@ export function DemoProductsSection() {
       title: "WaterWise",
       description: "National Water Tax management system concept",
       link: "http://waterwise-eta.vercel.app",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/waterwise.JPG",
       icon: ExternalLink,
       actionText: "Visit",
+    },
+    {
+      title: "Mindmaxer",
+      description: "Motivational AI for High Performance Athletes",
+      link: "https://mindmaxer.lovable.app/",
+      image: "/products/mindmaxer.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "Mandarin",
+      description: "AI Chinese Learning Platform",
+      link: "#",
+      image: "/products/mandarin.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
     },
     {
       title: "Trash to Treasure",
       description: "Trash Credits recycling system concept",
       link: "https://www.canva.com/design/DAFhgUPXfoc/ZJVtFbStYA2yB3o83Hiofg/view?utm_content=DAFhgUPXfoc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h",
-      image: "/placeholder.svg?height=300&width=400",
+      image: "/products/trash-to-treasure.png",
       icon: Palette,
       actionText: "View Design",
     },
@@ -87,11 +95,11 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group h-full overflow-hidden aspect-[4/5] cursor-pointer"
+      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[4/3]"
       aria-label={project.title}
     >
       {/* Background Image */}
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 w-full h-full">
         <img
           src={project.image || "/placeholder.svg"}
           alt={project.title}
@@ -129,9 +137,9 @@ export function DemoProductsSection() {
         </div>
 
         <div className="overflow-x-auto pb-4 scrollbar-hide">
-          <div className="flex gap-8 min-w-max items-stretch">
+          <div className="flex gap-8 min-w-max">
             {allProjects.map((project, index) => (
-              <div key={index} className="flex-shrink-0 w-80">
+              <div key={index} className="flex-shrink-0 w-[500px]">
                 <ProjectCard project={project} />
               </div>
             ))}
