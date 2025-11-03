@@ -31,7 +31,7 @@ export function TeamSection() {
       photo: '/avatars/ellis_avatar.jpeg',
       description: 'Business development specialist focused on strategic partnerships and market expansion.',
       twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/ellis-wu/'
+      linkedin: 'https://www.linkedin.com/in/hsien-cheng-ellis-wu-6a1044297/'
     },
     {
       id: 'jane',
@@ -41,42 +41,6 @@ export function TeamSection() {
       description: 'Creative director with expertise in UI/UX design and brand identity development.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.linkedin.com/in/jane-liu/'
-    },
-    {
-      id: 'linh',
-      name: 'Linh Linh',
-      role: 'UI/UX Designer',
-      photo: '/avatars/tecxmate-logo-light.png',
-      description: 'UI/UX designer specializing in user-centered design and digital experiences.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/linh-linh/'
-    },
-    {
-      id: 'bavo',
-      name: 'BAVO',
-      role: 'Mobile Developer',
-      photo: '/avatars/tecxmate-logo-light.png',
-      description: 'Mobile development specialist with expertise in iOS and Android app development.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/bavo/'
-    },
-    {
-      id: 'quyen',
-      name: 'QUYEN',
-      role: 'Mobile Developer',
-      photo: '/avatars/tecxmate-logo-light.png',
-      description: 'Mobile developer focused on cross-platform solutions and performance optimization.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/quyen/'
-    },
-    {
-      id: 'ddh',
-      name: 'DDH',
-      role: 'Web Developer',
-      photo: '/avatars/tecxmate-logo-light.png',
-      description: 'Web development specialist with expertise in modern frameworks and responsive design.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/ddh/'
     }
   ]
 
@@ -120,32 +84,34 @@ export function TeamSection() {
                     <div className="p-4 text-center">
                       <h3 className="text-lg font-semibold text-alt-black mb-1">{member.name}</h3>
                       <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
-                      <div className="flex items-center justify-center gap-3">
-                        <a 
-                          href={member.linkedin} 
-                          aria-label="LinkedIn" 
-                          className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <Linkedin className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                        </a>
-                        <a 
-                          href={member.twitter} 
-                          aria-label={member.id === 'brian' ? 'Company' : member.id === 'nikolas' ? 'Academic' : 'Author'} 
-                          className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          {member.id === 'brian' ? (
-                            <Building2 className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                          ) : member.id === 'nikolas' ? (
-                            <GraduationCap className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                          ) : (
-                            <PenTool className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                          )}
-                        </a>
-                      </div>
+                      {member.id !== 'jane' && (
+                        <div className="flex items-center justify-center gap-3">
+                          <a 
+                            href={member.linkedin} 
+                            aria-label="LinkedIn" 
+                            className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            <Linkedin className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                          </a>
+                          <a 
+                            href={member.twitter} 
+                            aria-label={member.id === 'brian' ? 'Company' : member.id === 'nikolas' ? 'Academic' : 'Author'} 
+                            className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            {member.id === 'brian' ? (
+                              <Building2 className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                            ) : member.id === 'nikolas' ? (
+                              <GraduationCap className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                            ) : (
+                              <PenTool className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                            )}
+                          </a>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </motion.div>

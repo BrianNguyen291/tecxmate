@@ -8,7 +8,7 @@ export function DemoProductsSection() {
   const allProjects = [
     {
       title: "TailU",
-      description: "Taiwan No.1 AI Pet Care Platform",
+      description: "Taiwan's Premier AI Pet Care Platform",
       link: "#",
       image: "/placeholder.svg?height=300&width=400",
       icon: ExternalLink,
@@ -16,7 +16,7 @@ export function DemoProductsSection() {
     },
     {
       title: "ClassZ",
-      description: "Hong Kong’s No.1 Afterschool Center Management System",
+      description: "Hong Kong’s Premier Afterschool Center Management System",
       link: "#",
       image: "/placeholder.svg?height=300&width=400",
       icon: ExternalLink,
@@ -63,33 +63,16 @@ export function DemoProductsSection() {
       actionText: "Learn More",
     },
     {
-      title: "tecxmate Official Website",
-      description: "Company homepage showcasing our services and portfolio",
-      link: "https://www.tecxmate.com/en",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: ExternalLink,
-      actionText: "Visit",
-    },
-    {
       title: "WaterWise",
-      description: "National Water tax management system concept",
+      description: "National Water Tax management system concept",
       link: "http://waterwise-eta.vercel.app",
       image: "/placeholder.svg?height=300&width=400",
       icon: ExternalLink,
       actionText: "Visit",
     },
     {
-      title: "CCVN",
-      description: "Vietnamese Education platform",
-      link: "https://nikolasdoan.my.canva.site/ccvn",
-      image: "/placeholder.svg?height=300&width=400",
-      icon: ExternalLink,
-      actionText: "Visit",
-    },
-    
-    {
-      title: "Graphics Design Portfolio 1",
-      description: "Creative design work for various clients",
+      title: "Trash to Treasure",
+      description: "Trash Credits recycling system concept",
       link: "https://www.canva.com/design/DAFhgUPXfoc/ZJVtFbStYA2yB3o83Hiofg/view?utm_content=DAFhgUPXfoc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h",
       image: "/placeholder.svg?height=300&width=400",
       icon: Palette,
