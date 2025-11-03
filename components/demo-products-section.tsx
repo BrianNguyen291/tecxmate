@@ -34,7 +34,7 @@ export function DemoProductsSection() {
       title: "Chi Chi Vietnamese",
       description: "Premier Vietnamese Language Education for Mandarin speakers",
       link: "https://chichivietnamese.com",
-      image: "/products/chichi.png",
+      image: "/products/chichi.jpg",
       icon: ExternalLink,
       actionText: "Visit",
     },
@@ -61,30 +61,6 @@ export function DemoProductsSection() {
       image: "/products/waterwise.JPG",
       icon: ExternalLink,
       actionText: "Visit",
-    },
-    {
-      title: "Mindmaxer",
-      description: "Motivational AI for High Performance Athletes",
-      link: "https://mindmaxer.lovable.app/",
-      image: "/products/mindmaxer.png",
-      icon: ExternalLink,
-      actionText: "Learn More",
-    },
-    {
-      title: "Mandarin",
-      description: "AI Chinese Learning Platform",
-      link: "#",
-      image: "/products/mandarin.png",
-      icon: ExternalLink,
-      actionText: "Learn More",
-    },
-    {
-      title: "Trash to Treasure",
-      description: "Trash Credits recycling system concept",
-      link: "https://www.canva.com/design/DAFhgUPXfoc/ZJVtFbStYA2yB3o83Hiofg/view?utm_content=DAFhgUPXfoc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h",
-      image: "/products/trash-to-treasure.png",
-      icon: Palette,
-      actionText: "View Design",
     },
   ]
 
@@ -113,7 +89,7 @@ export function DemoProductsSection() {
       {/* Content at bottom */}
       <div className="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:opacity-0">
         <div>
-          <div className="h-[3.5rem] flex items-start mt-6">
+          <div className="h-[3.5rem] flex items-start mt-4">
             <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
           </div>
           <div className="h-[3rem] flex items-start">
