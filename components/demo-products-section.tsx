@@ -58,7 +58,7 @@ export function DemoProductsSection() {
       title: "WaterWise",
       description: "National Water Tax management system concept",
       link: "http://waterwise-eta.vercel.app",
-      image: "/products/waterwise.JPG",
+      image: "/products/waterwise.jpg",
       icon: ExternalLink,
       actionText: "Visit",
     },
