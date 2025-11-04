@@ -18,7 +18,7 @@ export function DemoProductsSection() {
     },
     {
       title: "Rising Star Startup Competition",
-      description: "Startup competition platform and showcase",
+      description: "Representing Vietnamese students in Taiwanese startup competitions",
       link: "https://www.youtube.com/watch?v=uRUHCy9IGps",
       image: "/products/risingstar.png",
       icon: ExternalLink,
@@ -127,14 +127,7 @@ export function DemoProductsSection() {
     const Icon = project.icon
     
     return (
-    <Link
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="block rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col"
-      aria-label={project.title}
-      style={{ touchAction: 'auto' }}
-    >
+    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col">
       {/* Image */}
       <div className="w-full aspect-[4/3] bg-[#e3e3e3] flex-shrink-0">
         <Image
@@ -155,12 +148,18 @@ export function DemoProductsSection() {
           <h3 className="text-lg font-semibold text-alt-black mb-1 text-left">{project.title}</h3>
           <p className="text-sm text-gray-600 mb-3 line-clamp-2 text-left">{project.description}</p>
         </div>
-        <div className="flex items-center justify-center text-primary font-medium mt-auto">
+        <Link
+          href={project.link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex items-center justify-center text-primary font-medium mt-auto hover:text-primary/80 transition-colors"
+          aria-label={`${project.actionText} - ${project.title}`}
+        >
           <span>{project.actionText}</span>
           <Icon className="w-4 h-4 ml-1" />
-        </div>
+        </Link>
       </div>
-    </Link>
+    </div>
           )
     }
   

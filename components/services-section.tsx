@@ -4,8 +4,7 @@ import { useState } from "react"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { ComprehensiveOnboardingForm } from "@/components/comprehensive-onboarding-form"
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Brain, Zap, Bot } from "lucide-react"
-import Link from "next/link"
+import { Brain, Zap, Bot } from "lucide-react"
 
 export function ServicesSection() {
   const [showDemoForm, setShowDemoForm] = useState(false)
@@ -16,21 +15,18 @@ export function ServicesSection() {
       icon: Brain,
       title: "AI Application Development",
       description: "Build intelligent applications powered by machine learning, natural language processing, and computer vision. From chatbots to predictive analytics, we create AI solutions that drive business value.",
-      blogLink: "/blog",
     },
     {
       id: "business-automation",
       icon: Zap,
       title: "Business Automation",
       description: "Automate repetitive workflows, streamline operations, and integrate systems to boost efficiency. Reduce manual work and focus on what matters most to your business.",
-      blogLink: "/blog",
     },
     {
       id: "ai-integration",
       icon: Bot,
       title: "AI Integration & Consulting",
       description: "Integrate existing AI tools into your workflow or get expert guidance on AI strategy. We help you identify automation opportunities and implement the right solutions.",
-      blogLink: "/blog",
     },
   ]
 
@@ -56,14 +52,6 @@ export function ServicesSection() {
                   <h3 className="text-xl font-semibold text-alt-black mb-3">{service.title}</h3>
                   <p className="text-alt-gray-500 leading-relaxed">{service.description}</p>
                 </div>
-                <Link
-                  href={service.blogLink}
-                  className="flex items-center text-primary font-medium group-hover:gap-2 transition-all duration-200 mt-auto"
-                  onClick={(e) => e.stopPropagation()}
-                >
-                  <span>Learn More</span>
-                  <ArrowRight className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform duration-200" />
-                </Link>
               </div>
             )
           })}

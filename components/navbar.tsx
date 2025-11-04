@@ -29,17 +29,17 @@ export function Navbar() {
           >
             Home
           </Link>
-          <Link href="/#services" className="text-sm font-medium hover:text-primary transition-colors">
-            Services
-          </Link>
           <Link href="/#portfolio" className="text-sm font-medium hover:text-primary transition-colors">
             Projects
+          </Link>
+          <Link href="/#services" className="text-sm font-medium hover:text-primary transition-colors">
+            Services
           </Link>
           <Link
             href="/blog"
             className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
           >
-            Blog
+            News & Insights
           </Link>
         </nav>
         <div className="flex items-center gap-4">
@@ -65,13 +65,6 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              href="/#services"
-              className="text-sm font-medium hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Services
-            </Link>
-            <Link
               href="/#portfolio"
               className="text-sm font-medium hover:text-primary transition-colors"
               onClick={() => setIsMenuOpen(false)}
@@ -79,11 +72,18 @@ export function Navbar() {
               Projects
             </Link>
             <Link
+              href="/#services"
+              className="text-sm font-medium hover:text-primary transition-colors"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Services
+            </Link>
+            <Link
               href="/blog"
               className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
               onClick={() => setIsMenuOpen(false)}
             >
-              Blog
+              News & Insights
             </Link>
             <Button className="w-full" onClick={() => setIsMenuOpen(false)} asChild>
               <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
