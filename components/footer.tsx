@@ -8,7 +8,9 @@ export function Footer() {
         <div className="grid gap-6 md:grid-cols-3">
           <div className="space-y-3">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-accent font-normal tracking-tighter text-white">tecxmate inc.</span>
+              <span className="text-2xl font-accent tracking-tighter text-white">
+                <span className="font-bold">tecx</span><span className="font-normal">mate</span>
+              </span>
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
               Got an idea? Let's build it with tecxmate!

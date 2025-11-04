@@ -112,7 +112,16 @@ export function DemoProductsSection() {
           <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
         </div>
 
-        <div className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0" style={{ WebkitOverflowScrolling: 'touch' }}>
+        <div 
+          className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
+          style={{ 
+            WebkitOverflowScrolling: 'touch',
+            touchAction: 'pan-x pan-y',
+            willChange: 'scroll-position',
+            transform: 'translateZ(0)',
+            WebkitTapHighlightColor: 'transparent'
+          }}
+        >
           <div className="flex gap-8 min-w-max">
             {allProjects.map((project, index) => (
               <div key={index} className="flex-shrink-0 w-[280px] md:w-[500px]">
@@ -125,7 +134,10 @@ export function DemoProductsSection() {
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
-        .scrollbar-hide { touch-action: pan-x; }
+        .carousel-scroll {
+          -webkit-overflow-scrolling: touch;
+          overscroll-behavior-x: contain;
+        }
       `}</style>
     </section>
   )
