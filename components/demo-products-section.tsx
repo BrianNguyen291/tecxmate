@@ -3,11 +3,9 @@
 import { ExternalLink, Smartphone, Palette, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { useRef, useEffect, useState } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function DemoProductsSection() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const [isScrolling, setIsScrolling] = useState(false)
   // Combine all projects into a single array
   const allProjects = [
     {
@@ -21,7 +19,7 @@ export function DemoProductsSection() {
     {
       title: "Crypted - Harvard Innovation Labs",
       description: "Pioneering Blockchain Education Platform",
-      link: "https://www.crypted.vc",
+      link: "https://innovationlabs.harvard.edu/venture/crypted",
       image: "/products/crypted.png",
       icon: ExternalLink,
       actionText: "Visit",
@@ -68,72 +66,35 @@ export function DemoProductsSection() {
     },
   ]
 
-  // Enhanced mobile scrolling - prevent link clicks during horizontal scroll
+  const [isScrolling, setIsScrolling] = useState(false)
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+
+  // Prevent link clicks during horizontal scrolling only
   useEffect(() => {
     const container = scrollContainerRef.current
     if (!container) return
 
-    let touchStartX = 0
-    let touchStartY = 0
-    let touchMoved = false
-    let horizontalScroll = false
+    let lastScrollLeft = container.scrollLeft
+    let scrollTimeout: NodeJS.Timeout
 
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartX = e.touches[0].clientX
-      touchStartY = e.touches[0].clientY
-      touchMoved = false
-      horizontalScroll = false
-    }
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!touchStartX || !touchStartY) return
-
-      const touchX = e.touches[0].clientX
-      const touchY = e.touches[0].clientY
-      const diffX = Math.abs(touchX - touchStartX)
-      const diffY = Math.abs(touchY - touchStartY)
-
-      // Detect if user is trying to scroll horizontally
-      if (diffX > 10 || diffY > 10) {
-        touchMoved = true
-        if (diffX > diffY && diffX > 10) {
-          horizontalScroll = true
-          setIsScrolling(true)
-        }
-      }
-    }
-
-    const handleTouchEnd = (e: TouchEvent) => {
-      // If we detected horizontal scrolling, prevent link navigation
-      const links = container.querySelectorAll('a')
-      if (horizontalScroll && touchMoved) {
-        links.forEach(link => {
-          link.style.pointerEvents = 'none'
-        })
-        setTimeout(() => {
-          links.forEach(link => {
-            link.style.pointerEvents = 'auto'
-          })
+    const handleScroll = () => {
+      const currentScrollLeft = container.scrollLeft
+      // Detect if horizontal scrolling occurred
+      if (Math.abs(currentScrollLeft - lastScrollLeft) > 5) {
+        setIsScrolling(true)
+        clearTimeout(scrollTimeout)
+        scrollTimeout = setTimeout(() => {
           setIsScrolling(false)
-        }, 300)
-      } else {
-        setIsScrolling(false)
+        }, 150)
       }
-
-      touchStartX = 0
-      touchStartY = 0
-      touchMoved = false
-      horizontalScroll = false
+      lastScrollLeft = currentScrollLeft
     }
 
-    container.addEventListener('touchstart', handleTouchStart, { passive: true })
-    container.addEventListener('touchmove', handleTouchMove, { passive: true })
-    container.addEventListener('touchend', handleTouchEnd, { passive: true })
+    container.addEventListener('scroll', handleScroll, { passive: true })
 
     return () => {
-      container.removeEventListener('touchstart', handleTouchStart)
-      container.removeEventListener('touchmove', handleTouchMove)
-      container.removeEventListener('touchend', handleTouchEnd)
+      container.removeEventListener('scroll', handleScroll)
+      clearTimeout(scrollTimeout)
     }
   }, [])
 
@@ -155,6 +116,7 @@ export function DemoProductsSection() {
       className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
       onClick={handleClick}
+      style={{ touchAction: 'pan-x pan-y' }}
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full relative">
@@ -187,9 +149,9 @@ export function DemoProductsSection() {
         </div>
       </div>
     </Link>
-    )
-  }
-
+          )
+    }
+  
   return (
     <section id="portfolio" className="bg-white py-20 md:py-24 lg:py-28">
       <div className="container px-4 md:px-6 max-w-6xl">
@@ -202,7 +164,7 @@ export function DemoProductsSection() {
           className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-x pan-y',
+            touchAction: 'pan-x pan-y pinch-zoom',
             willChange: 'scroll-position',
             transform: 'translateZ(0)',
             WebkitTapHighlightColor: 'transparent',
@@ -224,6 +186,12 @@ export function DemoProductsSection() {
         .carousel-scroll {
           -webkit-overflow-scrolling: touch;
           overscroll-behavior-x: contain;
+        }
+        @media (max-width: 768px) {
+          .carousel-scroll a,
+          .carousel-scroll a * {
+            touch-action: pan-x pan-y;
+          }
         }
       `}</style>
     </section>
