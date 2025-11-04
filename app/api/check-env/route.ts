@@ -2,7 +2,7 @@ import { NextResponse } from "next/server"
 
 export async function GET() {
   return NextResponse.json({
-    notionApiKey: !!process.env.NOTION_API_KEY,
-    notionDatabaseId: !!process.env.NOTION_DATABASE_ID,
+    wordpressConfigured: !!process.env.WORDPRESS_SITE_URL,
+    siteUrl: !!process.env.NEXT_PUBLIC_SITE_URL,
   })
 }

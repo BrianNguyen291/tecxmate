@@ -6,6 +6,7 @@ import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 import React from "react"
 import { useRouter } from "next/navigation"
+import { RelatedPosts } from "@/components/related-posts"
 
 interface BlogPostContentProps {
   slug: string
@@ -71,10 +72,15 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
     <article>
       <div className="relative aspect-video w-full overflow-hidden">
         <div className="absolute inset-0 bg-black/40" />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={post.coverImage || "/placeholder.svg?height=600&width=1200"}
           alt={post.title}
           className="h-full w-full object-cover"
+          loading="eager"
+          fetchPriority="high"
+          width={1200}
+          height={630}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
           <div className="mb-4">
@@ -98,13 +104,20 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
 
       <div className="container px-4 py-12 md:px-6 md:py-16">
         <div className="mx-auto max-w-3xl">
-          <Link href="/blog" className="mb-8 inline-flex items-center gap-1 text-sm font-medium text-primary">
-            <ArrowLeft className="h-4 w-4" /> Back to all posts
-          </Link>
+          <nav aria-label="Breadcrumb" className="mb-8">
+            <Link href="/blog" className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline">
+              <ArrowLeft className="h-4 w-4" /> Back to all posts
+            </Link>
+          </nav>
 
-          <div className="wp-content prose prose-lg max-w-none" dangerouslySetInnerHTML={{ __html: post.content || "" }} />
+          <div 
+            className="wp-content prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:text-primary prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-img:rounded-lg prose-img:shadow-md" 
+            dangerouslySetInnerHTML={{ __html: post.content || "" }} 
+          />
         </div>
       </div>
+      
+      <RelatedPosts currentPostSlug={post.slug} currentCategory={post.category} />
     </article>
   )
 }

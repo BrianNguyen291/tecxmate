@@ -58,15 +58,32 @@ export default function Home() {
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
   return {
+    title: "Tecxmate - Technology Consultancy & Solutions for SMEs | Build the Future",
+    description: "Empowering SMEs and Founders with premier technology consultancy and solutions. Expert web development, software solutions, business technology, and digital transformation services.",
+    keywords: "technology consultancy, SME solutions, startup consulting, web development, software solutions, business technology, digital transformation, tech consulting, software development, business strategy",
     alternates: {
       canonical: baseUrl,
     },
     openGraph: {
+      title: "Tecxmate - Technology Consultancy & Solutions for SMEs",
+      description: "Empowering SMEs and Founders with premier technology consultancy and solutions.",
       url: baseUrl,
+      siteName: "Tecxmate",
       type: "website",
+      images: [
+        {
+          url: `${baseUrl}/tecxmate-logo-cropped.png`,
+          width: 1200,
+          height: 630,
+          alt: "Tecxmate - Technology Consultancy",
+        }
+      ],
     },
     twitter: {
       card: "summary_large_image",
+      title: "Tecxmate - Technology Consultancy & Solutions for SMEs",
+      description: "Empowering SMEs and Founders with premier technology consultancy and solutions.",
+      images: [`${baseUrl}/tecxmate-logo-cropped.png`],
     },
   }
 }

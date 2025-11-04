@@ -217,8 +217,8 @@ export function BlogListing() {
                         <span>{post.readTime}</span>
                       </div>
                     </div>
-                    <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight">{post.title}</h3>
-                    <p className="mb-4 text-gray-500">{post.excerpt}</p>
+                    <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2">{post.title}</h3>
+                    <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
                   </CardContent>
                   <CardFooter className="p-6 pt-0">
                     <Link

@@ -1,14 +1,21 @@
 import type React from "react"
 import type { Metadata } from "next"
+import { Inter } from "next/font/google"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
+
+const inter = Inter({ subsets: ["latin"] })
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
 export const metadata: Metadata = {
   title: "tecxmate - build the future",
-  description: "Build AI applications and automate your business processes. Empowering SMEs and Founders with intelligent automation and AI solutions.",
-  generator: 'v0.dev',
+  description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
+  generator: 'Next.js',
+  keywords: "technology consultancy, SME solutions, startup consulting, web development, software solutions, business technology, digital transformation",
+  authors: [{ name: 'Tecxmate' }],
+  creator: 'Tecxmate',
+  publisher: 'Tecxmate',
   metadataBase: new URL(baseUrl),
   icons: {
     icon: '/tecxmate-logo-cropped.png',
@@ -20,15 +27,46 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "tecxmate - build the future",
-    description: "Build AI applications and automate your business processes. Empowering SMEs and Founders with intelligent automation and AI solutions.",
+    description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
     url: baseUrl,
-    siteName: "tecxmate",
+    siteName: "Tecxmate",
     type: "website",
+    images: [
+      {
+        url: `${baseUrl}/tecxmate-logo-cropped.png`,
+        width: 1200,
+        height: 630,
+        alt: "Tecxmate - Technology Consultancy",
+      }
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "tecxmate - build the future",
-    description: "Build AI applications and automate your business processes. Empowering SMEs and Founders with intelligent automation and AI solutions.",
+    description: "Empowering SMEs and Founders with premier technology consultancy and solutions",
+    images: [`${baseUrl}/tecxmate-logo-cropped.png`],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  other: {
+    'theme-color': '#F6F3F1',
+    'color-scheme': 'light',
+    'apple-mobile-web-app-capable': 'yes',
+    'apple-mobile-web-app-status-bar-style': 'default',
   },
 }
 
@@ -42,9 +80,10 @@ export default function RootLayout({
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP&display=swap" rel="stylesheet" />
+        <link rel="alternate" type="application/rss+xml" title="Tecxmate Blog RSS Feed" href={`${baseUrl}/feed.xml`} />
+        <link rel="manifest" href="/manifest.json" />
       </head>
-      <body>
+      <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
         </ThemeProvider>

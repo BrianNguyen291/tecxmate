@@ -37,11 +37,19 @@ const fallbackPosts = [
 
 export async function GET() {
   try {
+    console.log('📡 API route /api/blog/posts called')
     const posts = await wpGetAllPosts()
-    if (posts && posts.length > 0) return NextResponse.json(posts)
+    console.log('📡 Posts fetched:', posts.length)
+    
+    if (posts && posts.length > 0) {
+      console.log('✅ Returning WordPress posts:', posts.length)
+      return NextResponse.json(posts)
+    }
+    
+    console.log('⚠️ No WordPress posts found, returning fallback posts')
     return NextResponse.json(fallbackPosts)
   } catch (error) {
-    console.error("API route error:", error)
+    console.error("❌ API route error:", error)
     return NextResponse.json(fallbackPosts)
   }
 }

@@ -7,13 +7,13 @@ const getFallbackPost = (slug: string) => {
     id: `fallback-${slug}`,
     slug: slug,
     title: "Sample Blog Post",
-    excerpt: "This is a sample blog post that appears when the Notion API is unavailable.",
+    excerpt: "This is a sample blog post that appears when the WordPress API is unavailable.",
     date: "January 1, 2023",
     readTime: "5 min read",
     category: "General",
     coverImage: "/placeholder.svg?height=600&width=1200",
     content:
-      "# Sample Content\n\nThis is a sample blog post content. The actual content could not be loaded from Notion.\n\n## Why am I seeing this?\n\nThis could be due to:\n- Notion API connection issues\n- Missing or incorrect environment variables\n- Database configuration issues\n\nPlease check your Notion integration setup and try again later.",
+      "# Sample Content\n\nThis is a sample blog post content. The actual content could not be loaded from WordPress.\n\n## Why am I seeing this?\n\nThis could be due to:\n- WordPress API connection issues\n- Missing or incorrect environment variables\n- WordPress site configuration issues\n\nPlease check your WordPress integration setup and try again later.",
   }
 }
 

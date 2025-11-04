@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
 import Link from "next/link"
-import type { BlogPost } from "@/lib/notion"
+import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 
 export function BlogSection() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
@@ -113,8 +113,8 @@ export function BlogSection() {
                       <span>{post.readTime}</span>
                     </div>
                   </div>
-                  <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight">{post.title}</h3>
-                  <p className="mb-4 text-gray-500">{post.excerpt}</p>
+                  <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2">{post.title}</h3>
+                  <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
                 </CardContent>
                 <CardFooter className="p-6 pt-0">
                   <Link

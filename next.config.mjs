@@ -8,7 +8,26 @@ const nextConfig = {
   },
   images: {
     unoptimized: true,
+    // Allow images from WordPress domains
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.wordpress.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.wp.com',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.wordpress.org',
+      },
+    ],
   },
+  // SEO and performance optimizations
+  compress: true,
+  poweredByHeader: false,
+  reactStrictMode: true,
   // Performance optimizations for development
   webpack: (config, { dev, isServer }) => {
     if (dev && !isServer) {
