@@ -8,8 +8,8 @@ export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
-        userAgent: "*",
-        allow: "/",
+      userAgent: "*",
+      allow: "/",
         disallow: ["/_next/", "/api/"],
       },
       {
@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
         userAgent: "Bingbot",
         allow: "/",
         disallow: ["/_next/", "/api/"],
-      },
+    },
     ],
     sitemap: `${rootUrl}/sitemap.xml`, // Use root domain for sitemap
     host: rootUrl, // Use root domain for host (Bing requirement)

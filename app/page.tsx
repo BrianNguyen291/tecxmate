@@ -5,6 +5,7 @@ import { ProcessSection } from "@/components/process-section"
 import { TeamSection } from "@/components/team-section"
 import { ValuesSection } from "@/components/values-section"
 import { DemoProductsSection } from "@/components/demo-products-section"
+import { CampaignsSection } from "@/components/campaigns-section"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 import Script from "next/script"
@@ -48,6 +49,7 @@ export default function Home() {
       />
       <HeroSection />
       <DemoProductsSection />
+      <CampaignsSection />
       <ServicesSection />
       <TeamSection />
       <Footer />
