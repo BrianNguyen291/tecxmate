@@ -127,23 +127,26 @@ export function DemoProductsSection() {
     const Icon = project.icon
     
     return (
-    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col">
+    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full">
       {/* Image */}
-      <div className="w-full aspect-[4/3] bg-[#e3e3e3] flex-shrink-0">
-        <Image
-          src={project.image || "/placeholder.svg"}
-          alt={project.title}
-          width={800}
-          height={600}
-          className="w-full h-full object-cover"
-          quality={75}
-          loading="lazy"
-          priority={false}
-        />
+      <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative" style={{ paddingBottom: '75%', height: 0 }}>
+        <div className="absolute inset-0 w-full h-full">
+          <Image
+            src={project.image || "/placeholder.svg"}
+            alt={project.title}
+            width={800}
+            height={600}
+            className="w-full h-full object-cover"
+            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+            quality={75}
+            loading="lazy"
+            priority={false}
+          />
+        </div>
       </div>
       
       {/* Content */}
-      <div className="p-4 flex flex-col flex-1">
+      <div className="p-4 flex flex-col flex-1 min-h-0">
         <div className="flex-1">
           <h3 className="text-lg font-semibold text-alt-black mb-1 text-left">{project.title}</h3>
           <p className="text-sm text-gray-600 mb-3 line-clamp-2 text-left">{project.description}</p>
@@ -184,9 +187,9 @@ export function DemoProductsSection() {
             msOverflowStyle: 'none'
           }}
         >
-          <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8">
+          <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8 items-stretch">
             {allProjects.map((project, index) => (
-              <div key={index} className="flex-shrink-0 w-72 md:w-80 first:ml-0 last:mr-0">
+              <div key={index} className="flex-shrink-0 w-72 md:w-80 first:ml-0 last:mr-0 flex">
                 <ProjectCard project={project} />
               </div>
             ))}
