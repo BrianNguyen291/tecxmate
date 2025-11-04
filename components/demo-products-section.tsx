@@ -12,7 +12,7 @@ export function DemoProductsSection() {
       title: "Rising Star Startup Competition",
       description: "Startup competition platform and showcase",
       link: "#",
-      image: "/products/risingstar.jpg",
+      image: "/products/risingstar.png",
       icon: ExternalLink,
       actionText: "Learn More",
     },
@@ -66,8 +66,9 @@ export function DemoProductsSection() {
     },
   ]
 
-  const [isScrolling, setIsScrolling] = useState(false)
   const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const isScrollingRef = useRef(false)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Prevent link clicks during horizontal scrolling only
   useEffect(() => {
@@ -75,38 +76,55 @@ export function DemoProductsSection() {
     if (!container) return
 
     let lastScrollLeft = container.scrollLeft
-    let scrollTimeout: NodeJS.Timeout
+    let lastScrollTime = 0
 
     const handleScroll = () => {
       const currentScrollLeft = container.scrollLeft
-      // Detect if horizontal scrolling occurred
-      if (Math.abs(currentScrollLeft - lastScrollLeft) > 5) {
-        setIsScrolling(true)
-        clearTimeout(scrollTimeout)
-        scrollTimeout = setTimeout(() => {
-          setIsScrolling(false)
-        }, 150)
+      const now = Date.now()
+      
+      // Detect if horizontal scrolling occurred (use smaller threshold when zoomed)
+      const threshold = 2 // Smaller threshold to work better when zoomed
+      if (Math.abs(currentScrollLeft - lastScrollLeft) > threshold) {
+        isScrollingRef.current = true
+        lastScrollTime = now
+        
+        clearTimeout(scrollTimeoutRef.current)
+        scrollTimeoutRef.current = setTimeout(() => {
+          // Only clear if enough time has passed since last scroll
+          if (Date.now() - lastScrollTime >= 250) {
+            isScrollingRef.current = false
+          }
+        }, 300)
       }
       lastScrollLeft = currentScrollLeft
     }
 
+    // Use event delegation to prevent clicks on links only after scroll
+    const handleClick = (e: MouseEvent) => {
+      // Only prevent if we were scrolling recently and it's a mouse click (not touch)
+      if (isScrollingRef.current && e.type === 'click') {
+        const target = e.target as HTMLElement
+        const link = target.closest('a')
+        if (link) {
+          e.preventDefault()
+          e.stopPropagation()
+        }
+      }
+    }
+
     container.addEventListener('scroll', handleScroll, { passive: true })
+    // Use bubble phase, not capture, to avoid interfering with scroll
+    container.addEventListener('click', handleClick, false)
 
     return () => {
       container.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
+      container.removeEventListener('click', handleClick, false)
+      clearTimeout(scrollTimeoutRef.current)
     }
   }, [])
 
   const ProjectCard = ({ project }: { project: typeof allProjects[0] }) => {
     const Icon = project.icon
-    
-    const handleClick = (e: React.MouseEvent) => {
-      if (isScrolling) {
-        e.preventDefault()
-        e.stopPropagation()
-      }
-    }
     
     return (
     <Link
@@ -115,7 +133,6 @@ export function DemoProductsSection() {
       rel="noopener noreferrer"
       className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
-      onClick={handleClick}
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full relative">
@@ -163,7 +180,7 @@ export function DemoProductsSection() {
           className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
-            willChange: 'scroll-position',
+            touchAction: 'pan-x pan-y pinch-zoom',
             transform: 'translateZ(0)',
             WebkitTapHighlightColor: 'transparent',
             overscrollBehaviorY: 'auto',
@@ -186,6 +203,11 @@ export function DemoProductsSection() {
           -webkit-overflow-scrolling: touch;
           overscroll-behavior-x: contain;
           overscroll-behavior-y: auto;
+        }
+        @media (max-width: 768px) {
+          .carousel-scroll {
+            touch-action: pan-x pan-y;
+          }
         }
       `}</style>
     </section>
