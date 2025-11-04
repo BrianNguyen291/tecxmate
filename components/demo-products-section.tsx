@@ -71,7 +71,7 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative rounded-lg shadow-sm hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
+      className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
     >
       {/* Background Image */}
@@ -79,15 +79,15 @@ export function DemoProductsSection() {
         <img
           src={project.image || "/placeholder.svg"}
           alt={project.title}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+          className="w-full h-full object-cover md:group-hover:scale-110 transition-transform duration-500"
         />
       </div>
       
       {/* Gradient Overlay at bottom for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-300 group-hover:opacity-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-300 md:group-hover:opacity-0"></div>
       
       {/* Content at bottom */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 group-hover:opacity-0">
+      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 md:group-hover:opacity-0">
         <div>
           <div className="h-[3.5rem] flex items-start mt-4">
             <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
@@ -112,7 +112,7 @@ export function DemoProductsSection() {
           <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
         </div>
 
-        <div className="overflow-x-auto pb-4 scrollbar-hide">
+        <div className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0" style={{ WebkitOverflowScrolling: 'touch' }}>
           <div className="flex gap-8 min-w-max">
             {allProjects.map((project, index) => (
               <div key={index} className="flex-shrink-0 w-[280px] md:w-[500px]">
@@ -125,6 +125,7 @@ export function DemoProductsSection() {
       <style jsx global>{`
         .scrollbar-hide::-webkit-scrollbar { display: none; }
         .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
+        .scrollbar-hide { touch-action: pan-x; }
       `}</style>
     </section>
   )
