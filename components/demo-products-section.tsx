@@ -135,7 +135,7 @@ export function DemoProductsSection() {
     let scrollLeft = 0
     let autoScrollAnimationId: number | null = null
     let scrollDirection = 1 // 1 for right, -1 for left
-    const scrollSpeed = 1 // pixels per frame
+    const scrollSpeed = 0.5 // pixels per frame (slower speed)
 
     // Auto-scroll function
     const startAutoScroll = () => {
