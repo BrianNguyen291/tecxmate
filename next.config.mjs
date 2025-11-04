@@ -7,7 +7,8 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   images: {
-    unoptimized: true,
+    // Enable Next.js image optimization for better performance
+    formats: ['image/avif', 'image/webp'],
     // Allow images from WordPress domains
     remotePatterns: [
       {

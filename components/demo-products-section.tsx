@@ -9,20 +9,20 @@ export function DemoProductsSection() {
   // Combine all projects into a single array
   const allProjects = [
     {
-      title: "Rising Star Startup Competition",
-      description: "Startup competition platform and showcase",
-      link: "#",
-      image: "/products/risingstar.png",
-      icon: ExternalLink,
-      actionText: "Learn More",
-    },
-    {
       title: "Crypted - Harvard Innovation Labs",
       description: "Pioneering Blockchain Education Platform",
       link: "https://innovationlabs.harvard.edu/venture/crypted",
       image: "/products/crypted.png",
       icon: ExternalLink,
       actionText: "Visit",
+    },
+    {
+      title: "Rising Star Startup Competition",
+      description: "Startup competition platform and showcase",
+      link: "#",
+      image: "/products/risingstar.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
     },
     {
       title: "HealthMaxers",
@@ -131,37 +131,30 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative rounded-lg shadow-sm group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
+      className="block rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300"
       aria-label={project.title}
     >
-      {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full relative">
+      {/* Image */}
+      <div className="w-full aspect-[4/3] bg-[#e3e3e3]">
         <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
-          fill
-          className="object-cover"
-          sizes="(max-width: 768px) 280px, 500px"
-          quality={90}
+          width={800}
+          height={600}
+          className="w-full h-full object-cover"
+          quality={75}
+          loading="lazy"
+          priority={false}
         />
       </div>
       
-      {/* Gradient Overlay at bottom for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
-      
-      {/* Content at bottom */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6">
-        <div>
-          <div className="h-[3.5rem] flex items-start mt-4">
-            <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
-          </div>
-          <div className="h-[3rem] flex items-start">
-            <p className="text-white/90 text-sm leading-relaxed line-clamp-2 drop-shadow-md">{project.description}</p>
-          </div>
-          <div className="inline-flex items-center text-white font-medium mt-3">
-            <span className="drop-shadow-lg">{project.actionText}</span>
-            <Icon className="w-4 h-4 ml-1 drop-shadow-lg" />
-          </div>
+      {/* Content */}
+      <div className="p-4 text-center">
+        <h3 className="text-lg font-semibold text-alt-black mb-1">{project.title}</h3>
+        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
+        <div className="inline-flex items-center text-primary font-medium">
+          <span>{project.actionText}</span>
+          <Icon className="w-4 h-4 ml-1" />
         </div>
       </div>
     </Link>
@@ -169,7 +162,7 @@ export function DemoProductsSection() {
     }
   
   return (
-    <section id="portfolio" className="bg-white py-20 md:py-24 lg:py-28">
+    <section id="portfolio" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28 border-t border-b border-[rgba(55,50,47,0.12)]">
       <div className="container px-4 md:px-6 max-w-6xl">
         <div className="text-center mb-16">
           <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
@@ -189,9 +182,9 @@ export function DemoProductsSection() {
             msOverflowStyle: 'none'
           }}
         >
-          <div className="flex gap-8 min-w-max pl-4 md:pl-8 pr-4 md:pr-8">
+          <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8">
             {allProjects.map((project, index) => (
-              <div key={index} className="flex-shrink-0 w-[280px] md:w-[500px] first:ml-0 last:mr-0">
+              <div key={index} className="flex-shrink-0 w-72 md:w-80 first:ml-0 last:mr-0">
                 <ProjectCard project={project} />
               </div>
             ))}
