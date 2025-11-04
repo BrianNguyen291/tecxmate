@@ -3,7 +3,7 @@
 import { ExternalLink, Smartphone, Palette, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useRef } from "react"
 
 export function DemoProductsSection() {
   // Combine all projects into a single array
@@ -69,8 +69,6 @@ export function DemoProductsSection() {
   const scrollContainerRef = useRef<HTMLDivElement>(null)
   const isScrollingRef = useRef(false)
   const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
-  const [isHovered, setIsHovered] = useState(false)
-  const autoScrollIntervalRef = useRef<NodeJS.Timeout | undefined>(undefined)
 
   // Prevent link clicks during horizontal scrolling only
   useEffect(() => {
@@ -124,149 +122,6 @@ export function DemoProductsSection() {
       clearTimeout(scrollTimeoutRef.current)
     }
   }, [])
-
-  // Click and drag scrolling + auto-scroll when cursor leaves
-  useEffect(() => {
-    const container = scrollContainerRef.current
-    if (!container) return
-
-    let isMouseDown = false
-    let startX = 0
-    let scrollLeft = 0
-    let autoScrollAnimationId: number | null = null
-    let scrollDirection = 1 // 1 for right, -1 for left
-    const scrollSpeed = 0.5 // pixels per frame (slower speed)
-
-    // Auto-scroll function
-    const startAutoScroll = () => {
-      // Clear any existing animation
-      if (autoScrollAnimationId !== null) {
-        cancelAnimationFrame(autoScrollAnimationId)
-      }
-
-      const animate = () => {
-        // Check if container has horizontal overflow
-        const hasHorizontalScroll = container.scrollWidth > container.clientWidth
-        if (!hasHorizontalScroll) {
-          autoScrollAnimationId = null
-          return
-        }
-
-        // Check if we've reached the end
-        const isAtEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 1
-        const isAtStart = container.scrollLeft <= 1
-
-        // Reverse direction at boundaries
-        if (isAtEnd) {
-          scrollDirection = -1
-        } else if (isAtStart) {
-          scrollDirection = 1
-        }
-
-        // Scroll smoothly
-        container.scrollLeft += scrollSpeed * scrollDirection
-
-        // Continue animation
-        autoScrollAnimationId = requestAnimationFrame(animate)
-      }
-
-      animate()
-    }
-
-    const stopAutoScroll = () => {
-      if (autoScrollAnimationId !== null) {
-        cancelAnimationFrame(autoScrollAnimationId)
-        autoScrollAnimationId = null
-      }
-    }
-
-    // Mouse drag to scroll (only when clicking)
-    const handleMouseDown = (e: MouseEvent) => {
-      if (e.button !== 0) return // Only left mouse button
-      stopAutoScroll() // Stop auto-scroll when user interacts
-      isMouseDown = true
-      startX = e.pageX - container.offsetLeft
-      scrollLeft = container.scrollLeft
-      container.style.cursor = 'grabbing'
-      container.style.userSelect = 'none'
-    }
-
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isMouseDown) return
-      e.preventDefault()
-      const x = e.pageX - container.offsetLeft
-      const walk = (x - startX) * 2 // Scroll speed multiplier
-      container.scrollLeft = scrollLeft - walk
-    }
-
-    const handleMouseUp = () => {
-      isMouseDown = false
-      container.style.cursor = 'grab'
-      container.style.userSelect = ''
-      // Resume auto-scroll if cursor is not hovering
-      if (!isHovered) {
-        startAutoScroll()
-      }
-    }
-
-    const handleMouseLeave = () => {
-      isMouseDown = false
-      setIsHovered(false)
-      container.style.cursor = 'default'
-      container.style.userSelect = ''
-      // Start auto-scroll when cursor leaves
-      startAutoScroll()
-    }
-
-    const handleMouseEnter = () => {
-      setIsHovered(true)
-      container.style.cursor = 'grab'
-      // Stop auto-scroll when cursor enters
-      stopAutoScroll()
-    }
-
-    // Add event listeners
-    container.addEventListener('mousedown', handleMouseDown)
-    container.addEventListener('mousemove', handleMouseMove)
-    container.addEventListener('mouseup', handleMouseUp)
-    container.addEventListener('mouseleave', handleMouseLeave)
-    container.addEventListener('mouseenter', handleMouseEnter)
-
-    // Also handle mouse leave on document level for when mouse leaves window
-    const handleDocumentMouseUp = () => {
-      if (isMouseDown) {
-        isMouseDown = false
-        if (container) {
-          container.style.cursor = 'grab'
-          container.style.userSelect = ''
-        }
-        // Resume auto-scroll if cursor is not hovering
-        if (!isHovered) {
-          startAutoScroll()
-        }
-      }
-    }
-
-    document.addEventListener('mouseup', handleDocumentMouseUp)
-
-    // Start auto-scroll initially (when cursor is not hovering)
-    if (!isHovered) {
-      startAutoScroll()
-    }
-
-    return () => {
-      container.removeEventListener('mousedown', handleMouseDown)
-      container.removeEventListener('mousemove', handleMouseMove)
-      container.removeEventListener('mouseup', handleMouseUp)
-      container.removeEventListener('mouseleave', handleMouseLeave)
-      container.removeEventListener('mouseenter', handleMouseEnter)
-      document.removeEventListener('mouseup', handleDocumentMouseUp)
-      stopAutoScroll()
-      if (autoScrollIntervalRef.current) {
-        clearInterval(autoScrollIntervalRef.current)
-      }
-    }
-  }, [isHovered])
 
   const ProjectCard = ({ project }: { project: typeof allProjects[0] }) => {
     const Icon = project.icon
@@ -331,12 +186,8 @@ export function DemoProductsSection() {
             overscrollBehaviorY: 'auto',
             overscrollBehaviorX: 'contain',
             scrollbarWidth: 'none',
-            msOverflowStyle: 'none',
-            cursor: isHovered ? 'grab' : 'default',
-            userSelect: 'none'
+            msOverflowStyle: 'none'
           }}
-          onMouseEnter={() => setIsHovered(true)}
-          onMouseLeave={() => setIsHovered(false)}
         >
           <div className="flex gap-8 min-w-max pl-4 md:pl-8 pr-4 md:pr-8">
             {allProjects.map((project, index) => (
@@ -376,15 +227,6 @@ export function DemoProductsSection() {
             overflow-x: auto;
             cursor: default;
             user-select: auto;
-          }
-        }
-        /* Desktop: Enable grab cursor and prevent text selection */
-        @media (min-width: 769px) {
-          .carousel-scroll {
-            cursor: grab;
-          }
-          .carousel-scroll:active {
-            cursor: grabbing;
           }
         }
       `}</style>
