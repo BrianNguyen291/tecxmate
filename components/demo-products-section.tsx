@@ -276,7 +276,7 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
+      className="block relative rounded-lg shadow-sm group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
     >
       {/* Background Image */}
@@ -285,17 +285,17 @@ export function DemoProductsSection() {
           src={project.image || "/placeholder.svg"}
           alt={project.title}
           fill
-          className="object-cover md:group-hover:scale-110 transition-transform duration-500"
+          className="object-cover"
           sizes="(max-width: 768px) 280px, 500px"
           quality={90}
         />
       </div>
       
       {/* Gradient Overlay at bottom for text readability */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-opacity duration-300 md:group-hover:opacity-0"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent"></div>
       
       {/* Content at bottom */}
-      <div className="absolute inset-0 flex flex-col justify-end p-6 transition-opacity duration-300 md:group-hover:opacity-0">
+      <div className="absolute inset-0 flex flex-col justify-end p-6">
         <div>
           <div className="h-[3.5rem] flex items-start mt-4">
             <h3 className="text-xl font-semibold text-white line-clamp-2 drop-shadow-lg">{project.title}</h3>
@@ -305,7 +305,7 @@ export function DemoProductsSection() {
           </div>
           <div className="inline-flex items-center text-white font-medium mt-3">
             <span className="drop-shadow-lg">{project.actionText}</span>
-            <Icon className="w-4 h-4 ml-1 transition-transform drop-shadow-lg" />
+            <Icon className="w-4 h-4 ml-1 drop-shadow-lg" />
           </div>
         </div>
       </div>
