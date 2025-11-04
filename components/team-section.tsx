@@ -59,7 +59,7 @@ export function TeamSection() {
           </motion.div>
 
           <div className="mt-16 overflow-x-auto overflow-y-hidden scrollbar-hide">
-            <div className="flex gap-6 pb-4">
+            <div className="flex gap-4 pb-4">
               {teamMembers.map((member) => (
                 <motion.div
                   key={member.id}
@@ -67,7 +67,7 @@ export function TeamSection() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: teamMembers.indexOf(member) * 0.05 }}
                   viewport={{ once: true }}
-                  className="flex-shrink-0 w-72"
+                  className="flex-shrink-0 w-64"
                 >
                   <div
                     className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300"
@@ -81,9 +81,9 @@ export function TeamSection() {
                     className="w-full h-full object-cover object-[center_20%]"
                   />
                 </div>
-                    <div className="p-4 text-center">
-                      <h3 className="text-lg font-semibold text-alt-black mb-1">{member.name}</h3>
-                      <p className="text-sm text-primary font-medium mb-3">{member.role}</p>
+                    <div className="p-3 text-center">
+                      <h3 className="text-base font-semibold text-alt-black mb-1">{member.name}</h3>
+                      <p className="text-xs text-primary font-medium mb-2">{member.role}</p>
                       {member.id !== 'jane' && (
                         <div className="flex items-center justify-center gap-3">
                           <a 
