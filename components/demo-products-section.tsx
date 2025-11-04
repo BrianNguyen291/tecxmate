@@ -19,7 +19,7 @@ export function DemoProductsSection() {
     {
       title: "Rising Star Startup Competition",
       description: "Startup competition platform and showcase",
-      link: "#",
+      link: "https://www.youtube.com/watch?v=uRUHCy9IGps",
       image: "/products/risingstar.png",
       icon: ExternalLink,
       actionText: "Learn More",
@@ -131,11 +131,12 @@ export function DemoProductsSection() {
       href={project.link}
       target="_blank"
       rel="noopener noreferrer"
-      className="block rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300"
+      className="block rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col"
       aria-label={project.title}
+      style={{ touchAction: 'auto' }}
     >
       {/* Image */}
-      <div className="w-full aspect-[4/3] bg-[#e3e3e3]">
+      <div className="w-full aspect-[4/3] bg-[#e3e3e3] flex-shrink-0">
         <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
@@ -149,10 +150,12 @@ export function DemoProductsSection() {
       </div>
       
       {/* Content */}
-      <div className="p-4 text-center">
-        <h3 className="text-lg font-semibold text-alt-black mb-1">{project.title}</h3>
-        <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
-        <div className="inline-flex items-center text-primary font-medium">
+      <div className="p-4 text-center flex flex-col flex-1">
+        <div className="flex-1">
+          <h3 className="text-lg font-semibold text-alt-black mb-1">{project.title}</h3>
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
+        </div>
+        <div className="inline-flex items-center text-primary font-medium mt-auto">
           <span>{project.actionText}</span>
           <Icon className="w-4 h-4 ml-1" />
         </div>
@@ -173,7 +176,7 @@ export function DemoProductsSection() {
           className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-x pinch-zoom',
+            touchAction: 'pan-y pan-x pinch-zoom',
             transform: 'translateZ(0)',
             WebkitTapHighlightColor: 'transparent',
             overscrollBehaviorY: 'auto',
@@ -215,7 +218,7 @@ export function DemoProductsSection() {
         /* Mobile: Enable native touch scrolling */
         @media (max-width: 768px) {
           .carousel-scroll {
-            touch-action: pan-x pinch-zoom;
+            touch-action: pan-y pan-x pinch-zoom;
             -webkit-overflow-scrolling: touch;
             overflow-x: auto;
             cursor: default;
