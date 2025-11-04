@@ -116,7 +116,6 @@ export function DemoProductsSection() {
       className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
       onClick={handleClick}
-      style={{ touchAction: 'pan-x pan-y' }}
     >
       {/* Background Image */}
       <div className="absolute inset-0 w-full h-full relative">
@@ -164,11 +163,11 @@ export function DemoProductsSection() {
           className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-x pan-y pinch-zoom',
             willChange: 'scroll-position',
             transform: 'translateZ(0)',
             WebkitTapHighlightColor: 'transparent',
-            overscrollBehavior: 'contain'
+            overscrollBehaviorY: 'auto',
+            overscrollBehaviorX: 'contain'
           }}
         >
           <div className="flex gap-8 min-w-max">
@@ -186,12 +185,7 @@ export function DemoProductsSection() {
         .carousel-scroll {
           -webkit-overflow-scrolling: touch;
           overscroll-behavior-x: contain;
-        }
-        @media (max-width: 768px) {
-          .carousel-scroll a,
-          .carousel-scroll a * {
-            touch-action: pan-x pan-y;
-          }
+          overscroll-behavior-y: auto;
         }
       `}</style>
     </section>
