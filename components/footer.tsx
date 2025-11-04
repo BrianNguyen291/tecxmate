@@ -43,7 +43,7 @@ export function Footer() {
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="#team" className="hover:text-white transition-colors duration-200">
-                  Meet our expert
+                  About
                 </Link>
               </li>
               <li>
@@ -70,6 +70,11 @@ export function Footer() {
                 <a href="mailto:hello@tecxmate.com" className="hover:text-white transition-colors duration-200">
                   Email: hello@tecxmate.com
                 </a>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors duration-200">
+                  Chat with us
+                </Link>
               </li>
               <li>
                 <a
