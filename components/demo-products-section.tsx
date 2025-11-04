@@ -2,8 +2,12 @@
 
 import { ExternalLink, Smartphone, Palette, ArrowRight } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
+import { useRef, useEffect, useState } from "react"
 
 export function DemoProductsSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const [isScrolling, setIsScrolling] = useState(false)
   // Combine all projects into a single array
   const allProjects = [
     {
@@ -64,8 +68,85 @@ export function DemoProductsSection() {
     },
   ]
 
+  // Enhanced mobile scrolling - prevent link clicks during horizontal scroll
+  useEffect(() => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    let touchStartX = 0
+    let touchStartY = 0
+    let touchMoved = false
+    let horizontalScroll = false
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX = e.touches[0].clientX
+      touchStartY = e.touches[0].clientY
+      touchMoved = false
+      horizontalScroll = false
+    }
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!touchStartX || !touchStartY) return
+
+      const touchX = e.touches[0].clientX
+      const touchY = e.touches[0].clientY
+      const diffX = Math.abs(touchX - touchStartX)
+      const diffY = Math.abs(touchY - touchStartY)
+
+      // Detect if user is trying to scroll horizontally
+      if (diffX > 10 || diffY > 10) {
+        touchMoved = true
+        if (diffX > diffY && diffX > 10) {
+          horizontalScroll = true
+          setIsScrolling(true)
+        }
+      }
+    }
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      // If we detected horizontal scrolling, prevent link navigation
+      const links = container.querySelectorAll('a')
+      if (horizontalScroll && touchMoved) {
+        links.forEach(link => {
+          link.style.pointerEvents = 'none'
+        })
+        setTimeout(() => {
+          links.forEach(link => {
+            link.style.pointerEvents = 'auto'
+          })
+          setIsScrolling(false)
+        }, 300)
+      } else {
+        setIsScrolling(false)
+      }
+
+      touchStartX = 0
+      touchStartY = 0
+      touchMoved = false
+      horizontalScroll = false
+    }
+
+    container.addEventListener('touchstart', handleTouchStart, { passive: true })
+    container.addEventListener('touchmove', handleTouchMove, { passive: true })
+    container.addEventListener('touchend', handleTouchEnd, { passive: true })
+
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart)
+      container.removeEventListener('touchmove', handleTouchMove)
+      container.removeEventListener('touchend', handleTouchEnd)
+    }
+  }, [])
+
   const ProjectCard = ({ project }: { project: typeof allProjects[0] }) => {
     const Icon = project.icon
+    
+    const handleClick = (e: React.MouseEvent) => {
+      if (isScrolling) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+    }
+    
     return (
     <Link
       href={project.link}
@@ -73,13 +154,17 @@ export function DemoProductsSection() {
       rel="noopener noreferrer"
       className="block relative rounded-lg shadow-sm md:hover:shadow-lg transition-all duration-300 group overflow-hidden aspect-[3/4] md:aspect-[4/3]"
       aria-label={project.title}
+      onClick={handleClick}
     >
       {/* Background Image */}
-      <div className="absolute inset-0 w-full h-full">
-        <img
+      <div className="absolute inset-0 w-full h-full relative">
+        <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
-          className="w-full h-full object-cover md:group-hover:scale-110 transition-transform duration-500"
+          fill
+          className="object-cover md:group-hover:scale-110 transition-transform duration-500"
+          sizes="(max-width: 768px) 280px, 500px"
+          quality={90}
         />
       </div>
       
@@ -113,13 +198,15 @@ export function DemoProductsSection() {
         </div>
 
         <div 
+          ref={scrollContainerRef}
           className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
           style={{ 
             WebkitOverflowScrolling: 'touch',
             touchAction: 'pan-x pan-y',
             willChange: 'scroll-position',
             transform: 'translateZ(0)',
-            WebkitTapHighlightColor: 'transparent'
+            WebkitTapHighlightColor: 'transparent',
+            overscrollBehavior: 'contain'
           }}
         >
           <div className="flex gap-8 min-w-max">
