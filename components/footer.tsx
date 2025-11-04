@@ -39,7 +39,7 @@ export function Footer() {
             </div>
           </div>
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-white">Company</h3>
+            <h3 className="text-lg font-semibold text-white">Team</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="#team" className="hover:text-white transition-colors duration-200">

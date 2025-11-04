@@ -150,12 +150,12 @@ export function DemoProductsSection() {
       </div>
       
       {/* Content */}
-      <div className="p-4 text-center flex flex-col flex-1">
+      <div className="p-4 flex flex-col flex-1">
         <div className="flex-1">
-          <h3 className="text-lg font-semibold text-alt-black mb-1">{project.title}</h3>
-          <p className="text-sm text-gray-600 mb-3 line-clamp-2">{project.description}</p>
+          <h3 className="text-lg font-semibold text-alt-black mb-1 text-left">{project.title}</h3>
+          <p className="text-sm text-gray-600 mb-3 line-clamp-2 text-left">{project.description}</p>
         </div>
-        <div className="inline-flex items-center text-primary font-medium mt-auto">
+        <div className="flex items-center justify-center text-primary font-medium mt-auto">
           <span>{project.actionText}</span>
           <Icon className="w-4 h-4 ml-1" />
         </div>

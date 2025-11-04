@@ -47,7 +47,7 @@ export function LogoCarousel() {
   ]
 
   return (
-    <div className="absolute left-0 right-0 bottom-28 md:bottom-16">
+    <div className="absolute left-0 right-0 bottom-36 md:bottom-16">
       <div className="flex items-center gap-2 md:gap-4">
         <div className="ml-2 md:ml-8 flex-shrink-0">
           <div className="flex flex-col text-left">
