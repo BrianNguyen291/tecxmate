@@ -41,6 +41,14 @@ export function DemoProductsSection() {
       actionText: "Learn More",
     },
     {
+      title: "CryptED",
+      description: "Gamified Blockchain and Web3 education through interactive gameplay",
+      link: "https://apps.apple.com/tw/app/crypted-blockchain-education/id6747925774?l=en-GB",
+      image: "/products/cryptedapp.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
       title: "TailU",
       description: "Taiwan's Premier AI Pet Care Platform",
       link: "#",

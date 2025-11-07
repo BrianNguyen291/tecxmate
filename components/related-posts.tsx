@@ -46,7 +46,7 @@ export function RelatedPosts({ currentPostSlug, currentCategory, currentTags }: 
             
             // If still not enough, add recent posts
             if (combined.length < 3) {
-              const recent = allPosts
+            const recent = allPosts
                 .filter(post => post.slug !== currentPostSlug)
                 .filter(post => !combined.some(p => p.slug === post.slug))
                 .slice(0, 3 - combined.length)

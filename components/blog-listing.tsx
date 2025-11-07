@@ -187,7 +187,7 @@ export function BlogListing() {
                 <p className="text-gray-500 mb-4">No posts found matching your criteria.</p>
                 <Button onClick={clearFilters} variant="outline">
                   Clear filters
-                </Button>
+                      </Button>
               </div>
             ) : (
               <>
@@ -199,10 +199,10 @@ export function BlogListing() {
                       {selectedCategory && selectedCategory !== "All" && ` in category "${selectedCategory}"`}
                       {searchParam && ` matching "${searchParam}"`}
                     </p>
-                  </div>
+                        </div>
                 )}
-                <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
-                  {displayPosts.map((post) => (
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+              {displayPosts.map((post) => (
                 <Card
                   key={post.id}
                   className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg"

@@ -175,24 +175,24 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
     
     console.log('✅ Post found:', { id: p.id, slug: decodedSlug, title: p.title?.rendered })
     
-      return {
-        id: p.id,
-        slug: decodedSlug,
-        title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
-        excerpt: (() => {
-          let excerpt = decodeHtmlEntities(stripHtml(p.excerpt?.rendered || ""))
-          if (excerpt.length > 150) {
-            excerpt = excerpt.substring(0, 147).trim() + "..."
-          }
-          return excerpt
-        })(),
-        date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
-        readTime: estimateReadTime(stripHtml(contentHtml)),
-        category: wpPrimaryCategory(p),
-        coverImage: wpFeaturedImage(p),
-        content: contentHtml,
+    return {
+      id: p.id,
+      slug: decodedSlug,
+      title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
+      excerpt: (() => {
+        let excerpt = decodeHtmlEntities(stripHtml(p.excerpt?.rendered || ""))
+        if (excerpt.length > 150) {
+          excerpt = excerpt.substring(0, 147).trim() + "..."
+        }
+        return excerpt
+      })(),
+      date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+      readTime: estimateReadTime(stripHtml(contentHtml)),
+      category: wpPrimaryCategory(p),
+      coverImage: wpFeaturedImage(p),
+      content: contentHtml,
         tags: wpTags(p),
-      }
+    }
   } catch (error) {
     console.error('❌ Error fetching post by slug:', error)
     return null

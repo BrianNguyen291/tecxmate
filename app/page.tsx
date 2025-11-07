@@ -25,7 +25,10 @@ export default function Home() {
             "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com",
             "logo": (process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com") + "/logo.png",
             "sameAs": [
-              "https://www.linkedin.com/company/tecxmate"
+              "https://www.facebook.com/tecxmate",
+              "https://x.com/tecxmate",
+              "https://www.instagram.com/tecxmate",
+              "https://tw.linkedin.com/company/tecxmate"
             ]
           }),
         }}

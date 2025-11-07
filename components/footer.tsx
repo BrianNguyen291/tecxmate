@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Linkedin, Github } from "lucide-react"
+import { Facebook, Twitter, Instagram, Linkedin, Video } from "lucide-react"
 
 export function Footer() {
   return (
@@ -15,30 +15,57 @@ export function Footer() {
             <p className="text-sm text-gray-300 leading-relaxed">
               Got an idea? Let's build it with tecxmate!
             </p>
-            <div className="flex gap-3">
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href="https://cal.com/nikolasdoan/30min"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-200"
+              >
+                <Video className="h-5 w-5" />
+                <span className="text-sm">Book a Discovery Call</span>
+              </a>
+              <div className="flex gap-3">
+              <a 
+                href="https://www.facebook.com/tecxmate" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              >
                 <Facebook className="h-5 w-5" />
                 <span className="sr-only">Facebook</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+              </a>
+              <a 
+                href="https://x.com/tecxmate" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              >
                 <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+                <span className="sr-only">X</span>
+              </a>
+              <a 
+                href="https://www.instagram.com/tecxmate" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              >
                 <Instagram className="h-5 w-5" />
                 <span className="sr-only">Instagram</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
+              </a>
+              <a 
+                href="https://tw.linkedin.com/company/tecxmate" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="text-gray-400 hover:text-white transition-colors duration-200"
+              >
                 <Linkedin className="h-5 w-5" />
                 <span className="sr-only">LinkedIn</span>
-              </Link>
-              <Link href="#" className="text-gray-400 hover:text-white transition-colors duration-200">
-                <Github className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </Link>
+              </a>
+              </div>
             </div>
           </div>
-          <div className="space-y-3">
+          <div className="space-y-3 md:ml-6">
             <h3 className="text-lg font-semibold text-white">Team</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
@@ -70,11 +97,6 @@ export function Footer() {
                 <a href="mailto:hello@tecxmate.com" className="hover:text-white transition-colors duration-200">
                   Email: hello@tecxmate.com
                 </a>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors duration-200">
-                  Chat with us
-                </Link>
               </li>
               <li>
                 <a
