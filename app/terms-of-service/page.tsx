@@ -3,6 +3,28 @@ import { join } from 'path'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import ReactMarkdown from 'react-markdown'
+import { cache } from 'react'
+import type { Metadata } from 'next'
+
+// Cache the file reading for better performance
+// Revalidate every hour (3600 seconds) - these pages rarely change
+export const revalidate = 3600
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tecxmate.com'
+
+export const metadata: Metadata = {
+  title: 'Terms of Service | Tecxmate',
+  description: 'Read our terms of service to understand the terms and conditions for using tecxmate services.',
+  alternates: {
+    canonical: `${baseUrl}/terms-of-service`,
+  },
+  openGraph: {
+    title: 'Terms of Service | Tecxmate',
+    description: 'Read our terms of service to understand the terms and conditions for using tecxmate services.',
+    url: `${baseUrl}/terms-of-service`,
+    type: 'website',
+  },
+}
 
 async function getTermsOfService() {
   try {
@@ -10,12 +32,16 @@ async function getTermsOfService() {
     const content = await readFile(filePath, 'utf8')
     return content
   } catch (error) {
+    console.error('Error reading terms of service:', error)
     return '# Terms of Service\n\nContent not available.'
   }
 }
 
+// Cache the content reading function
+const getCachedTermsOfService = cache(getTermsOfService)
+
 export default async function TermsOfServicePage() {
-  const content = await getTermsOfService()
+  const content = await getCachedTermsOfService()
 
   return (
     <div className="min-h-screen bg-[#F6F3F1]">

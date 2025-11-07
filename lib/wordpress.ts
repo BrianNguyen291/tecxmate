@@ -8,6 +8,7 @@ export type WPBlogPost = {
   category: string
   coverImage: string
   content?: string
+  tags?: string[]
 }
 
 import { WORDPRESS_API_URL } from "./wp-config"
@@ -52,6 +53,11 @@ function wpFeaturedImage(post: any) {
 function wpPrimaryCategory(post: any) {
   const cat = post._embedded?.["wp:term"]?.[0]?.[0]
   return cat?.name || "Uncategorized"
+}
+
+function wpTags(post: any): string[] {
+  const tags = post._embedded?.["wp:term"]?.[1] || []
+  return tags.map((tag: any) => tag.name || "").filter((name: string) => name.length > 0)
 }
 
 export async function wpGetAllPosts(): Promise<WPBlogPost[]> {
@@ -117,6 +123,7 @@ export async function wpGetAllPosts(): Promise<WPBlogPost[]> {
         readTime: estimateReadTime(stripHtml(p.content?.rendered || "")),
         category: wpPrimaryCategory(p),
         coverImage: wpFeaturedImage(p),
+        tags: wpTags(p),
       }
     })
     
@@ -168,23 +175,24 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
     
     console.log('✅ Post found:', { id: p.id, slug: decodedSlug, title: p.title?.rendered })
     
-    return {
-      id: p.id,
-      slug: decodedSlug,
-      title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
-      excerpt: (() => {
-        let excerpt = decodeHtmlEntities(stripHtml(p.excerpt?.rendered || ""))
-        if (excerpt.length > 150) {
-          excerpt = excerpt.substring(0, 147).trim() + "..."
-        }
-        return excerpt
-      })(),
-      date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
-      readTime: estimateReadTime(stripHtml(contentHtml)),
-      category: wpPrimaryCategory(p),
-      coverImage: wpFeaturedImage(p),
-      content: contentHtml,
-    }
+      return {
+        id: p.id,
+        slug: decodedSlug,
+        title: decodeHtmlEntities(stripHtml(p.title?.rendered || "Untitled")),
+        excerpt: (() => {
+          let excerpt = decodeHtmlEntities(stripHtml(p.excerpt?.rendered || ""))
+          if (excerpt.length > 150) {
+            excerpt = excerpt.substring(0, 147).trim() + "..."
+          }
+          return excerpt
+        })(),
+        date: new Date(p.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+        readTime: estimateReadTime(stripHtml(contentHtml)),
+        category: wpPrimaryCategory(p),
+        coverImage: wpFeaturedImage(p),
+        content: contentHtml,
+        tags: wpTags(p),
+      }
   } catch (error) {
     console.error('❌ Error fetching post by slug:', error)
     return null

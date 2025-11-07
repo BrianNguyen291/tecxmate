@@ -9,9 +9,10 @@ import type { WPBlogPost } from "@/lib/wordpress"
 interface RelatedPostsProps {
   currentPostSlug: string
   currentCategory: string
+  currentTags?: string[]
 }
 
-export function RelatedPosts({ currentPostSlug, currentCategory }: RelatedPostsProps) {
+export function RelatedPosts({ currentPostSlug, currentCategory, currentTags }: RelatedPostsProps) {
   const [relatedPosts, setRelatedPosts] = useState<WPBlogPost[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -21,24 +22,40 @@ export function RelatedPosts({ currentPostSlug, currentCategory }: RelatedPostsP
         const response = await fetch("/api/blog/posts")
         if (response.ok) {
           const allPosts: WPBlogPost[] = await response.json()
+          const currentPost = allPosts.find(post => post.slug === currentPostSlug)
+          const currentPostTags = currentPost?.tags || currentTags || []
           
-          // Filter out current post and get posts from same category or recent posts
-          const filtered = allPosts
+          // Prioritize posts with matching tags, then same category
+          const withMatchingTags = allPosts
             .filter(post => post.slug !== currentPostSlug)
             .filter(post => 
-              post.category === currentCategory || 
-              post.category !== "Uncategorized"
+              post.tags && post.tags.length > 0 &&
+              currentPostTags.some(tag => post.tags!.includes(tag))
             )
             .slice(0, 3)
           
-          // If not enough posts in same category, add recent posts
-          if (filtered.length < 3) {
-            const recent = allPosts
-              .filter(post => post.slug !== currentPostSlug && !filtered.some(p => p.slug === post.slug))
-              .slice(0, 3 - filtered.length)
-            setRelatedPosts([...filtered, ...recent])
+          // If not enough posts with matching tags, add posts from same category
+          if (withMatchingTags.length < 3) {
+            const sameCategory = allPosts
+              .filter(post => post.slug !== currentPostSlug)
+              .filter(post => !withMatchingTags.some(p => p.slug === post.slug))
+              .filter(post => post.category === currentCategory)
+              .slice(0, 3 - withMatchingTags.length)
+            
+            const combined = [...withMatchingTags, ...sameCategory]
+            
+            // If still not enough, add recent posts
+            if (combined.length < 3) {
+              const recent = allPosts
+                .filter(post => post.slug !== currentPostSlug)
+                .filter(post => !combined.some(p => p.slug === post.slug))
+                .slice(0, 3 - combined.length)
+              setRelatedPosts([...combined, ...recent])
+            } else {
+              setRelatedPosts(combined.slice(0, 3))
+            }
           } else {
-            setRelatedPosts(filtered)
+            setRelatedPosts(withMatchingTags)
           }
         }
       } catch (error) {
@@ -49,7 +66,7 @@ export function RelatedPosts({ currentPostSlug, currentCategory }: RelatedPostsP
     }
 
     fetchRelatedPosts()
-  }, [currentPostSlug, currentCategory])
+  }, [currentPostSlug, currentCategory, currentTags])
 
   if (loading || relatedPosts.length === 0) {
     return null

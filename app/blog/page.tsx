@@ -4,6 +4,7 @@ import { BlogListing } from "@/components/blog-listing"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { wpGetAllPosts } from "@/lib/wordpress"
+import { Suspense } from "react"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
@@ -127,7 +128,13 @@ export default async function BlogPage() {
 
           <section className="py-12 md:py-16">
             <div className="container px-4 md:px-6">
-              <BlogListing />
+              <Suspense fallback={
+                <div className="flex justify-center py-12">
+                  <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent"></div>
+                </div>
+              }>
+                <BlogListing />
+              </Suspense>
             </div>
           </section>
         </main>

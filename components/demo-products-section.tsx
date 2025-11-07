@@ -64,6 +64,14 @@ export function DemoProductsSection() {
       icon: ExternalLink,
       actionText: "Learn More",
     },
+    {
+      title: "IPRPSHIELD Copyright Protection Service",
+      description: "Protect your brand against counterfeits, piracy, and online threats",
+      link: "https://iprpshield.com/",
+      image: "/products/iprpshield.png",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
   ]
 
   const scrollContainerRef = useRef<HTMLDivElement>(null)

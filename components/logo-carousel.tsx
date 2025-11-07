@@ -41,6 +41,10 @@ export function LogoCarousel() {
       src: "/logos/healthmaxers.png",
     },
     {
+      name: "IPRP Shield",
+      src: "/logos/IPRPSHIELD.png",
+    },
+    {
       name: "CHI CHI Vietnamese",
       src: "/logos/chichi.png",
     },

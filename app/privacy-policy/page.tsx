@@ -3,6 +3,28 @@ import { join } from 'path'
 import { Navbar } from '@/components/navbar'
 import { Footer } from '@/components/footer'
 import ReactMarkdown from 'react-markdown'
+import { cache } from 'react'
+import type { Metadata } from 'next'
+
+// Cache the file reading for better performance
+// Revalidate every hour (3600 seconds) - these pages rarely change
+export const revalidate = 3600
+
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://www.tecxmate.com'
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Tecxmate',
+  description: 'Read our privacy policy to understand how tecxmate collects, uses, and protects your personal information.',
+  alternates: {
+    canonical: `${baseUrl}/privacy-policy`,
+  },
+  openGraph: {
+    title: 'Privacy Policy | Tecxmate',
+    description: 'Read our privacy policy to understand how tecxmate collects, uses, and protects your personal information.',
+    url: `${baseUrl}/privacy-policy`,
+    type: 'website',
+  },
+}
 
 async function getPrivacyPolicy() {
   try {
@@ -10,12 +32,16 @@ async function getPrivacyPolicy() {
     const content = await readFile(filePath, 'utf8')
     return content
   } catch (error) {
+    console.error('Error reading privacy policy:', error)
     return '# Privacy Policy\n\nContent not available.'
   }
 }
 
+// Cache the content reading function
+const getCachedPrivacyPolicy = cache(getPrivacyPolicy)
+
 export default async function PrivacyPolicyPage() {
-  const content = await getPrivacyPolicy()
+  const content = await getCachedPrivacyPolicy()
 
   return (
     <div className="min-h-screen bg-[#F6F3F1]">
