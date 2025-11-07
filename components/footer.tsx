@@ -13,7 +13,7 @@ export function Footer() {
               </span>
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Got an idea? Let's build it with tecxmate!
+              Got an idea? Let's build it together!
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
