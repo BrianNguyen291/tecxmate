@@ -127,7 +127,7 @@ export function DemoProductsSection() {
     const Icon = project.icon
     
     return (
-    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full">
+    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full w-full">
       {/* Image */}
       <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative" style={{ paddingBottom: '75%', height: 0 }}>
         <div className="absolute inset-0 w-full h-full">
@@ -145,17 +145,17 @@ export function DemoProductsSection() {
         </div>
       </div>
       
-      {/* Content */}
-      <div className="p-4 flex flex-col flex-1 min-h-0">
-        <div className="flex-1">
-          <h3 className="text-lg font-semibold text-alt-black mb-1 text-left">{project.title}</h3>
-          <p className="text-sm text-gray-600 mb-3 line-clamp-2 text-left">{project.description}</p>
+      {/* Content - Fixed height area */}
+      <div className="p-4 flex flex-col flex-1 min-h-[200px]">
+        <div className="flex-1 flex flex-col mb-3">
+          <h3 className="text-lg font-semibold text-alt-black mb-2 text-left line-clamp-2 h-14 flex items-start">{project.title}</h3>
+          <p className="text-sm text-gray-600 text-left line-clamp-2 h-10 flex items-start">{project.description}</p>
         </div>
         <Link
           href={project.link}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex items-center justify-center text-primary font-medium mt-auto hover:text-primary/80 transition-colors"
+          className="flex items-center justify-center text-primary font-medium hover:text-primary/80 transition-colors mt-auto"
           aria-label={`${project.actionText} - ${project.title}`}
         >
           <span>{project.actionText}</span>
@@ -189,7 +189,7 @@ export function DemoProductsSection() {
         >
           <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8 items-stretch">
             {allProjects.map((project, index) => (
-              <div key={index} className="flex-shrink-0 w-72 md:w-80 first:ml-0 last:mr-0 flex">
+              <div key={index} className="project-card-wrapper first:ml-0 last:mr-0 flex items-stretch">
                 <ProjectCard project={project} />
               </div>
             ))}
@@ -225,6 +225,21 @@ export function DemoProductsSection() {
             overflow-x: auto;
             cursor: default;
             user-select: auto;
+          }
+        }
+        /* Ensure all project cards have consistent width */
+        .project-card-wrapper {
+          flex-shrink: 0 !important;
+          flex-grow: 0 !important;
+          width: 288px !important;
+          min-width: 288px !important;
+          max-width: 288px !important;
+        }
+        @media (min-width: 768px) {
+          .project-card-wrapper {
+            width: 320px !important;
+            min-width: 320px !important;
+            max-width: 320px !important;
           }
         }
       `}</style>

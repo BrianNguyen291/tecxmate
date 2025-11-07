@@ -5,48 +5,97 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
+    /* Apple-inspired color palette */
+    /* Primary colors - Purple */
+    --primary: 271 76% 53% !important; /* #8c52ff - Force purple to override cache */
+    --primary-light: 271 85% 65%; /* #a978ff */
+    --primary-dark: 271 70% 40%; /* #6b3fcc */
+    --primary-foreground: 0 0% 100%;
+    
+    /* Success colors - Apple Green */
+    --success: 142 71% 45%; /* #30d158 */
+    --success-light: 142 63% 60%; /* #64e786 */
+    --success-dark: 142 46% 34%; /* #2e7d32 */
+    --success-foreground: 0 0% 100%;
+    
+    /* Error colors - Apple Red */
+    --destructive: 0 84% 42%; /* #d70015 */
+    --destructive-light: 4 90% 58%; /* #ff3b30 */
+    --destructive-dark: 0 67% 39%; /* #c62828 */
+    --destructive-foreground: 0 0% 100%;
+    
+    /* Warning colors - Apple Orange */
+    --warning: 20 100% 37%; /* #bf4800 */
+    --warning-light: 33 100% 50%; /* #ff9500 */
+    --warning-foreground: 0 0% 100%;
+    
+    /* Info colors - Same as primary */
+    --info: 271 76% 53%;
+    --info-foreground: 0 0% 100%;
+    
+    /* Background colors */
+    --background: 0 0% 98%; /* #fafafa */
+    --foreground: 0 0% 11%; /* #1d1d1f */
+    --card: 0 0% 100%; /* #ffffff */
+    --card-foreground: 0 0% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
-    --primary: 271 76% 53%;
-    --primary-foreground: 0 0% 98%;
+    --popover-foreground: 0 0% 11%;
+    
+    /* Text colors */
+    --text-primary: 0 0% 11%; /* #1d1d1f */
+    --text-secondary: 0 0% 43%; /* #6e6e73 */
+    --text-tertiary: 0 0% 53%; /* #86868b */
+    
+    /* Secondary/Muted colors */
     --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary-foreground: 0 0% 11%;
     --muted: 0 0% 96%;
-    --muted-foreground: 0 0% 40%;
+    --muted-foreground: 0 0% 43%;
     --accent: 0 0% 96%;
-    --accent-foreground: 0 0% 0%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 90%;
-    --input: 0 0% 90%;
-    --ring: 271 76% 53%;
-    --radius: 0.5rem;
+    --accent-foreground: 0 0% 11%;
+    
+    /* Border colors */
+    --border: 0 0% 90%; /* #e5e5e7 */
+    --border-medium: 0 0% 82%; /* #d2d2d7 */
+    --border-dark: 0 0% 53%; /* #86868b */
+    --input: 0 0% 82%;
+    --ring: 271 76% 53%; /* Purple */
+    --divider: 0 0% 96%; /* #f5f5f7 */
+    
+    /* Border radius */
+    --radius: 0.75rem; /* 12px - Apple's preferred radius */
   }
 
   .dark {
-    --background: 0 0% 0%;
+    /* Dark mode - Adjusted for Apple's dark aesthetic */
+    --background: 0 0% 8%;
     --foreground: 0 0% 98%;
-    --card: 0 0% 0%;
+    --card: 0 0% 12%;
     --card-foreground: 0 0% 98%;
-    --popover: 0 0% 0%;
+    --popover: 0 0% 12%;
     --popover-foreground: 0 0% 98%;
+    
     --primary: 271 76% 53%;
-    --primary-foreground: 0 0% 98%;
+    --primary-foreground: 0 0% 100%;
+    
     --secondary: 0 0% 15%;
     --secondary-foreground: 0 0% 98%;
     --muted: 0 0% 15%;
     --muted-foreground: 0 0% 65%;
     --accent: 0 0% 15%;
     --accent-foreground: 0 0% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 0 0% 15%;
-    --input: 0 0% 15%;
+    
+    --destructive: 0 84% 42%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 0 0% 25%;
+    --input: 0 0% 25%;
     --ring: 271 76% 53%;
+    --divider: 0 0% 20%;
+    
+    --text-primary: 0 0% 98%;
+    --text-secondary: 0 0% 65%;
+    --text-tertiary: 0 0% 53%;
   }
 }
 
@@ -57,38 +106,133 @@
   
   body {
     @apply bg-background text-foreground font-sans;
-    font-family: 'IBM Plex Sans JP', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    /* Apple system fonts */
+    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    letter-spacing: -0.01em;
   }
 
+  /* Apple-inspired typography */
   h1 {
-    @apply text-5xl md:text-6xl font-bold tracking-tight;
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: hsl(var(--text-primary));
   }
 
   h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight;
+    font-size: 28px;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: hsl(var(--text-primary));
   }
 
   h3 {
-    @apply text-2xl md:text-3xl font-semibold tracking-tight;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: hsl(var(--text-primary));
   }
 
   h4 {
-    @apply text-xl md:text-2xl font-semibold;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: -0.01em;
+    color: hsl(var(--text-primary));
   }
 
   h5 {
-    @apply text-lg md:text-xl font-medium;
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: hsl(var(--text-primary));
   }
 
   h6 {
-    @apply text-base md:text-lg font-medium;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: hsl(var(--text-primary));
   }
 
   p {
-    @apply text-base md:text-lg leading-relaxed;
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: hsl(var(--text-primary));
   }
 
   .text-small {
-    @apply text-sm md:text-base;
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: hsl(var(--text-secondary));
+  }
+
+  .text-caption {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.4;
+    color: hsl(var(--text-secondary));
+  }
+}
+
+@layer utilities {
+  /* Apple-style component utilities */
+  .apple-card {
+    @apply bg-card border border-border rounded-lg shadow-none transition-all duration-200;
+  }
+  
+  .apple-card-hover {
+    @apply hover:border-border-medium hover:shadow-[0_2px_8px_rgba(0,0,0,0.08)];
+  }
+  
+  .apple-button {
+    @apply text-[14px] font-medium rounded-md px-6 py-2.5 transition-colors duration-200;
+  }
+  
+  .apple-button-primary {
+    @apply apple-button bg-primary text-white hover:bg-primary-dark;
+  }
+  
+  .apple-button-outlined {
+    @apply apple-button border border-border-medium text-text-primary hover:border-border-dark hover:bg-background;
+  }
+  
+  .apple-button-text {
+    @apply apple-button text-primary hover:bg-primary/8;
+  }
+  
+  /* Apple-style text utilities */
+  .text-apple-primary {
+    @apply text-text-primary;
+  }
+  
+  .text-apple-secondary {
+    @apply text-text-secondary;
+  }
+  
+  .text-apple-tertiary {
+    @apply text-text-tertiary;
+  }
+  
+  /* Apple-style spacing */
+  .section-spacing {
+    @apply mt-12 mb-8;
+  }
+  
+  .page-container {
+    @apply p-8 max-w-[1400px] mx-auto bg-background min-h-screen;
+  }
+  
+  /* Footer copyright text - ensure it's white */
+  footer .copyright-text,
+  footer .copyright-text p {
+    color: white !important;
   }
 }

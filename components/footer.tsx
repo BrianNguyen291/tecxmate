@@ -89,7 +89,7 @@ export function Footer() {
             </ul>
           </div>
         </div>
-        <div className="mt-10 pt-6 text-center text-sm text-gray-400">
+        <div className="mt-10 pt-6 text-center text-sm copyright-text">
           <p>© {new Date().getFullYear()} tecxmate. All rights reserved.</p>
         </div>
       </div>
