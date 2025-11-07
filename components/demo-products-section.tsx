@@ -14,7 +14,7 @@ export function DemoProductsSection() {
       link: "https://innovationlabs.harvard.edu/venture/crypted",
       image: "/products/crypted.png",
       icon: ExternalLink,
-      actionText: "Visit",
+      actionText: "Learn More",
     },
     {
       title: "Rising Star Startup Competition",
@@ -30,7 +30,7 @@ export function DemoProductsSection() {
       link: "https://healthmaxers.com",
       image: "/products/healthmaxer.png",
       icon: ExternalLink,
-      actionText: "Visit",
+      actionText: "Learn More",
     },
     {
       title: "Chi Chi Vietnamese",
@@ -38,7 +38,7 @@ export function DemoProductsSection() {
       link: "https://chichivietnamese.com",
       image: "/products/chichi.jpg",
       icon: ExternalLink,
-      actionText: "Visit",
+      actionText: "Learn More",
     },
     {
       title: "TailU",
@@ -62,7 +62,7 @@ export function DemoProductsSection() {
       link: "http://waterwise-eta.vercel.app",
       image: "/products/waterwise.jpg",
       icon: ExternalLink,
-      actionText: "Visit",
+      actionText: "Learn More",
     },
   ]
 
