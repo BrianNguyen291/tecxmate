@@ -1,11 +1,17 @@
 "use client"
 
-import { ExternalLink, Smartphone, Palette, ArrowRight } from "lucide-react"
+import { ExternalLink, Smartphone, Palette, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 export function DemoProductsSection() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null)
+  const isScrollingRef = useRef(false)
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  const [canScrollLeft, setCanScrollLeft] = useState(false)
+  const [canScrollRight, setCanScrollRight] = useState(true)
+
   // Combine all projects into a single array
   const allProjects = [
     {
@@ -82,9 +88,27 @@ export function DemoProductsSection() {
     },
   ]
 
-  const scrollContainerRef = useRef<HTMLDivElement>(null)
-  const isScrollingRef = useRef(false)
-  const scrollTimeoutRef = useRef<NodeJS.Timeout | undefined>(undefined)
+  // Check scroll position for arrow buttons
+  const checkScroll = () => {
+    const container = scrollContainerRef.current
+    if (!container) return
+
+    const { scrollLeft, scrollWidth, clientWidth } = container
+    setCanScrollLeft(scrollLeft > 0)
+    setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 10)
+  }
+
+  const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -320, behavior: 'smooth' })
+    }
+  }
+
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 320, behavior: 'smooth' })
+    }
+  }
 
   // Prevent link clicks during horizontal scrolling only
   useEffect(() => {
@@ -95,6 +119,7 @@ export function DemoProductsSection() {
     let lastScrollTime = 0
 
     const handleScroll = () => {
+      checkScroll()
       const currentScrollLeft = container.scrollLeft
       const now = Date.now()
       
@@ -128,13 +153,18 @@ export function DemoProductsSection() {
       }
     }
 
+    checkScroll()
     container.addEventListener('scroll', handleScroll, { passive: true })
     // Use bubble phase, not capture, to avoid interfering with scroll
     container.addEventListener('click', handleClick, false)
 
+    // Check on resize
+    window.addEventListener('resize', checkScroll)
+
     return () => {
       container.removeEventListener('scroll', handleScroll)
       container.removeEventListener('click', handleClick, false)
+      window.removeEventListener('resize', checkScroll)
       clearTimeout(scrollTimeoutRef.current)
     }
   }, [])
@@ -185,26 +215,68 @@ export function DemoProductsSection() {
           <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
         </div>
 
-        <div 
-          ref={scrollContainerRef}
-          className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
-          style={{ 
-            WebkitOverflowScrolling: 'touch',
-            touchAction: 'pan-y pan-x pinch-zoom',
-            transform: 'translateZ(0)',
-            WebkitTapHighlightColor: 'transparent',
-            overscrollBehaviorY: 'auto',
-            overscrollBehaviorX: 'contain',
-            scrollbarWidth: 'none',
-            msOverflowStyle: 'none'
-          }}
-        >
-          <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8 items-stretch">
-            {allProjects.map((project, index) => (
-              <div key={index} className="project-card-wrapper first:ml-0 last:mr-0 flex items-stretch">
-                <ProjectCard project={project} />
-              </div>
-            ))}
+        <div className="relative">
+          {/* Left Arrow */}
+          <button
+            onClick={scrollLeft}
+            disabled={!canScrollLeft}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed hidden md:flex items-center justify-center"
+            aria-label="Scroll left"
+          >
+            <ChevronLeft className="h-6 w-6 text-gray-700" />
+          </button>
+
+          <div 
+            ref={scrollContainerRef}
+            className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
+            style={{ 
+              WebkitOverflowScrolling: 'touch',
+              touchAction: 'pan-y pan-x pinch-zoom',
+              transform: 'translateZ(0)',
+              WebkitTapHighlightColor: 'transparent',
+              overscrollBehaviorY: 'auto',
+              overscrollBehaviorX: 'contain',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none'
+            }}
+          >
+            <div className="flex gap-6 pb-4 min-w-max pl-4 md:pl-8 pr-4 md:pr-8 items-stretch">
+              {allProjects.map((project, index) => (
+                <div key={index} className="project-card-wrapper first:ml-0 last:mr-0 flex items-stretch">
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Right Arrow */}
+          <button
+            onClick={scrollRight}
+            disabled={!canScrollRight}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed hidden md:flex items-center justify-center"
+            aria-label="Scroll right"
+          >
+            <ChevronRight className="h-6 w-6 text-gray-700" />
+          </button>
+
+          {/* Mobile arrows */}
+          <div className="flex md:hidden justify-center gap-4 mt-4">
+            <button
+              onClick={scrollLeft}
+              disabled={!canScrollLeft}
+              className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Scroll left"
+            >
+              <ChevronLeft className="h-5 w-5 text-gray-700" />
+            </button>
+            <button
+              onClick={scrollRight}
+              disabled={!canScrollRight}
+              className="p-2 rounded-full bg-white shadow-md hover:bg-gray-50 transition-all disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Scroll right"
+            >
+              <ChevronRight className="h-5 w-5 text-gray-700" />
+            </button>
           </div>
         </div>
       </div>
