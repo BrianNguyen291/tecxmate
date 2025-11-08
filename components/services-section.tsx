@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Link from "next/link"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { ComprehensiveOnboardingForm } from "@/components/comprehensive-onboarding-form"
 import { Button } from "@/components/ui/button"
@@ -51,6 +52,11 @@ export function ServicesSection() {
                   </div>
                   <h3 className="text-xl font-semibold text-alt-black mb-3">{service.title}</h3>
                   <p className="text-alt-gray-500 leading-relaxed">{service.description}</p>
+                </div>
+                <div className="mt-auto">
+                  <Link href={`/services/${service.id === 'ai-applications' ? 'ai-application-development' : service.id === 'ai-integration' ? 'ai-integration-consulting' : service.id}`} className="text-primary hover:underline text-sm font-medium inline-flex items-center">
+                    Learn More →
+                  </Link>
                 </div>
               </div>
             )

@@ -69,7 +69,7 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white">Team</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
-                <Link href="#team" className="hover:text-white transition-colors duration-200">
+                <Link href="/about" className="hover:text-white transition-colors duration-200">
                   About
                 </Link>
               </li>

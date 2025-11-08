@@ -20,16 +20,69 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "Organization",
-            "name": "tecxmate",
+            "@type": "ProfessionalService",
+            "name": "Tecxmate",
+            "alternateName": "tecxmate",
             "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com",
-            "logo": (process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com") + "/logo.png",
+            "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"}/tecxmate-logo-cropped.png`,
+            "image": `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"}/tecxmate-logo-cropped.png`,
+            "description": "Premier technology consultancy providing AI development, web development, business automation, and digital transformation services for SMEs and startups.",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Taipei",
+              "addressRegion": "Taiwan",
+              "addressCountry": "TW"
+            },
+            "contactPoint": {
+              "@type": "ContactPoint",
+              "email": "hello@tecxmate.com",
+              "contactType": "Customer Service",
+              "availableLanguage": ["English", "Chinese"]
+            },
             "sameAs": [
               "https://www.facebook.com/tecxmate",
               "https://x.com/tecxmate",
               "https://www.instagram.com/tecxmate",
               "https://tw.linkedin.com/company/tecxmate"
-            ]
+            ],
+            "hasOfferCatalog": {
+              "@type": "OfferCatalog",
+              "name": "Technology Consultancy Services",
+              "itemListElement": [
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "AI Development & Integration",
+                    "description": "Cutting-edge AI application development and integration services"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Web Development",
+                    "description": "Custom web development and software solutions"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Business Automation",
+                    "description": "Streamline operations with automated workflows and system integration"
+                  }
+                },
+                {
+                  "@type": "Offer",
+                  "itemOffered": {
+                    "@type": "Service",
+                    "name": "Digital Transformation",
+                    "description": "Comprehensive digital transformation consulting for SMEs"
+                  }
+                }
+              ]
+            }
           }),
         }}
       />
@@ -63,32 +116,51 @@ export default function Home() {
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
   return {
-    title: "Tecxmate - Technology Consultancy & Solutions for SMEs | Build the Future",
-    description: "Empowering SMEs and Founders with premier technology consultancy and solutions. Expert web development, software solutions, business technology, and digital transformation services.",
-    keywords: "technology consultancy, SME solutions, startup consulting, web development, software solutions, business technology, digital transformation, tech consulting, software development, business strategy",
+    title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups | AI Development & Web Solutions",
+    description: "Transform your business with Tecxmate's cutting-edge technology solutions. Expert AI integration, web development, business automation, and digital transformation services. Fast delivery, innovative solutions for SMEs and founders. Book your free consultation today.",
+    keywords: [
+      "technology consultancy",
+      "AI development",
+      "business automation",
+      "web development",
+      "startup consulting",
+      "SME solutions",
+      "digital transformation",
+      "software development",
+      "AI integration",
+      "tech consulting Taiwan",
+      "business technology",
+      "blockchain development",
+      "mobile app development",
+      "enterprise solutions",
+      "Taiwan tech consultancy"
+    ].join(", "),
     alternates: {
       canonical: baseUrl,
     },
     openGraph: {
-      title: "Tecxmate - Technology Consultancy & Solutions for SMEs",
-      description: "Empowering SMEs and Founders with premier technology consultancy and solutions.",
+      title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups",
+      description: "Transform your business with AI-powered solutions, web development, and business automation. Fast delivery, innovative technology consulting for SMEs and founders. Book your free discovery call.",
       url: baseUrl,
       siteName: "Tecxmate",
+      locale: "en_US",
       type: "website",
       images: [
         {
           url: `${baseUrl}/tecxmate-logo-cropped.png`,
           width: 1200,
           height: 630,
-          alt: "Tecxmate - Technology Consultancy",
+          alt: "Tecxmate - Premier Technology Consultancy for SMEs and Startups",
+          type: "image/png",
         }
       ],
     },
     twitter: {
       card: "summary_large_image",
-      title: "Tecxmate - Technology Consultancy & Solutions for SMEs",
-      description: "Empowering SMEs and Founders with premier technology consultancy and solutions.",
+      title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups",
+      description: "Transform your business with AI-powered solutions, web development, and business automation. Fast delivery, innovative technology consulting.",
       images: [`${baseUrl}/tecxmate-logo-cropped.png`],
+      creator: "@tecxmate",
     },
   }
 }

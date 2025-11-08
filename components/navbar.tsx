@@ -29,10 +29,16 @@ export function Navbar() {
           >
             Home
           </Link>
-          <Link href="/#portfolio" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            href="/projects" 
+            className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
+          >
             Projects
           </Link>
-          <Link href="/#services" className="text-sm font-medium hover:text-primary transition-colors">
+          <Link 
+            href="/services" 
+            className={`text-sm font-medium transition-colors ${isActive("/services") ? "text-primary" : "hover:text-primary"}`}
+          >
             Services
           </Link>
           <Link
@@ -65,15 +71,15 @@ export function Navbar() {
               Home
             </Link>
             <Link
-              href="/#portfolio"
-              className="text-sm font-medium hover:text-primary transition-colors"
+              href="/projects"
+              className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Projects
             </Link>
             <Link
-              href="/#services"
-              className="text-sm font-medium hover:text-primary transition-colors"
+              href="/services"
+              className={`text-sm font-medium transition-colors ${isActive("/services") ? "text-primary" : "hover:text-primary"}`}
               onClick={() => setIsMenuOpen(false)}
             >
               Services
