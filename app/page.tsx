@@ -1,14 +1,23 @@
 import { Navbar } from "@/components/navbar"
 import { HeroSection } from "@/components/hero-section"
 import { ServicesSection } from "@/components/services-section"
-import { ProcessSection } from "@/components/process-section"
-import { TeamSection } from "@/components/team-section"
-import { ValuesSection } from "@/components/values-section"
-import { DemoProductsSection } from "@/components/demo-products-section"
-import { CampaignsSection } from "@/components/campaigns-section"
 import { Footer } from "@/components/footer"
 import type { Metadata } from "next"
 import Script from "next/script"
+import dynamic from "next/dynamic"
+
+// Lazy load below-the-fold components to reduce initial bundle and TBT
+const DemoProductsSection = dynamic(() => import("@/components/demo-products-section").then(mod => ({ default: mod.DemoProductsSection })), {
+  loading: () => <div className="h-64 bg-gray-50" />,
+})
+
+const CampaignsSection = dynamic(() => import("@/components/campaigns-section").then(mod => ({ default: mod.CampaignsSection })), {
+  loading: () => <div className="h-64 bg-gray-50" />,
+})
+
+const TeamSection = dynamic(() => import("@/components/team-section").then(mod => ({ default: mod.TeamSection })), {
+  loading: () => <div className="h-64 bg-gray-50" />,
+})
 
 export default function Home() {
   return (
@@ -17,6 +26,7 @@ export default function Home() {
       <Script
         id="org-jsonld"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -89,6 +99,7 @@ export default function Home() {
       <Script
         id="website-jsonld"
         type="application/ld+json"
+        strategy="afterInteractive"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

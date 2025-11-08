@@ -104,14 +104,72 @@
     @apply border-border;
   }
   
-  body {
-    @apply bg-background text-foreground font-sans;
-    /* Apple system fonts */
-    font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 15px;
-    line-height: 1.5;
-    letter-spacing: -0.01em;
-  }
+      body {
+        @apply bg-background text-foreground font-sans;
+        /* Apple system fonts */
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 15px;
+        line-height: 1.5;
+        letter-spacing: -0.01em;
+        /* Prevent layout shift */
+        font-display: swap;
+      }
+      
+      /* Prevent layout shift for images */
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+      
+      /* Optimize font loading */
+      @font-face {
+        font-display: swap;
+      }
+      
+      /* Prevent layout shifts from dynamic content */
+      [data-layout-shift] {
+        contain: layout style paint;
+      }
+      
+      /* Optimize rendering */
+      * {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+      }
+      
+      /* Prevent FOUT (Flash of Unstyled Text) */
+      body {
+        visibility: visible;
+      }
+      
+      /* Reserve space for above-the-fold content */
+      #hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+      }
+      
+      /* Optimize animations */
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+      
+      /* Prevent layout shifts from fonts */
+      h1, h2, h3, h4, h5, h6 {
+        font-display: swap;
+      }
+      
+      /* Optimize image rendering */
+      img {
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
 
   /* Apple-inspired typography */
   h1 {

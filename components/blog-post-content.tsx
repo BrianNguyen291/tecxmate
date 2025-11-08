@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
@@ -73,16 +74,15 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   return (
     <article>
       <div className="relative aspect-video w-full overflow-hidden">
-        <div className="absolute inset-0 bg-black/40" />
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <div className="absolute inset-0 bg-black/40 z-10" />
+        <Image
           src={post.coverImage || "/placeholder.svg?height=600&width=1200"}
           alt={post.title}
-          className="h-full w-full object-cover"
-          loading="eager"
-          fetchPriority="high"
-          width={1200}
-          height={630}
+          fill
+          className="object-cover"
+          priority
+          sizes="100vw"
+          quality={85}
         />
         <div className="absolute inset-0 flex flex-col items-center justify-center px-4 text-center text-white">
           <div className="mb-4">

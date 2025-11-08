@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
+import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
@@ -207,11 +208,15 @@ export function BlogListing() {
                   key={post.id}
                   className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg"
                 >
-                  <div className="aspect-video w-full overflow-hidden">
-                    <img
+                  <div className="aspect-video w-full overflow-hidden relative">
+                    <Image
                       src={post.coverImage || "/placeholder.svg?height=200&width=400"}
                       alt={post.title}
-                      className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
+                      fill
+                      className="object-cover transition-transform duration-300 hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      quality={75}
+                      loading="lazy"
                     />
                   </div>
                   <CardContent className="p-6">
@@ -337,11 +342,15 @@ export function BlogListing() {
                   {displayPosts.slice(0, 3).map((post) => (
                     <li key={post.id}>
                       <Link href={`/blog/${post.slug}`} className="group flex gap-3">
-                        <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md">
-                          <img
+                        <div className="h-16 w-16 shrink-0 overflow-hidden rounded-md relative">
+                          <Image
                             src={post.coverImage || "/placeholder.svg?height=50&width=50"}
                             alt={post.title}
-                            className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                            fill
+                            className="object-cover transition-transform duration-300 group-hover:scale-105"
+                            sizes="64px"
+                            quality={75}
+                            loading="lazy"
                           />
                         </div>
                         <div>

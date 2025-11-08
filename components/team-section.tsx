@@ -1,6 +1,5 @@
 "use client"
 
-import { motion } from "framer-motion"
 import { Linkedin, GraduationCap, PenTool, Building2 } from "lucide-react"
 import Image from "next/image"
 
@@ -48,25 +47,15 @@ export function TeamSection() {
     <>
       <section id="team" className="bg-alt-gray-100 py-20 snap-start border-t border-b border-[rgba(55,50,47,0.12)]">
         <div className="container px-4 md:px-6 max-w-6xl">
-          <motion.div
-            className="flex flex-col items-center justify-center space-y-4 text-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          <div className="flex flex-col items-center justify-center space-y-4 text-center">
             <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl">Meet Our Experts</h2>
-          </motion.div>
+          </div>
 
           <div className="mt-16 overflow-x-auto overflow-y-hidden scrollbar-hide">
             <div className="flex gap-4 pb-4">
               {teamMembers.map((member) => (
-                <motion.div
+                <div
                   key={member.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: teamMembers.indexOf(member) * 0.05 }}
-                  viewport={{ once: true }}
                   className="flex-shrink-0 w-64"
                 >
                   <div
@@ -114,7 +103,7 @@ export function TeamSection() {
                       )}
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
             </div>
           </div>

@@ -11,22 +11,43 @@ export function CampaignsSection() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    async function fetchPosts() {
+    // Defer data fetching significantly to reduce TBT - load after initial render
+    let mounted = true
+    const fetchPosts = async () => {
       try {
+        // Use longer delay to ensure page is interactive first
+        await new Promise(resolve => setTimeout(resolve, 500))
+        
+        if (!mounted) return
+        
         const response = await fetch("/api/blog/posts")
         if (!response.ok) {
           throw new Error(`Failed to fetch posts: ${response.status}`)
         }
         const data = await response.json()
-        setBlogPosts(data.slice(0, 6)) // Show only 6 most recent posts
+        if (mounted) {
+          setBlogPosts(data.slice(0, 6))
+          setLoading(false)
+        }
       } catch (err) {
-        console.error("Error fetching blog posts:", err)
-        setBlogPosts([])
-      } finally {
-        setLoading(false)
+        if (mounted) {
+          console.error("Error fetching blog posts:", err)
+          setBlogPosts([])
+          setLoading(false)
+        }
       }
     }
-    fetchPosts()
+    
+    // Use requestIdleCallback if available, otherwise delay longer
+    if (typeof window !== 'undefined' && 'requestIdleCallback' in window) {
+      requestIdleCallback(fetchPosts, { timeout: 3000 })
+    } else {
+      setTimeout(fetchPosts, 1000)
+    }
+    
+    return () => {
+      mounted = false
+    }
   }, [])
 
   if (loading) {
@@ -63,13 +84,13 @@ export function CampaignsSection() {
                 href={`/blog/${post.slug}`}
                 className="group block rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden h-full hover:border-primary hover:shadow-md transition-all duration-300"
               >
-                <div className="aspect-video w-full overflow-hidden bg-gray-100">
+                <div className="aspect-video w-full overflow-hidden bg-gray-100 relative">
                   <Image
                     src={post.coverImage || "/placeholder.svg?height=200&width=400"}
                     alt={post.title}
-                    width={400}
-                    height={225}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     quality={75}
                     loading="lazy"
                   />

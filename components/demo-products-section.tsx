@@ -144,21 +144,17 @@ export function DemoProductsSection() {
     
     return (
     <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full w-full">
-      {/* Image */}
-      <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative" style={{ paddingBottom: '75%', height: 0 }}>
-        <div className="absolute inset-0 w-full h-full">
-          <Image
-            src={project.image || "/placeholder.svg"}
-            alt={project.title}
-            width={800}
-            height={600}
-            className="w-full h-full object-cover"
-            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-            quality={75}
-            loading="lazy"
-            priority={false}
-          />
-        </div>
+      {/* Image - Fixed aspect ratio to prevent layout shift */}
+      <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative aspect-[4/3]">
+        <Image
+          src={project.image || "/placeholder.svg"}
+          alt={project.title}
+          fill
+          className="object-cover"
+          sizes="(max-width: 768px) 288px, 320px"
+          quality={75}
+          loading="lazy"
+        />
       </div>
       
       {/* Content - Fixed height area */}

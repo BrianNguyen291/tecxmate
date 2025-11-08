@@ -25,7 +25,7 @@ export function Footer() {
                 <Video className="h-5 w-5" />
                 <span className="text-sm">Book a Discovery Call</span>
               </a>
-              <div className="flex gap-3">
+            <div className="flex gap-3">
               <a 
                 href="https://www.facebook.com/tecxmate" 
                 target="_blank" 

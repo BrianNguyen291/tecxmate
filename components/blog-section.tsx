@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import { motion } from "framer-motion"
+import { useState, useEffect, memo } from "react"
+import Image from "next/image"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowRight } from "lucide-react"
@@ -71,61 +71,51 @@ export function BlogSection() {
   return (
     <section id="blog" className="bg-white py-20">
       <div className="container px-4 md:px-6">
-        <motion.div
-          className="flex flex-col items-center justify-center space-y-4 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
+        <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="inline-block rounded-lg bg-primary/10 px-3 py-1 text-sm text-primary">Our Blog</div>
           <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">Latest Insights</h2>
           <p className="max-w-[700px] text-gray-500 md:text-xl/relaxed">
             Stay updated with the latest trends and insights in web development and design
           </p>
-        </motion.div>
+        </div>
 
         <div className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {displayPosts.map((post, index) => (
-            <motion.div
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg">
-                <div className="aspect-video w-full overflow-hidden">
-                  <img
-                    src={post.coverImage || "/placeholder.svg?height=200&width=400"}
-                    alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-300 hover:scale-105"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
-                      <span>{post.date}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{post.readTime}</span>
-                    </div>
+          {displayPosts.map((post) => (
+            <Card key={post.id} className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg">
+              <div className="aspect-video w-full overflow-hidden relative">
+                <Image
+                  src={post.coverImage || "/placeholder.svg?height=200&width=400"}
+                  alt={post.title}
+                  fill
+                  className="object-cover transition-transform duration-300 hover:scale-105"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  quality={75}
+                  loading="lazy"
+                />
+              </div>
+              <CardContent className="p-6">
+                <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
+                  <div className="flex items-center gap-1">
+                    <Calendar className="h-4 w-4" />
+                    <span>{post.date}</span>
                   </div>
-                  <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2">{post.title}</h3>
-                  <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
-                </CardContent>
-                <CardFooter className="p-6 pt-0">
-                  <Link
-                    href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
-                    className="group inline-flex items-center gap-1 font-medium text-primary"
-                  >
-                    Read More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </Link>
-                </CardFooter>
-              </Card>
-            </motion.div>
+                  <div className="flex items-center gap-1">
+                    <Clock className="h-4 w-4" />
+                    <span>{post.readTime}</span>
+                  </div>
+                </div>
+                <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2">{post.title}</h3>
+                <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
+              </CardContent>
+              <CardFooter className="p-6 pt-0">
+                <Link
+                  href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
+                  className="group inline-flex items-center gap-1 font-medium text-primary"
+                >
+                  Read More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </CardFooter>
+            </Card>
           ))}
         </div>
 

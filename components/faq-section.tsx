@@ -58,33 +58,33 @@ export function FaqSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
       />
-      <section id="faq" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28">
-        <div className="container px-4 md:px-6 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="mb-6">Frequently Asked Questions</h2>
-            <p className="text-alt-gray-500 max-w-2xl mx-auto">
-              Find answers to common questions about our services and process
-            </p>
-          </div>
-
-          <Accordion type="single" collapsible className="w-full">
-            {faqs.map((faq, index) => (
-              <AccordionItem 
-                key={index}
-                value={`item-${index}`} 
-                className="border-b border-alt-gray-200 py-4"
-              >
-                <AccordionTrigger className="text-left font-semibold text-alt-black hover:text-primary transition-colors duration-200">
-                  {faq.question}
-                </AccordionTrigger>
-                <AccordionContent className="text-alt-gray-500 leading-relaxed pt-2">
-                  {faq.answer}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
+    <section id="faq" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28">
+      <div className="container px-4 md:px-6 max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="mb-6">Frequently Asked Questions</h2>
+          <p className="text-alt-gray-500 max-w-2xl mx-auto">
+            Find answers to common questions about our services and process
+          </p>
         </div>
-      </section>
+
+        <Accordion type="single" collapsible className="w-full">
+          {faqs.map((faq, index) => (
+            <AccordionItem 
+              key={index}
+              value={`item-${index}`} 
+              className="border-b border-alt-gray-200 py-4"
+            >
+              <AccordionTrigger className="text-left font-semibold text-alt-black hover:text-primary transition-colors duration-200">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="text-alt-gray-500 leading-relaxed pt-2">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
     </>
   )
 }

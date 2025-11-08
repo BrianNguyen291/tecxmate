@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import Image from "next/image"
 
 export function PartnersSection() {
   const partners = [
@@ -52,25 +52,27 @@ export function PartnersSection() {
         <div className="mt-16">
           <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 md:grid-cols-4">
             {partners.map((partner, index) => (
-              <motion.div
+              <div
                 key={index}
                 className="flex items-center justify-center"
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                viewport={{ once: true }}
               >
                 <div className="group relative flex h-24 w-full items-center justify-center rounded-lg border border-gray-200 bg-white p-4 transition-all hover:border-primary/20 hover:shadow-md">
-                  <img
-                    src={partner.logo || "/placeholder.svg"}
-                    alt={`${partner.name} logo`}
-                    className="max-h-12 w-auto max-w-full grayscale transition-all duration-300 group-hover:grayscale-0"
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-white/80 opacity-0 transition-opacity group-hover:opacity-100">
+                  <div className="relative h-12 w-full max-w-[120px]">
+                    <Image
+                      src={partner.logo || "/placeholder.svg"}
+                      alt={`${partner.name} logo`}
+                      fill
+                      className="object-contain grayscale transition-all duration-300 group-hover:grayscale-0"
+                      sizes="(max-width: 640px) 120px, 160px"
+                      quality={75}
+                      loading="lazy"
+                    />
+                  </div>
+                  <div className="absolute inset-0 flex items-center justify-center rounded-lg bg-white/80 opacity-0 transition-opacity group-hover:opacity-100 z-10">
                     <span className="font-medium text-primary">{partner.name}</span>
                   </div>
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

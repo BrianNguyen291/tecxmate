@@ -83,54 +83,54 @@ export function TestimonialsSection() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(reviewStructuredData) }}
       />
-      <section className="bg-white py-20 md:py-24 lg:py-28">
-        <div className="container px-4 md:px-6 max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="mb-6">Our Clients</h2>
-            <p className="text-alt-gray-500 max-w-2xl mx-auto">
-              Hear from businesses we've helped with our technology solutions
-            </p>
+    <section className="bg-white py-20 md:py-24 lg:py-28">
+      <div className="container px-4 md:px-6 max-w-4xl">
+        <div className="text-center mb-16">
+          <h2 className="mb-6">Our Clients</h2>
+          <p className="text-alt-gray-500 max-w-2xl mx-auto">
+            Hear from businesses we've helped with our technology solutions
+          </p>
+        </div>
+
+        <div className="text-center">
+          <blockquote className="text-xl md:text-2xl italic text-alt-black mb-8 leading-relaxed">
+            "{testimonials[current].quote}"
+          </blockquote>
+          
+          <div className="flex items-center justify-center gap-4 mb-8">
+            <Avatar className="h-12 w-12">
+              <AvatarImage
+                src={testimonials[current].avatar || "/placeholder.svg"}
+                alt={testimonials[current].author}
+              />
+              <AvatarFallback className="bg-alt-gray-100 text-alt-black">
+                {testimonials[current].author.charAt(0)}
+              </AvatarFallback>
+            </Avatar>
+            <div className="text-left">
+              <h4 className="font-semibold text-alt-black">{testimonials[current].author}</h4>
+              <p className="text-sm text-alt-gray-500">
+                {testimonials[current].position && `${testimonials[current].position}, `}
+                {testimonials[current].company}
+              </p>
+            </div>
           </div>
 
-          <div className="text-center">
-            <blockquote className="text-xl md:text-2xl italic text-alt-black mb-8 leading-relaxed">
-              "{testimonials[current].quote}"
-            </blockquote>
-            
-            <div className="flex items-center justify-center gap-4 mb-8">
-              <Avatar className="h-12 w-12">
-                <AvatarImage
-                  src={testimonials[current].avatar || "/placeholder.svg"}
-                  alt={testimonials[current].author}
-                />
-                <AvatarFallback className="bg-alt-gray-100 text-alt-black">
-                  {testimonials[current].author.charAt(0)}
-                </AvatarFallback>
-              </Avatar>
-              <div className="text-left">
-                <h4 className="font-semibold text-alt-black">{testimonials[current].author}</h4>
-                <p className="text-sm text-alt-gray-500">
-                  {testimonials[current].position && `${testimonials[current].position}, `}
-                  {testimonials[current].company}
-                </p>
-              </div>
-            </div>
-
-            <div className="flex justify-center gap-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  className={`h-2 w-2 rounded-full transition-colors duration-200 ${
-                    index === current ? "bg-primary" : "bg-alt-gray-300"
-                  }`}
-                  onClick={() => setCurrent(index)}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
+          <div className="flex justify-center gap-2">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`h-2 w-2 rounded-full transition-colors duration-200 ${
+                  index === current ? "bg-primary" : "bg-alt-gray-300"
+                }`}
+                onClick={() => setCurrent(index)}
+                aria-label={`Go to testimonial ${index + 1}`}
+              />
+            ))}
           </div>
         </div>
-      </section>
+      </div>
+    </section>
     </>
   )
 }

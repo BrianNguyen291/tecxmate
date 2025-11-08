@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useCallback } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -10,9 +10,17 @@ export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
 
-  const isActive = (path: string) => {
+  const isActive = useCallback((path: string) => {
     return pathname === path
-  }
+  }, [pathname])
+  
+  const toggleMenu = useCallback(() => {
+    setIsMenuOpen(prev => !prev)
+  }, [])
+  
+  const closeMenu = useCallback(() => {
+    setIsMenuOpen(false)
+  }, [])
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-[#F6F3F1]/30 backdrop-blur-lg">
@@ -54,7 +62,7 @@ export function Navbar() {
               Book a Call
             </a>
           </Button>
-          <Button variant="ghost" size="icon" className="md:hidden" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
             {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             <span className="sr-only">Toggle menu</span>
           </Button>
@@ -66,32 +74,32 @@ export function Navbar() {
             <Link
               href="/"
               className={`text-sm font-medium transition-colors ${isActive("/") ? "text-primary" : "hover:text-primary"}`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Home
             </Link>
             <Link
               href="/projects"
               className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Projects
             </Link>
             <Link
               href="/services"
               className={`text-sm font-medium transition-colors ${isActive("/services") ? "text-primary" : "hover:text-primary"}`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               Services
             </Link>
             <Link
               href="/blog"
               className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
-              onClick={() => setIsMenuOpen(false)}
+              onClick={closeMenu}
             >
               News & Insights
             </Link>
-            <Button className="w-full" onClick={() => setIsMenuOpen(false)} asChild>
+            <Button className="w-full" onClick={closeMenu} asChild>
               <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
                 Book a Call
               </a>

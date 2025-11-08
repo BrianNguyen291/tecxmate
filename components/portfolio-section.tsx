@@ -1,8 +1,9 @@
 "use client"
 
-import { motion } from "framer-motion"
+import Image from "next/image"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+import { memo } from "react"
 
 export function PortfolioSection() {
   const categories = ["All", "E-commerce", "Corporate", "SaaS", "Portfolio"]
@@ -65,30 +66,27 @@ export function PortfolioSection() {
                   {projects
                     .filter((project) => category === "All" || project.category === category)
                     .map((project, index) => (
-                      <motion.div
-                        key={index}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.5, delay: index * 0.1 }}
-                      >
-                        <Card className="overflow-hidden">
-                          <CardContent className="p-0">
-                            <div className="relative">
-                              <img
-                                src={project.image || "/placeholder.svg"}
-                                alt={project.title}
-                                className="aspect-video w-full object-cover"
-                              />
-                              <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity hover:opacity-100">
-                                <div className="text-center text-white">
-                                  <h3 className="text-lg font-bold">{project.title}</h3>
-                                  <p className="text-sm">{project.category}</p>
-                                </div>
+                      <Card key={index} className="overflow-hidden">
+                        <CardContent className="p-0">
+                          <div className="relative aspect-video w-full">
+                            <Image
+                              src={project.image || "/placeholder.svg"}
+                              alt={project.title}
+                              fill
+                              className="object-cover"
+                              loading="lazy"
+                              sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                              quality={75}
+                            />
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity hover:opacity-100 z-10">
+                              <div className="text-center text-white">
+                                <h3 className="text-lg font-bold">{project.title}</h3>
+                                <p className="text-sm">{project.category}</p>
                               </div>
                             </div>
-                          </CardContent>
-                        </Card>
-                      </motion.div>
+                          </div>
+                        </CardContent>
+                      </Card>
                     ))}
                 </div>
               </TabsContent>

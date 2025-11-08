@@ -1,20 +1,10 @@
 "use client"
 
+import Image from "next/image"
 import { InfiniteSlider } from "@/components/ui/infinite-slider"
-import { useEffect, useState } from "react"
 
 export function LogoCarousel() {
-  const [isMobile, setIsMobile] = useState(false)
-
-  useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+  // Removed mobile detection to reduce TBT - use CSS media queries instead
   const logos = [
     {
       name: "Harvard",
@@ -63,19 +53,24 @@ export function LogoCarousel() {
         <div className="h-12 md:h-16 w-0.5 bg-gray-400"></div>
         <InfiniteSlider
           duration={30}
-          gap={isMobile ? 16 : 32}
+          gap={32}
           className="py-2 md:py-4 flex-1"
         >
         {logos.map((logo, index) => {
           return (
             <div
               key={index}
-              className="flex items-center justify-center"
+              className="flex items-center justify-center h-8 md:h-12 w-auto relative"
             >
-              <img
+              <Image
                 src={logo.src}
                 alt={logo.name}
+                width={120}
+                height={48}
                 className="max-h-8 md:max-h-12 w-auto object-contain transition-all duration-300 hover:scale-110"
+                loading="lazy"
+                quality={75}
+                sizes="(max-width: 768px) 80px, 120px"
               />
             </div>
           );
