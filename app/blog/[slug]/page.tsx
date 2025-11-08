@@ -76,7 +76,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       "articleSection": post.category,
       "inLanguage": "en",
       "wordCount": post.content ? post.content.replace(/<[^>]*>/g, "").split(/\s+/).length : 0,
-      "keywords": `${post.category}, technology, business, consulting`
+      "keywords": post.tags && post.tags.length > 0 
+        ? `${post.category}, ${post.tags.join(", ")}, technology, business, consulting`
+        : `${post.category}, technology, business, consulting`,
+      "about": post.tags && post.tags.length > 0 
+        ? post.tags.map((tag: string) => ({
+            "@type": "Thing",
+            "name": tag
+          }))
+        : undefined
     },
     {
       "@context": "https://schema.org",
@@ -123,7 +131,17 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       },
       "datePublished": rawPost.date,
       "dateModified": rawPost.modified || rawPost.date,
-      "url": `${baseUrl}/blog/${slug}`
+      "url": `${baseUrl}/blog/${slug}`,
+      "keywords": post.tags && post.tags.length > 0 
+        ? `${post.category}, ${post.tags.join(", ")}, technology, business, consulting`
+        : `${post.category}, technology, business, consulting`,
+      "articleSection": post.category,
+      "about": post.tags && post.tags.length > 0 
+        ? post.tags.map((tag: string) => ({
+            "@type": "Thing",
+            "name": tag
+          }))
+        : undefined
     }
   ] : null
 
@@ -183,8 +201,10 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description,
     keywords: (() => {
       const titleWords = post.title.toLowerCase().split(/\s+/).filter(w => w.length > 3).slice(0, 5)
+      const tags = post.tags && post.tags.length > 0 ? post.tags : []
       return [
         post.category,
+        ...tags,
         'technology',
         'business',
         'consulting',
@@ -225,7 +245,9 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       modifiedTime: modifiedDate || publishedDate,
       authors: ['Tecxmate'],
       section: post.category,
-      tags: [post.category, 'technology', 'business', 'consulting'],
+      tags: post.tags && post.tags.length > 0 
+        ? [post.category, ...post.tags, 'technology', 'business', 'consulting']
+        : [post.category, 'technology', 'business', 'consulting'],
       images: post.coverImage ? [
         {
           url: post.coverImage,
