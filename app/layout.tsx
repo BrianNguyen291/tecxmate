@@ -16,9 +16,9 @@ export const metadata: Metadata = {
   publisher: 'Tecxmate',
   metadataBase: new URL(baseUrl),
   icons: {
-    icon: '/tecxmate-logo-cropped.png',
-    shortcut: '/tecxmate-logo-cropped.png',
-    apple: '/tecxmate-logo-cropped.png',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/apple-icon.png',
   },
   alternates: {
     canonical: baseUrl,
