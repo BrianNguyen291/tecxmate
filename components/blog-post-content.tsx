@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Calendar, Clock, ArrowLeft, Star, Facebook, Twitter, Linkedin, Link as LinkIcon } from "lucide-react"
+import { Calendar, Clock, ArrowLeft, Star, Facebook, Twitter, Linkedin, Link as LinkIcon, Check } from "lucide-react"
 import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 import React from "react"
@@ -21,6 +21,7 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [liked, setLiked] = useState(false)
+  const [linkCopied, setLinkCopied] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -58,10 +59,15 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
     if (!postUrl) return
     try {
       await navigator.clipboard.writeText(postUrl)
+      setLinkCopied(true)
       toast({
         title: "Link copied!",
         description: "The blog post link has been copied to your clipboard.",
       })
+      // Reset the copied state after 2 seconds
+      setTimeout(() => {
+        setLinkCopied(false)
+      }, 2000)
     } catch (err) {
       console.error('Failed to copy:', err)
       toast({
@@ -218,11 +224,30 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
                     </button>
                     <button
                       onClick={copyToClipboard}
-                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
-                      aria-label="Copy link"
-                      title="Copy link"
+                      className={`p-2 rounded-full transition-all duration-300 ${
+                        linkCopied 
+                          ? 'bg-green-100 hover:bg-green-100' 
+                          : 'hover:bg-gray-100'
+                      }`}
+                      aria-label={linkCopied ? "Link copied!" : "Copy link"}
+                      title={linkCopied ? "Link copied!" : "Copy link"}
                     >
-                      <LinkIcon className="h-5 w-5 text-gray-600" />
+                      <div className="relative h-5 w-5 flex items-center justify-center">
+                        <Check 
+                          className={`h-5 w-5 text-green-600 absolute transition-all duration-200 ${
+                            linkCopied 
+                              ? 'opacity-100 scale-100 rotate-0' 
+                              : 'opacity-0 scale-50 rotate-90'
+                          }`}
+                        />
+                        <LinkIcon 
+                          className={`h-5 w-5 text-gray-600 absolute transition-all duration-200 ${
+                            linkCopied 
+                              ? 'opacity-0 scale-50 rotate-90' 
+                              : 'opacity-100 scale-100 rotate-0'
+                          }`}
+                        />
+                      </div>
                     </button>
                   </div>
                 </div>

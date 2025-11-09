@@ -31,18 +31,18 @@ export function DemoProductsSection() {
       actionText: "Learn More",
     },
     {
-      title: "HealthMaxers",
-      description: "Performance health insights at scale",
-      link: "https://healthmaxers.com",
-      image: "/products/healthmaxer.png",
-      icon: ExternalLink,
-      actionText: "Learn More",
-    },
-    {
       title: "Chi Chi Vietnamese",
       description: "Premier Vietnamese Language Education for Mandarin speakers",
       link: "https://chichivietnamese.com",
       image: "/products/chichi.jpg",
+      icon: ExternalLink,
+      actionText: "Learn More",
+    },
+    {
+      title: "HealthMaxers",
+      description: "Performance health insights at scale",
+      link: "https://healthmaxers.com",
+      image: "/products/healthmaxer.png",
       icon: ExternalLink,
       actionText: "Learn More",
     },
@@ -173,14 +173,20 @@ export function DemoProductsSection() {
     const Icon = project.icon
     
     return (
-    <div className="rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full w-full">
+    <Link
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      className="group block rounded-lg border border-alt-gray-200 bg-white shadow-sm overflow-hidden hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col h-full w-full"
+      aria-label={`${project.actionText} - ${project.title}`}
+    >
       {/* Image - Fixed aspect ratio to prevent layout shift */}
-      <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative aspect-[4/3]">
+      <div className="w-full bg-[#e3e3e3] flex-shrink-0 relative aspect-[4/3] overflow-hidden">
         <Image
           src={project.image || "/placeholder.svg"}
           alt={project.title}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 group-hover:scale-105"
           sizes="(max-width: 768px) 288px, 320px"
           quality={75}
           loading="lazy"
@@ -190,21 +196,15 @@ export function DemoProductsSection() {
       {/* Content - Fixed height area */}
       <div className="p-4 flex flex-col flex-1 min-h-[200px]">
         <div className="flex-1 flex flex-col mb-3">
-          <h3 className="text-lg font-semibold text-alt-black mb-2 text-left line-clamp-2 h-14 flex items-start">{project.title}</h3>
+          <h3 className="text-lg font-semibold text-alt-black mb-2 text-left line-clamp-2 h-14 flex items-start group-hover:text-primary transition-colors">{project.title}</h3>
           <p className="text-sm text-gray-600 text-left line-clamp-2 h-10 flex items-start">{project.description}</p>
         </div>
-        <Link
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center justify-center text-primary font-medium hover:text-primary/80 transition-colors mt-auto"
-          aria-label={`${project.actionText} - ${project.title}`}
-        >
+        <div className="flex items-center justify-center text-primary font-medium mt-auto">
           <span>{project.actionText}</span>
           <Icon className="w-4 h-4 ml-1" />
-        </Link>
+        </div>
       </div>
-    </div>
+    </Link>
           )
     }
   

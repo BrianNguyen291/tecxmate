@@ -117,9 +117,9 @@ export function CampaignsSection() {
                   <p className="text-sm text-gray-600 line-clamp-2 mb-3">
                     {post.excerpt}
                   </p>
-                  <div className="inline-flex items-center text-sm font-medium text-primary group-hover:gap-2 transition-all">
+                  <div className="inline-flex items-center text-sm font-medium text-primary">
                     <span>Read More</span>
-                    <ArrowRight className="w-4 h-4 ml-1 transition-transform group-hover:translate-x-1" />
+                    <ArrowRight className="w-4 h-4 ml-1" />
                   </div>
                 </div>
               </Link>

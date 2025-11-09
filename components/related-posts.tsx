@@ -79,49 +79,50 @@ export function RelatedPosts({ currentPostSlug, currentCategory, currentTags }: 
         <h2 className="mb-8 text-2xl font-bold">Related Articles</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {relatedPosts.map((post) => (
-            <Card
+            <Link
               key={post.id}
-              className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg"
+              href={`/blog/${post.slug}`}
+              className="group block h-full"
             >
-              <div className="aspect-video w-full overflow-hidden relative">
-                <Image
-                  src={post.coverImage || "/placeholder.svg?height=200&width=400"}
-                  alt={post.title}
-                  fill
-                  className="object-cover transition-transform duration-300 hover:scale-105"
-                  loading="lazy"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  quality={75}
-                />
-              </div>
-              <CardContent className="p-6">
-                <div className="mb-2">
-                  <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                    {post.category}
-                  </span>
+              <Card className="h-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:border-primary hover:shadow-md transition-all duration-300">
+                <div className="aspect-video w-full overflow-hidden relative">
+                  <Image
+                    src={post.coverImage || "/placeholder.svg?height=200&width=400"}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    quality={75}
+                  />
                 </div>
-                <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
-                  <div className="flex items-center gap-1">
-                    <Calendar className="h-4 w-4" />
-                    <span>{post.date}</span>
+                <CardContent className="p-6">
+                  <div className="mb-2">
+                    <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                      {post.category}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-1">
-                    <Clock className="h-4 w-4" />
-                    <span>{post.readTime}</span>
+                  <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>{post.date}</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Clock className="h-4 w-4" />
+                      <span>{post.readTime}</span>
+                    </div>
                   </div>
-                </div>
-                <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight">{post.title}</h3>
-                <p className="mb-4 text-gray-500 line-clamp-2">{post.excerpt}</p>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Link
-                  href={`/blog/${post.slug}`}
-                  className="group inline-flex items-center gap-1 font-medium text-primary"
-                >
-                  Read More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </CardFooter>
-            </Card>
+                  <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight group-hover:text-primary transition-colors">{post.title}</h3>
+                  <p className="mb-4 text-gray-500 line-clamp-2">{post.excerpt}</p>
+                </CardContent>
+                <CardFooter className="p-6 pt-0">
+                  <div className="inline-flex items-center gap-1 font-medium text-primary">
+                    <span>Read More</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </div>
+                </CardFooter>
+              </Card>
+            </Link>
           ))}
         </div>
       </div>

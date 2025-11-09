@@ -204,62 +204,64 @@ export function BlogListing() {
                 )}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {displayPosts.map((post) => (
-                <Card
+                <Link
                   key={post.id}
-                  className="h-full overflow-hidden border-none shadow-md transition-all hover:shadow-lg"
+                  href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
+                  className="group block h-full"
                 >
-                  <div className="aspect-video w-full overflow-hidden relative">
-                    <Image
-                      src={post.coverImage || "/placeholder.svg?height=200&width=400"}
-                      alt={post.title}
-                      fill
-                      className="object-cover transition-transform duration-300 hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                      quality={75}
-                      loading="lazy"
-                    />
-                  </div>
-                  <CardContent className="p-6">
-                    <div className="mb-2">
-                      <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                        {post.category}
-                      </span>
+                  <Card className="h-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:border-primary hover:shadow-md transition-all duration-300">
+                    <div className="aspect-video w-full overflow-hidden relative">
+                      <Image
+                        src={post.coverImage || "/placeholder.svg?height=200&width=400"}
+                        alt={post.title}
+                        fill
+                        className="object-cover transition-transform duration-300 group-hover:scale-105"
+                        sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        quality={75}
+                        loading="lazy"
+                      />
                     </div>
-                    <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
+                    <CardContent className="p-6">
+                      <div className="mb-2">
+                        <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                          {post.category}
+                        </span>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{post.readTime}</span>
+                      <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>{post.date}</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          <span>{post.readTime}</span>
+                        </div>
                       </div>
-                    </div>
-                    <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2">{post.title}</h3>
-                    <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
-                    {post.tags && post.tags.length > 0 && (
-                      <div className="flex flex-wrap gap-1 mb-4">
-                        {post.tags.slice(0, 3).map((tag) => (
-                          <Link
-                            key={tag}
-                            href={`/blog?tag=${encodeURIComponent(tag)}`}
-                            className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
-                          >
-                            {tag}
-                          </Link>
-                        ))}
+                      <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                      <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
+                      {post.tags && post.tags.length > 0 && (
+                        <div className="flex flex-wrap gap-1 mb-4" onClick={(e) => e.stopPropagation()}>
+                          {post.tags.slice(0, 3).map((tag) => (
+                            <Link
+                              key={tag}
+                              href={`/blog?tag=${encodeURIComponent(tag)}`}
+                              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {tag}
+                            </Link>
+                          ))}
+                        </div>
+                      )}
+                    </CardContent>
+                    <CardFooter className="p-6 pt-0">
+                      <div className="inline-flex items-center gap-1 font-medium text-primary">
+                        <span>Read More</span>
+                        <ArrowRight className="h-4 w-4" />
                       </div>
-                    )}
-                  </CardContent>
-                  <CardFooter className="p-6 pt-0">
-                    <Link
-                      href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
-                      className="group inline-flex items-center gap-1 font-medium text-primary"
-                    >
-                      Read More <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
-                  </CardFooter>
-                </Card>
+                    </CardFooter>
+                  </Card>
+                </Link>
               ))}
                 </div>
               </>

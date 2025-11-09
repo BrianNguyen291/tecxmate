@@ -66,19 +66,19 @@ export function PortfolioSection() {
                   {projects
                     .filter((project) => category === "All" || project.category === category)
                     .map((project, index) => (
-                      <Card key={index} className="overflow-hidden">
+                      <Card key={index} className="group overflow-hidden border border-gray-200 bg-white shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 cursor-pointer">
                         <CardContent className="p-0">
-                          <div className="relative aspect-video w-full">
+                          <div className="relative aspect-video w-full overflow-hidden">
                             <Image
                               src={project.image || "/placeholder.svg"}
                               alt={project.title}
                               fill
-                              className="object-cover"
+                              className="object-cover transition-transform duration-300 group-hover:scale-105"
                               loading="lazy"
                               sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               quality={75}
                             />
-                            <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 transition-opacity hover:opacity-100 z-10">
+                            <div className="absolute inset-0 flex items-center justify-center bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10">
                               <div className="text-center text-white">
                                 <h3 className="text-lg font-bold">{project.title}</h3>
                                 <p className="text-sm">{project.category}</p>
