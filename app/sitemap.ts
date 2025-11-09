@@ -3,71 +3,74 @@ import { wpGetAllPosts } from "@/lib/wordpress"
 import { WORDPRESS_API_URL } from "@/lib/wp-config"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
+  // Use root domain (without www) for consistency with robots.txt
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://tecxmate.com"
+  // Remove www if present to ensure consistent canonical URL
+  const rootUrl = baseUrl.replace(/^https?:\/\/(www\.)?/, 'https://')
 
   const staticUrls: MetadataRoute.Sitemap = [
     { 
-      url: `${baseUrl}/`, 
+      url: `${rootUrl}/`, 
       lastModified: new Date(), 
       changeFrequency: "daily", 
       priority: 1 
     },
     { 
-      url: `${baseUrl}/services`, 
+      url: `${rootUrl}/services`, 
       lastModified: new Date(), 
       changeFrequency: "weekly", 
       priority: 0.9 
     },
     { 
-      url: `${baseUrl}/services/ai-application-development`, 
+      url: `${rootUrl}/services/ai-application-development`, 
       lastModified: new Date(), 
       changeFrequency: "monthly", 
       priority: 0.8 
     },
     { 
-      url: `${baseUrl}/services/business-automation`, 
+      url: `${rootUrl}/services/business-automation`, 
       lastModified: new Date(), 
       changeFrequency: "monthly", 
       priority: 0.8 
     },
     { 
-      url: `${baseUrl}/services/ai-integration-consulting`, 
+      url: `${rootUrl}/services/ai-integration-consulting`, 
       lastModified: new Date(), 
       changeFrequency: "monthly", 
       priority: 0.8 
     },
     { 
-      url: `${baseUrl}/projects`, 
+      url: `${rootUrl}/projects`, 
       lastModified: new Date(), 
       changeFrequency: "weekly", 
       priority: 0.9 
     },
     { 
-      url: `${baseUrl}/about`, 
+      url: `${rootUrl}/about`, 
       lastModified: new Date(), 
       changeFrequency: "monthly", 
       priority: 0.8 
     },
     { 
-      url: `${baseUrl}/blog`, 
+      url: `${rootUrl}/blog`, 
       lastModified: new Date(), 
       changeFrequency: "daily", 
       priority: 0.9 
     },
     { 
-      url: `${baseUrl}/privacy-policy`, 
+      url: `${rootUrl}/privacy-policy`, 
       lastModified: new Date(), 
       changeFrequency: "yearly", 
       priority: 0.5 
     },
     { 
-      url: `${baseUrl}/terms-of-service`, 
+      url: `${rootUrl}/terms-of-service`, 
       lastModified: new Date(), 
       changeFrequency: "yearly", 
       priority: 0.5 
     },
     {
-      url: `${baseUrl}/feed.xml`,
+      url: `${rootUrl}/feed.xml`,
       lastModified: new Date(),
       changeFrequency: "daily",
       priority: 0.8,
@@ -89,7 +92,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       postUrls = posts.map((p) => {
         const modifiedDate = postDatesMap.get(p.slug)
         return {
-          url: `${baseUrl}/blog/${encodeURIComponent(p.slug)}`,
+          url: `${rootUrl}/blog/${encodeURIComponent(p.slug)}`,
           lastModified: modifiedDate ? new Date(modifiedDate) : new Date(),
           changeFrequency: "weekly" as const,
           priority: 0.8,
@@ -98,7 +101,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     } else {
       // Fallback: use current date if we can't fetch dates
       postUrls = posts.map((p) => ({
-        url: `${baseUrl}/blog/${encodeURIComponent(p.slug)}`,
+        url: `${rootUrl}/blog/${encodeURIComponent(p.slug)}`,
         lastModified: new Date(),
         changeFrequency: "weekly" as const,
         priority: 0.8,
