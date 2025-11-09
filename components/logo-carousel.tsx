@@ -50,7 +50,7 @@ export function LogoCarousel() {
             <span className="text-xs md:text-sm text-gray-600 font-medium">from</span>
           </div>
         </div>
-        <div className="h-12 md:h-16 w-0.5 bg-gray-400"></div>
+        <div className="h-12 md:h-20 w-0.5 bg-gray-400"></div>
         <InfiniteSlider
           duration={30}
           gap={32}
@@ -60,17 +60,17 @@ export function LogoCarousel() {
           return (
             <div
               key={index}
-              className="flex items-center justify-center h-8 md:h-12 w-auto relative"
+              className="flex items-center justify-center h-12 md:h-20 w-auto relative"
             >
               <Image
                 src={logo.src}
                 alt={logo.name}
-                width={120}
-                height={48}
-                className="max-h-8 md:max-h-12 w-auto object-contain transition-all duration-300 hover:scale-110"
+                width={400}
+                height={160}
+                className="h-12 md:h-20 w-auto object-contain transition-all duration-300 hover:scale-110"
                 loading="lazy"
-                quality={75}
-                sizes="(max-width: 768px) 80px, 120px"
+                quality={100}
+                sizes="(max-width: 768px) 200px, 400px"
               />
             </div>
           );
