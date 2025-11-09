@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Calendar, Clock, ArrowLeft } from "lucide-react"
+import { Calendar, Clock, ArrowLeft, Star, Facebook, Twitter, Linkedin, Link as LinkIcon } from "lucide-react"
 import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 import React from "react"
@@ -9,6 +9,8 @@ import { useRouter } from "next/navigation"
 import { RelatedPosts } from "@/components/related-posts"
 import { BlogSidebar } from "@/components/blog-sidebar"
 import { BlogTags } from "@/components/blog-tags"
+import { Button } from "@/components/ui/button"
+import { useToast } from "@/hooks/use-toast"
 
 interface BlogPostContentProps {
   slug: string
@@ -18,7 +20,57 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   const [post, setPost] = useState<BlogPost | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [liked, setLiked] = useState(false)
   const router = useRouter()
+  const { toast } = useToast()
+
+  const getPostUrl = () => {
+    if (typeof window !== 'undefined') {
+      return `${window.location.origin}/blog/${slug}`
+    }
+    return ''
+  }
+
+  const shareToFacebook = () => {
+    const postUrl = getPostUrl()
+    if (!postUrl) return
+    const url = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(postUrl)}`
+    window.open(url, '_blank', 'width=600,height=400')
+  }
+
+  const shareToTwitter = () => {
+    const postUrl = getPostUrl()
+    if (!postUrl) return
+    const postTitle = post?.title || ''
+    const url = `https://twitter.com/intent/tweet?url=${encodeURIComponent(postUrl)}&text=${encodeURIComponent(postTitle)}`
+    window.open(url, '_blank', 'width=600,height=400')
+  }
+
+  const shareToLinkedIn = () => {
+    const postUrl = getPostUrl()
+    if (!postUrl) return
+    const url = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(postUrl)}`
+    window.open(url, '_blank', 'width=600,height=400')
+  }
+
+  const copyToClipboard = async () => {
+    const postUrl = getPostUrl()
+    if (!postUrl) return
+    try {
+      await navigator.clipboard.writeText(postUrl)
+      toast({
+        title: "Link copied!",
+        description: "The blog post link has been copied to your clipboard.",
+      })
+    } catch (err) {
+      console.error('Failed to copy:', err)
+      toast({
+        title: "Failed to copy",
+        description: "Please copy the link manually.",
+        variant: "destructive",
+      })
+    }
+  }
 
   useEffect(() => {
     async function fetchPost() {
@@ -122,6 +174,60 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
                 <BlogTags tags={post.tags} />
               </div>
             )}
+
+            {/* Like and Share Buttons */}
+            <div className="mt-8 pt-8 border-t border-gray-200">
+              <div className="flex items-center gap-4 flex-wrap">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => {
+                    setLiked(!liked)
+                  }}
+                  className={`flex items-center gap-2 ${liked ? 'text-primary border-primary' : ''}`}
+                >
+                  <Star className={`h-4 w-4 ${liked ? 'fill-current' : ''}`} />
+                  Like
+                </Button>
+                <div className="flex items-center gap-3 flex-wrap">
+                  <span className="text-sm text-gray-600 font-medium">Share to:</span>
+                  <div className="flex items-center gap-3">
+                    <button
+                      onClick={shareToFacebook}
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label="Share on Facebook"
+                      title="Share on Facebook"
+                    >
+                      <Facebook className="h-5 w-5 text-blue-600" />
+                    </button>
+                    <button
+                      onClick={shareToTwitter}
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label="Share on Twitter"
+                      title="Share on Twitter"
+                    >
+                      <Twitter className="h-5 w-5 text-blue-400" />
+                    </button>
+                    <button
+                      onClick={shareToLinkedIn}
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label="Share on LinkedIn"
+                      title="Share on LinkedIn"
+                    >
+                      <Linkedin className="h-5 w-5 text-blue-700" />
+                    </button>
+                    <button
+                      onClick={copyToClipboard}
+                      className="p-2 rounded-full hover:bg-gray-100 transition-colors"
+                      aria-label="Copy link"
+                      title="Copy link"
+                    >
+                      <LinkIcon className="h-5 w-5 text-gray-600" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Sidebar - Right side */}

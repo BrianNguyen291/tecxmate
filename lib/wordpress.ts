@@ -11,6 +11,16 @@ export type WPBlogPost = {
   tags?: string[]
 }
 
+export type WPComment = {
+  id: number
+  authorName: string
+  authorUrl?: string
+  authorAvatar?: string
+  date: string
+  content: string
+  parent?: number
+}
+
 import { WORDPRESS_API_URL } from "./wp-config"
 
 function stripHtml(html: string) {
@@ -196,6 +206,57 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
   } catch (error) {
     console.error('❌ Error fetching post by slug:', error)
     return null
+  }
+}
+
+export async function wpGetCommentsByPostId(postId: number): Promise<WPComment[]> {
+  try {
+    const url = `${WORDPRESS_API_URL}/comments?post=${postId}&status=approve&orderby=date&order=asc`
+    console.log('🔍 Fetching WordPress comments from:', url)
+    
+    const res = await fetch(url, { 
+      next: { revalidate: 300 },
+      headers: {
+        'Accept': 'application/json',
+      }
+    })
+    
+    if (!res.ok) {
+      // Comments might not be enabled or available, which is okay
+      if (res.status === 404 || res.status === 403) {
+        console.log('ℹ️ Comments not available for this post')
+        return []
+      }
+      console.error('❌ WordPress Comments API Error:', {
+        status: res.status,
+        statusText: res.statusText,
+        url
+      })
+      return []
+    }
+    
+    const data = await res.json()
+    
+    if (!Array.isArray(data)) {
+      console.error('❌ WordPress API returned non-array comments data:', data)
+      return []
+    }
+    
+    const comments = data.map((c: any) => ({
+      id: c.id,
+      authorName: c.author_name || 'Anonymous',
+      authorUrl: c.author_url || undefined,
+      authorAvatar: c.author_avatar_urls?.['96'] || undefined,
+      date: new Date(c.date).toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" }),
+      content: c.content?.rendered || '',
+      parent: c.parent || undefined,
+    }))
+    
+    console.log('✅ Processed comments:', comments.length)
+    return comments
+  } catch (error) {
+    console.error('❌ Error fetching WordPress comments:', error)
+    return []
   }
 }
 
