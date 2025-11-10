@@ -182,3 +182,44 @@ If you encounter issues:
 3. Verify all required variables are set
 4. Test WordPress API access directly
 
+### `UPSTASH_REDIS_REST_URL`
+**Optional** | **Server-side only**
+
+Upstash Redis REST API URL. Used for blog view counter storage.
+
+**Required for blog view counter functionality.**
+
+**Example:**
+```env
+UPSTASH_REDIS_REST_URL=https://your-db.upstash.io
+```
+
+**How to get:**
+1. Go to Vercel Dashboard → Storage → Create Database
+2. Select Upstash from Marketplace
+3. Create Redis database
+4. Copy the REST URL from Upstash dashboard
+
+---
+
+### `UPSTASH_REDIS_REST_TOKEN`
+**Optional** | **Server-side only**
+
+Upstash Redis REST API token. Used for authentication.
+
+**Required for blog view counter functionality.**
+
+**Example:**
+```env
+UPSTASH_REDIS_REST_TOKEN=your-token-here
+```
+
+**How to get:**
+1. Go to Upstash dashboard
+2. Select your Redis database
+3. Go to REST API section
+4. Copy the token
+
+**Note:** Keep this token secure and never commit it to version control.
+
+---

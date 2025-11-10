@@ -43,3 +43,6 @@ next-env.d.ts
 # Exclude sub-projects from being watched
 /tecxmate-main/.next
 /crypted.vc/.next
+
+# Blog view counts data
+/data

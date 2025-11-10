@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Calendar, Clock, ArrowRight, Search, X } from "lucide-react"
+import { Calendar, Clock, ArrowRight, Search, X, Eye } from "lucide-react"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
@@ -15,6 +15,7 @@ export function BlogListing() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
+  const [viewCounts, setViewCounts] = useState<Record<string, number>>({})
   const searchParams = useSearchParams()
   const selectedCategory = searchParams.get("category")
   const selectedTag = searchParams.get("tag")
@@ -31,6 +32,20 @@ export function BlogListing() {
 
         const data = await response.json()
         setBlogPosts(data)
+        
+        // Fetch view counts for all posts
+        if (data.length > 0) {
+          const slugs = data.map((post: BlogPost) => post.slug).join(',')
+          try {
+            const viewsResponse = await fetch(`/api/blog/views?slugs=${encodeURIComponent(slugs)}`)
+            if (viewsResponse.ok) {
+              const viewsData = await viewsResponse.json()
+              setViewCounts(viewsData)
+            }
+          } catch (err) {
+            console.error('Error fetching view counts:', err)
+          }
+        }
       } catch (err) {
         console.error("Error fetching blog posts:", err)
         setError("Failed to load blog posts. Please try again later.")
@@ -204,12 +219,11 @@ export function BlogListing() {
                 )}
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
               {displayPosts.map((post) => (
-                <Link
-                  key={post.id}
-                  href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
-                  className="group block h-full"
-                >
-                  <Card className="h-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:border-primary hover:shadow-md transition-all duration-300">
+                <Card key={post.id} className="h-full overflow-hidden border border-gray-200 bg-white shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 group">
+                  <Link
+                    href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
+                    className="block"
+                  >
                     <div className="aspect-video w-full overflow-hidden relative">
                       <Image
                         src={post.coverImage || "/placeholder.svg?height=200&width=400"}
@@ -221,47 +235,60 @@ export function BlogListing() {
                         loading="lazy"
                       />
                     </div>
-                    <CardContent className="p-6">
-                      <div className="mb-2">
-                        <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
-                          {post.category}
-                        </span>
+                  </Link>
+                  <CardContent className="p-6">
+                    <div className="mb-2">
+                      <span className="inline-block rounded-full bg-primary/10 px-2.5 py-0.5 text-xs font-medium text-primary">
+                        {post.category}
+                      </span>
+                    </div>
+                    <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
+                      <div className="flex items-center gap-1">
+                        <Calendar className="h-4 w-4" />
+                        <span>{post.date}</span>
                       </div>
-                      <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4" />
-                          <span>{post.date}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="h-4 w-4" />
-                          <span>{post.readTime}</span>
-                        </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="h-4 w-4" />
+                        <span>{post.readTime}</span>
                       </div>
-                      <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
-                      <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
-                      {post.tags && post.tags.length > 0 && (
-                        <div className="flex flex-wrap gap-1 mb-4" onClick={(e) => e.stopPropagation()}>
-                          {post.tags.slice(0, 3).map((tag) => (
-                            <Link
-                              key={tag}
-                              href={`/blog?tag=${encodeURIComponent(tag)}`}
-                              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
-                              onClick={(e) => e.stopPropagation()}
-                            >
-                              {tag}
-                            </Link>
-                          ))}
+                      {viewCounts[post.slug] !== undefined && (
+                        <div className="flex items-center gap-1">
+                          <Eye className="h-4 w-4" />
+                          <span>{viewCounts[post.slug].toLocaleString()}</span>
                         </div>
                       )}
-                    </CardContent>
-                    <CardFooter className="p-6 pt-0">
-                      <div className="inline-flex items-center gap-1 font-medium text-primary">
-                        <span>Read More</span>
-                        <ArrowRight className="h-4 w-4" />
+                    </div>
+                    <Link
+                      href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
+                      className="block"
+                    >
+                      <h3 className="mb-2 text-xl font-bold leading-tight tracking-tight line-clamp-2 group-hover:text-primary transition-colors">{post.title}</h3>
+                    </Link>
+                    <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
+                    {post.tags && post.tags.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mb-4">
+                        {post.tags.slice(0, 3).map((tag) => (
+                          <Link
+                            key={tag}
+                            href={`/blog?tag=${encodeURIComponent(tag)}`}
+                            className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-gray-100 text-gray-700 hover:bg-primary/10 hover:text-primary transition-colors"
+                          >
+                            {tag}
+                          </Link>
+                        ))}
                       </div>
-                    </CardFooter>
-                  </Card>
-                </Link>
+                    )}
+                  </CardContent>
+                  <CardFooter className="p-6 pt-0">
+                    <Link
+                      href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
+                      className="inline-flex items-center gap-1 font-medium text-primary hover:underline"
+                    >
+                      <span>Read More</span>
+                      <ArrowRight className="h-4 w-4" />
+                    </Link>
+                  </CardFooter>
+                </Card>
               ))}
                 </div>
               </>

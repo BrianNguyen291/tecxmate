@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Calendar, Clock, ArrowLeft, Star, Facebook, Twitter, Linkedin, Link as LinkIcon, Check } from "lucide-react"
+import { Calendar, Clock, ArrowLeft, Star, Facebook, Twitter, Linkedin, Link as LinkIcon, Check, Eye } from "lucide-react"
 import Link from "next/link"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
 import React from "react"
@@ -22,6 +22,7 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   const [error, setError] = useState<string | null>(null)
   const [liked, setLiked] = useState(false)
   const [linkCopied, setLinkCopied] = useState(false)
+  const [views, setViews] = useState<number>(0)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -77,6 +78,48 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
       })
     }
   }
+
+  // Track view when post is loaded
+  useEffect(() => {
+    async function trackView() {
+      try {
+        const response = await fetch('/api/blog/views', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ slug }),
+        })
+        
+        if (response.ok) {
+          const data = await response.json()
+          setViews(data.views || 0)
+        }
+      } catch (err) {
+        console.error('Error tracking view:', err)
+      }
+    }
+
+    // Only track view once per page load
+    trackView()
+  }, [slug])
+
+  // Fetch view count on mount
+  useEffect(() => {
+    async function fetchViews() {
+      try {
+        const response = await fetch(`/api/blog/views?slug=${encodeURIComponent(slug)}`)
+        if (response.ok) {
+          const data = await response.json()
+          setViews(data.views || 0)
+        }
+      } catch (err) {
+        console.error('Error fetching views:', err)
+      }
+    }
+
+    fetchViews()
+  }, [slug])
 
   useEffect(() => {
     async function fetchPost() {
@@ -164,6 +207,10 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
                 <div className="flex items-center gap-1">
                   <Clock className="h-4 w-4" />
                   <span>{post.readTime}</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <Eye className="h-4 w-4" />
+                  <span>{views.toLocaleString()} {views === 1 ? 'view' : 'views'}</span>
                 </div>
               </div>
             </header>
