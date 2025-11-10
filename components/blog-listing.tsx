@@ -5,7 +5,7 @@ import Image from "next/image"
 import { useSearchParams } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter } from "@/components/ui/card"
-import { Calendar, Clock, ArrowRight, Search, X, Eye } from "lucide-react"
+import { Calendar, Clock, ArrowRight, Search, X, Eye, Star } from "lucide-react"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
@@ -16,6 +16,7 @@ export function BlogListing() {
   const [error, setError] = useState<string | null>(null)
   const [searchQuery, setSearchQuery] = useState("")
   const [viewCounts, setViewCounts] = useState<Record<string, number>>({})
+  const [likeCounts, setLikeCounts] = useState<Record<string, number>>({})
   const searchParams = useSearchParams()
   const selectedCategory = searchParams.get("category")
   const selectedTag = searchParams.get("tag")
@@ -33,17 +34,25 @@ export function BlogListing() {
         const data = await response.json()
         setBlogPosts(data)
         
-        // Fetch view counts for all posts
+        // Fetch view counts and like counts for all posts
         if (data.length > 0) {
           const slugs = data.map((post: BlogPost) => post.slug).join(',')
           try {
+            // Fetch view counts
             const viewsResponse = await fetch(`/api/blog/views?slugs=${encodeURIComponent(slugs)}`)
             if (viewsResponse.ok) {
               const viewsData = await viewsResponse.json()
               setViewCounts(viewsData)
             }
+            
+            // Fetch like counts
+            const likesResponse = await fetch(`/api/blog/likes?slugs=${encodeURIComponent(slugs)}`)
+            if (likesResponse.ok) {
+              const likesData = await likesResponse.json()
+              setLikeCounts(likesData)
+            }
           } catch (err) {
-            console.error('Error fetching view counts:', err)
+            console.error('Error fetching counts:', err)
           }
         }
       } catch (err) {
@@ -64,9 +73,9 @@ export function BlogListing() {
   }, [searchParam])
 
   // Placeholder posts for when real posts aren't available
-  const placeholderPosts = [
+  const placeholderPosts: BlogPost[] = [
     {
-      id: "placeholder-1",
+      id: 1,
       slug: "#",
       title: "Web Design Trends to Watch",
       excerpt: "Explore the latest web design trends that are shaping the digital landscape this year.",
@@ -74,9 +83,10 @@ export function BlogListing() {
       readTime: "5 min read",
       category: "Design",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
     {
-      id: "placeholder-2",
+      id: 2,
       slug: "#",
       title: "Improving Website Loading Speed",
       excerpt: "Learn practical tips and techniques to optimize your website's performance.",
@@ -84,9 +94,10 @@ export function BlogListing() {
       readTime: "7 min read",
       category: "Performance",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
     {
-      id: "placeholder-3",
+      id: 3,
       slug: "#",
       title: "Mobile-First Design Importance",
       excerpt: "With mobile traffic continuing to rise, designing for mobile-first is no longer optional.",
@@ -94,9 +105,10 @@ export function BlogListing() {
       readTime: "6 min read",
       category: "Design",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
     {
-      id: "placeholder-4",
+      id: 4,
       slug: "#",
       title: "Understanding SEO for Developers",
       excerpt: "A comprehensive guide to search engine optimization for web developers.",
@@ -104,9 +116,10 @@ export function BlogListing() {
       readTime: "8 min read",
       category: "SEO",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
     {
-      id: "placeholder-5",
+      id: 5,
       slug: "#",
       title: "The Future of JavaScript Frameworks",
       excerpt: "An in-depth look at where JavaScript frameworks are headed in the coming years.",
@@ -114,9 +127,10 @@ export function BlogListing() {
       readTime: "9 min read",
       category: "Development",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
     {
-      id: "placeholder-6",
+      id: 6,
       slug: "#",
       title: "Building Accessible Web Applications",
       excerpt: "Learn how to create web applications that are accessible to all users.",
@@ -124,14 +138,15 @@ export function BlogListing() {
       readTime: "7 min read",
       category: "Accessibility",
       coverImage: "/placeholder.svg?height=200&width=400",
+      tags: [],
     },
   ]
 
   // Use real posts if available, otherwise use placeholders
-  const allPosts = blogPosts.length > 0 ? blogPosts : placeholderPosts
+  const allPosts: BlogPost[] = blogPosts.length > 0 ? blogPosts : placeholderPosts
 
   // Filter posts based on category, tag, or search
-  let filteredPosts = allPosts
+  let filteredPosts: BlogPost[] = allPosts
 
   if (selectedCategory && selectedCategory !== "All") {
     filteredPosts = filteredPosts.filter(post => post.category === selectedCategory)
@@ -139,7 +154,7 @@ export function BlogListing() {
 
   if (selectedTag) {
     filteredPosts = filteredPosts.filter(post => 
-      post.tags && post.tags.includes(selectedTag)
+      post.tags && post.tags.length > 0 && post.tags.includes(selectedTag)
     )
   }
 
@@ -148,11 +163,11 @@ export function BlogListing() {
     filteredPosts = filteredPosts.filter(post =>
       post.title.toLowerCase().includes(query.toLowerCase()) ||
       post.excerpt.toLowerCase().includes(query.toLowerCase()) ||
-      (post.tags && post.tags.some(tag => tag.toLowerCase().includes(query.toLowerCase())))
+      (post.tags && post.tags.length > 0 && post.tags.some((tag: string) => tag.toLowerCase().includes(query.toLowerCase())))
     )
   }
 
-  const displayPosts = filteredPosts
+  const displayPosts: BlogPost[] = filteredPosts
 
   // Extract unique categories
   const categories = ["All", ...Array.from(new Set(allPosts.map((post) => post.category)))]
@@ -242,22 +257,28 @@ export function BlogListing() {
                         {post.category}
                       </span>
                     </div>
-                    <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
-                      <div className="flex items-center gap-1">
-                        <Calendar className="h-4 w-4" />
-                        <span>{post.date}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <Clock className="h-4 w-4" />
-                        <span>{post.readTime}</span>
-                      </div>
-                      {viewCounts[post.slug] !== undefined && (
+                      <div className="mb-4 flex items-center gap-4 text-sm text-gray-500">
                         <div className="flex items-center gap-1">
-                          <Eye className="h-4 w-4" />
-                          <span>{viewCounts[post.slug].toLocaleString()}</span>
+                          <Calendar className="h-4 w-4" />
+                          <span>{post.date}</span>
                         </div>
-                      )}
-                    </div>
+                        <div className="flex items-center gap-1">
+                          <Clock className="h-4 w-4" />
+                          <span>{post.readTime}</span>
+                        </div>
+                        {viewCounts[post.slug] !== undefined && viewCounts[post.slug] > 0 && (
+                          <div className="flex items-center gap-1">
+                            <Eye className="h-4 w-4" />
+                            <span>{viewCounts[post.slug].toLocaleString()}</span>
+                          </div>
+                        )}
+                        {likeCounts[post.slug] !== undefined && likeCounts[post.slug] > 0 && (
+                          <div className="flex items-center gap-1">
+                            <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                            <span>{likeCounts[post.slug].toLocaleString()}</span>
+                          </div>
+                        )}
+                      </div>
                     <Link
                       href={blogPosts.length > 0 ? `/blog/${post.slug}` : "/blog"}
                       className="block"
@@ -267,7 +288,7 @@ export function BlogListing() {
                     <p className="mb-4 text-gray-500 line-clamp-3">{post.excerpt}</p>
                     {post.tags && post.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1 mb-4">
-                        {post.tags.slice(0, 3).map((tag) => (
+                        {post.tags.slice(0, 3).map((tag: string) => (
                           <Link
                             key={tag}
                             href={`/blog?tag=${encodeURIComponent(tag)}`}

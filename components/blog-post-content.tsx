@@ -21,8 +21,10 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [liked, setLiked] = useState(false)
+  const [likes, setLikes] = useState<number>(0)
   const [linkCopied, setLinkCopied] = useState(false)
   const [views, setViews] = useState<number>(0)
+  const [isLiking, setIsLiking] = useState(false)
   const router = useRouter()
   const { toast } = useToast()
 
@@ -120,6 +122,84 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
 
     fetchViews()
   }, [slug])
+
+  // Fetch like count and check if user has liked (using localStorage)
+  useEffect(() => {
+    async function fetchLikes() {
+      try {
+        const response = await fetch(`/api/blog/likes?slug=${encodeURIComponent(slug)}`)
+        if (response.ok) {
+          const data = await response.json()
+          setLikes(data.likes || 0)
+          
+          // Check if user has liked this post (stored in localStorage)
+          if (typeof window !== 'undefined') {
+            const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]')
+            setLiked(likedPosts.includes(slug))
+          }
+        }
+      } catch (err) {
+        console.error('Error fetching likes:', err)
+      }
+    }
+
+    fetchLikes()
+  }, [slug])
+
+  // Handle like/unlike
+  const handleLike = async () => {
+    if (isLiking) return
+    
+    setIsLiking(true)
+    const action = liked ? 'unlike' : 'like'
+    
+    try {
+      const response = await fetch('/api/blog/likes', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ slug, action }),
+      })
+      
+      if (response.ok) {
+        const data = await response.json()
+        setLikes(data.likes || 0)
+        setLiked(data.liked)
+        
+        // Store liked state in localStorage
+        if (typeof window !== 'undefined') {
+          const likedPosts = JSON.parse(localStorage.getItem('likedPosts') || '[]')
+          if (data.liked) {
+            if (!likedPosts.includes(slug)) {
+              likedPosts.push(slug)
+            }
+          } else {
+            const index = likedPosts.indexOf(slug)
+            if (index > -1) {
+              likedPosts.splice(index, 1)
+            }
+          }
+          localStorage.setItem('likedPosts', JSON.stringify(likedPosts))
+        }
+      } else {
+        toast({
+          title: "Failed to like post",
+          description: "Please try again later.",
+          variant: "destructive",
+        })
+      }
+    } catch (err) {
+      console.error('Error toggling like:', err)
+      toast({
+        title: "Failed to like post",
+        description: "Please try again later.",
+        variant: "destructive",
+      })
+    } finally {
+      setIsLiking(false)
+    }
+  }
 
   useEffect(() => {
     async function fetchPost() {
@@ -234,13 +314,15 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => {
-                    setLiked(!liked)
-                  }}
-                  className={`flex items-center gap-2 ${liked ? 'text-primary border-primary' : ''}`}
+                  onClick={handleLike}
+                  disabled={isLiking}
+                  className={`flex items-center gap-2 ${liked ? 'text-primary border-primary bg-primary/5' : ''}`}
                 >
                   <Star className={`h-4 w-4 ${liked ? 'fill-current' : ''}`} />
-                  Like
+                  {isLiking ? '...' : liked ? 'Liked' : 'Like'}
+                  {likes > 0 && (
+                    <span className="ml-1 text-xs">({likes.toLocaleString()})</span>
+                  )}
                 </Button>
                 <div className="flex items-center gap-3 flex-wrap">
                   <span className="text-sm text-gray-600 font-medium">Share to:</span>
