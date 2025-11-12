@@ -1,14 +1,14 @@
 {
-  "home": "首页",
-  "about": "关于",
-  "blog": "博客",
-  "projects": "项目",
-  "services": "服务",
-  "contact": "联系",
-  "language": "语言",
-  "read_more": "阅读更多",
-  "load_more": "加载更多",
-  "search": "搜索",
-  "news_insights": "新闻与洞察",
-  "book_call": "预约通话"
+  "home": "首頁",
+  "about": "關於",
+  "blog": "部落格",
+  "projects": "專案",
+  "services": "服務",
+  "contact": "聯絡",
+  "language": "語言",
+  "read_more": "閱讀更多",
+  "load_more": "載入更多",
+  "search": "搜尋",
+  "news_insights": "新聞與洞察",
+  "book_call": "預約通話"
 }
