@@ -11,6 +11,7 @@ import { BlogSidebar } from "@/components/blog-sidebar"
 import { BlogTags } from "@/components/blog-tags"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
+import { trackBlogPostView } from "@/lib/keyword-tracking"
 
 interface BlogPostContentProps {
   slug: string
@@ -105,6 +106,13 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
     // Only track view once per page load
     trackView()
   }, [slug])
+
+  // Track blog post view for keyword analysis
+  useEffect(() => {
+    if (post) {
+      trackBlogPostView(slug, post.title, post.category, post.tags)
+    }
+  }, [post, slug])
 
   // Fetch view count on mount
   useEffect(() => {
