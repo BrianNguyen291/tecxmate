@@ -1,7 +1,12 @@
+"use client"
+
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Video } from "lucide-react"
+import { useLanguage } from "@/components/language-provider"
 
 export function Footer() {
+  const { language } = useLanguage()
+  
   return (
     <footer className="bg-alt-black py-12 md:py-14 border-0">
       <div className="container px-4 md:px-6 max-w-6xl">
@@ -11,6 +16,9 @@ export function Footer() {
               <span className="text-2xl font-accent tracking-tighter text-white">
                 <span className="font-bold">tecx</span><span className="font-normal">mate</span>
               </span>
+              {language === 'zh' && (
+                <span className="text-lg font-normal text-white ml-2">凰龜科技</span>
+              )}
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
               Got an idea? Let's build it together!

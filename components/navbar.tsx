@@ -46,6 +46,9 @@ export function Navbar() {
           <span className="text-2xl font-accent tracking-tighter text-primary">
             <span className="font-bold">tecx</span><span className="font-normal">mate</span>
           </span>
+          {language === 'zh' && (
+            <span className="text-lg font-normal text-primary ml-2">凰龜科技</span>
+          )}
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link
