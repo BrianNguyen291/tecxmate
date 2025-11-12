@@ -260,8 +260,8 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
   }
 
   return (
-    <article>
-      <div className="container px-4 py-8 md:px-6 md:py-12">
+    <article className="overflow-x-hidden w-full">
+      <div className="container px-4 py-8 md:px-6 md:py-12 w-full max-w-full">
         <div className="grid gap-10 md:grid-cols-4">
           {/* Main Content - Left side */}
           <div className="md:col-span-3">
@@ -304,10 +304,12 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
             </header>
 
             {/* Main Content */}
-            <div 
-              className="wp-content prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:text-primary prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-img:rounded-lg prose-img:shadow-md prose-img:w-full" 
-              dangerouslySetInnerHTML={{ __html: post.content || "" }} 
-            />
+            <div className="overflow-x-hidden">
+              <div 
+                className="wp-content prose prose-lg max-w-none prose-headings:font-bold prose-headings:text-gray-900 prose-p:text-gray-700 prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-strong:text-gray-900 prose-code:text-primary prose-code:bg-gray-100 prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-gray-900 prose-pre:text-gray-100 prose-img:rounded-lg prose-img:shadow-md prose-img:w-full" 
+                dangerouslySetInnerHTML={{ __html: post.content || "" }} 
+              />
+            </div>
 
             {/* Tags */}
             {post.tags && post.tags.length > 0 && (

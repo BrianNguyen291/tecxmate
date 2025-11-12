@@ -209,8 +209,8 @@ export function BlogListing() {
   }
 
   return (
-    <section className="py-12 md:py-16">
-      <div className="container px-4 md:px-6">
+    <section className="py-12 md:py-16 overflow-x-hidden w-full">
+      <div className="container px-4 md:px-6 w-full max-w-full">
         <div className="grid gap-10 md:grid-cols-4">
           <div className="md:col-span-3">
             {displayPosts.length === 0 ? (

@@ -138,9 +138,9 @@ export default async function BlogPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbStructuredData) }}
       />
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white overflow-x-hidden w-full">
         <Navbar />
-        <main>
+        <main className="overflow-x-hidden w-full">
           <section className="bg-primary/5 py-16 md:py-24">
             <div className="container px-4 md:px-6">
               <div className="mx-auto max-w-2xl text-center">

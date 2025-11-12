@@ -201,7 +201,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
           dangerouslySetInnerHTML={{ __html: JSON.stringify(data) }}
         />
       ))}
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-white overflow-x-hidden w-full">
         <Navbar />
         <BlogPostContent slug={slug} />
         <Footer />

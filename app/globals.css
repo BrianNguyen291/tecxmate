@@ -104,6 +104,11 @@
     @apply border-border;
   }
   
+      html {
+        overflow-x: hidden;
+        width: 100%;
+      }
+  
       body {
         @apply bg-background text-foreground font-sans;
         /* Apple system fonts */
@@ -113,6 +118,9 @@
         letter-spacing: -0.01em;
         /* Prevent layout shift */
         font-display: swap;
+        overflow-x: hidden;
+        width: 100%;
+        max-width: 100vw;
       }
       
       /* Prevent layout shift for images */
@@ -120,6 +128,60 @@
         max-width: 100%;
         height: auto;
         display: block;
+      }
+      
+      /* Fix prose content overflow */
+      .prose,
+      .wp-content {
+        max-width: 100%;
+        overflow-x: hidden;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      /* Fix tables, code blocks, and pre elements */
+      .prose table,
+      .wp-content table {
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+        width: 100%;
+      }
+      
+      .prose pre,
+      .wp-content pre {
+        max-width: 100%;
+        overflow-x: auto;
+        display: block;
+      }
+      
+      .prose code,
+      .wp-content code {
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      /* Ensure iframes and videos don't overflow */
+      iframe,
+      video,
+      embed,
+      object {
+        max-width: 100%;
+        height: auto;
+      }
+      
+      /* Ensure main content areas don't overflow */
+      main {
+        max-width: 100%;
+        overflow-x: hidden;
+      }
+      
+      article {
+        max-width: 100%;
+      }
+      
+      section {
+        max-width: 100%;
       }
       
       /* Optimize font loading */
