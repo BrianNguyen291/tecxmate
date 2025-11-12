@@ -40,6 +40,15 @@ export function TeamSection() {
       description: 'Creative director with expertise in UI/UX design and brand identity development.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.linkedin.com/in/jane-liu/'
+    },
+    {
+      id: 'edgar',
+      name: 'Edgar Edffedi',
+      role: 'Head of Media',
+      photo: '/avatars/edgar_avatar.jpeg',
+      description: 'Media specialist focused on content strategy, digital marketing, and media production.',
+      twitter: 'https://www.tecxmate.com',
+      linkedin: 'https://www.tecxmate.com'
     }
   ]
 
