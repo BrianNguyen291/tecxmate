@@ -2,13 +2,22 @@
 
 import { useState, useCallback } from "react"
 import Link from "next/link"
-import { Menu, X } from "lucide-react"
+import { Menu, X, Globe } from "lucide-react"
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Button } from "@/components/ui/button"
 import { usePathname } from "next/navigation"
+import { useLanguage, type Language } from "@/components/language-provider"
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const pathname = usePathname()
+  const { language, setLanguage, t } = useLanguage()
+
+  const languageLabels: Record<Language, string> = {
+    en: "English",
+    vi: "Tiếng Việt",
+    zh: "中文",
+  }
 
   const isActive = useCallback((path: string) => {
     return pathname === path
@@ -21,6 +30,14 @@ export function Navbar() {
   const closeMenu = useCallback(() => {
     setIsMenuOpen(false)
   }, [])
+
+  const handleLanguageSelect = useCallback(
+    (lang: Language) => {
+      setLanguage(lang)
+      closeMenu()
+    },
+    [setLanguage, closeMenu],
+  )
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-[#F6F3F1]/30 backdrop-blur-lg">
@@ -35,31 +52,50 @@ export function Navbar() {
             href="/"
             className={`text-sm font-medium transition-colors ${isActive("/") ? "text-primary" : "hover:text-primary"}`}
           >
-            Home
+            {t("home")}
           </Link>
           <Link 
             href="/projects" 
             className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
           >
-            Projects
+            {t("projects")}
           </Link>
           <Link 
             href="/services" 
             className={`text-sm font-medium transition-colors ${isActive("/services") ? "text-primary" : "hover:text-primary"}`}
           >
-            Services
+            {t("services")}
           </Link>
           <Link
             href="/blog"
             className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
           >
-            News & Insights
+            {t("news_insights")}
           </Link>
         </nav>
         <div className="flex items-center gap-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="hidden md:flex items-center gap-2">
+                <Globe className="h-4 w-4" />
+                <span>{languageLabels[language]}</span>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {Object.entries(languageLabels).map(([code, label]) => (
+                <DropdownMenuItem
+                  key={code}
+                  onClick={() => handleLanguageSelect(code as Language)}
+                  className={code === language ? "bg-muted/50" : undefined}
+                >
+                  {label}
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
           <Button className="hidden md:flex" asChild>
             <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
-              Book a Call
+              {t("book_call")}
             </a>
           </Button>
           <Button variant="ghost" size="icon" className="md:hidden" onClick={toggleMenu}>
@@ -76,32 +112,53 @@ export function Navbar() {
               className={`text-sm font-medium transition-colors ${isActive("/") ? "text-primary" : "hover:text-primary"}`}
               onClick={closeMenu}
             >
-              Home
+              {t("home")}
             </Link>
             <Link
               href="/projects"
               className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
               onClick={closeMenu}
             >
-              Projects
+              {t("projects")}
             </Link>
             <Link
               href="/services"
               className={`text-sm font-medium transition-colors ${isActive("/services") ? "text-primary" : "hover:text-primary"}`}
               onClick={closeMenu}
             >
-              Services
+              {t("services")}
             </Link>
             <Link
               href="/blog"
               className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
               onClick={closeMenu}
             >
-              News & Insights
+              {t("news_insights")}
             </Link>
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" className="w-full flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Globe className="h-4 w-4" />
+                    <span>{languageLabels[language]}</span>
+                  </div>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="start" className="w-full">
+                {Object.entries(languageLabels).map(([code, label]) => (
+                  <DropdownMenuItem
+                    key={code}
+                    onClick={() => handleLanguageSelect(code as Language)}
+                    className={code === language ? "bg-muted/50" : undefined}
+                  >
+                    {label}
+                  </DropdownMenuItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
             <Button className="w-full" onClick={closeMenu} asChild>
               <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
-                Book a Call
+                {t("book_call")}
               </a>
             </Button>
           </nav>

@@ -6,6 +6,7 @@ import { BackToTop } from "@/components/back-to-top"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Analytics } from '@vercel/analytics/react'
+import { LanguageProvider } from "@/components/language-provider"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID
@@ -148,8 +149,10 @@ export default function RootLayout({
         <FirebaseAnalytics />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-          <BackToTop />
+          <LanguageProvider>
+            {children}
+            <BackToTop />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
