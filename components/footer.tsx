@@ -5,10 +5,10 @@ import { Facebook, Twitter, Instagram, Linkedin, Video } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
 
 export function Footer() {
-  const { language } = useLanguage()
+  const { language, t } = useLanguage()
   
   return (
-    <footer className="bg-alt-black py-12 md:py-14 border-0">
+    <footer id="footer" className="bg-alt-black py-12 md:py-14 border-0">
       <div className="container px-4 md:px-6 max-w-6xl">
         <div className="grid gap-6 md:grid-cols-3">
           <div className="space-y-3">
@@ -17,11 +17,11 @@ export function Footer() {
                 <span className="font-bold">tecx</span><span className="font-normal">mate</span>
               </span>
               {language === 'zh' && (
-                <span className="text-lg font-normal text-white ml-2">凰龜科技</span>
+                <span className="text-2xl font-accent tracking-tighter text-white">凰龜科技</span>
               )}
             </Link>
             <p className="text-sm text-gray-300 leading-relaxed">
-              Got an idea? Let's build it together!
+              {t("got_idea")}
             </p>
             <div className="flex flex-wrap items-center gap-3">
               <a
@@ -31,7 +31,7 @@ export function Footer() {
                 className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-200"
               >
                 <Video className="h-5 w-5" />
-                <span className="text-sm">Book a Discovery Call</span>
+                <span className="text-sm">{t("book_discovery_call")}</span>
               </a>
             <div className="flex gap-3">
               <a 
@@ -74,36 +74,36 @@ export function Footer() {
             </div>
           </div>
           <div className="space-y-3 md:ml-6">
-            <h3 className="text-lg font-semibold text-white">Team</h3>
+            <h3 className="text-lg font-semibold text-white">{t("team")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors duration-200">
-                  About
+                  {t("about")}
                 </Link>
               </li>
               <li>
                 <Link href="/blog" className="hover:text-white transition-colors duration-200">
-                  News & Insights
+                  {t("news_insights")}
                 </Link>
               </li>
               <li>
                 <Link href="/privacy-policy" className="hover:text-white transition-colors duration-200">
-                  Privacy Policy
+                  {t("privacy_policy")}
                 </Link>
               </li>
               <li>
                 <Link href="/terms-of-service" className="hover:text-white transition-colors duration-200">
-                  Terms of Services
+                  {t("terms_of_service")}
                 </Link>
               </li>
             </ul>
           </div>
           <div className="space-y-3">
-            <h3 className="text-lg font-semibold text-white">Contact</h3>
+            <h3 className="text-lg font-semibold text-white">{t("contact")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <a href="mailto:hello@tecxmate.com" className="hover:text-white transition-colors duration-200">
-                  Email: hello@tecxmate.com
+                  {t("email")}: hello@tecxmate.com
                 </a>
               </li>
               <li>
@@ -113,14 +113,14 @@ export function Footer() {
                   rel="noopener noreferrer"
                   className="hover:text-white transition-colors duration-200"
                 >
-                  Book a Discovery Call
+                  {t("book_discovery_call")}
                 </a>
               </li>
             </ul>
           </div>
         </div>
         <div className="mt-10 pt-6 text-center text-sm copyright-text">
-          <p>© {new Date().getFullYear()} tecxmate. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} tecxmate. {t("all_rights_reserved")}</p>
         </div>
       </div>
     </footer>

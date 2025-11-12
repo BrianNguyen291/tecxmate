@@ -26,7 +26,7 @@ export function TeamSection() {
     {
       id: 'ellis',
       name: 'Ellis Wu',
-      role: 'Chief Business Developer',
+      role: 'Business Developer',
       photo: '/avatars/ellis_avatar.jpeg',
       description: 'Business development specialist focused on strategic partnerships and market expansion.',
       twitter: 'https://www.tecxmate.com',
@@ -35,7 +35,7 @@ export function TeamSection() {
     {
       id: 'jane',
       name: 'Jane Liu',
-      role: 'Chief Designer',
+      role: 'Lead Designer',
       photo: '/avatars/jane_avatar.jpeg',
       description: 'Creative director with expertise in UI/UX design and brand identity development.',
       twitter: 'https://www.tecxmate.com',

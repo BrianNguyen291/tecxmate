@@ -47,7 +47,7 @@ export function Navbar() {
             <span className="font-bold">tecx</span><span className="font-normal">mate</span>
           </span>
           {language === 'zh' && (
-            <span className="text-lg font-normal text-primary ml-2">凰龜科技</span>
+            <span className="text-2xl font-accent tracking-tighter text-primary">凰龜科技</span>
           )}
         </Link>
         <nav className="hidden md:flex gap-6">
@@ -74,6 +74,19 @@ export function Navbar() {
             className={`text-sm font-medium transition-colors ${isActive("/blog") ? "text-primary" : "hover:text-primary"}`}
           >
             {t("news_insights")}
+          </Link>
+          <Link
+            href="#footer"
+            className={`text-sm font-medium transition-colors hover:text-primary`}
+            onClick={(e) => {
+              e.preventDefault()
+              const footer = document.getElementById('footer')
+              if (footer) {
+                footer.scrollIntoView({ behavior: 'smooth' })
+              }
+            }}
+          >
+            {t("contact")}
           </Link>
         </nav>
         <div className="flex items-center gap-4">
@@ -137,6 +150,20 @@ export function Navbar() {
               onClick={closeMenu}
             >
               {t("news_insights")}
+            </Link>
+            <Link
+              href="#footer"
+              className={`text-sm font-medium transition-colors hover:text-primary`}
+              onClick={(e) => {
+                e.preventDefault()
+                closeMenu()
+                const footer = document.getElementById('footer')
+                if (footer) {
+                  footer.scrollIntoView({ behavior: 'smooth' })
+                }
+              }}
+            >
+              {t("contact")}
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
