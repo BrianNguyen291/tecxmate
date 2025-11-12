@@ -5,6 +5,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { BackToTop } from "@/components/back-to-top"
 import { GoogleAnalytics } from "@/components/google-analytics"
 import { Analytics } from '@vercel/analytics/react'
+import { LanguageProvider } from "@/components/language-provider"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
@@ -123,8 +124,10 @@ export default function RootLayout({
         <GoogleAnalytics />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          {children}
-          <BackToTop />
+          <LanguageProvider>
+            {children}
+            <BackToTop />
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>
