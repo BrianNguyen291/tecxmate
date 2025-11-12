@@ -89,6 +89,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       const rawPosts = await rawPostsRes.json()
       const postDatesMap = new Map<string, string>(rawPosts.map((p: any) => [p.slug, p.modified]))
       
+      // Create URLs for blog posts
       postUrls = posts.map((p) => {
         const modifiedDate = postDatesMap.get(p.slug)
         return {

@@ -3,6 +3,7 @@ import { Footer } from "@/components/footer"
 import { BlogPostContent } from "@/components/blog-post-content"
 import { wpGetPostBySlug } from "@/lib/wordpress"
 import { WORDPRESS_API_URL } from "@/lib/wp-config"
+import { generateCountryKeywords } from "@/lib/keywords"
 import type { Metadata } from "next"
 import Script from "next/script"
 import { notFound } from "next/navigation"
@@ -76,15 +77,27 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       "articleSection": post.category,
       "inLanguage": "en",
       "wordCount": post.content ? post.content.replace(/<[^>]*>/g, "").split(/\s+/).length : 0,
-      "keywords": post.tags && post.tags.length > 0 
-        ? `${post.category}, ${post.tags.join(", ")}, technology, business, consulting`
-        : `${post.category}, technology, business, consulting`,
+      "keywords": generateCountryKeywords([
+        post.category,
+        ...(post.tags || []),
+        'technology',
+        'business',
+        'consulting',
+      ]),
       "about": post.tags && post.tags.length > 0 
         ? post.tags.map((tag: string) => ({
             "@type": "Thing",
             "name": tag
           }))
-        : undefined
+        : undefined,
+      "audience": {
+        "@type": "Audience",
+        "audienceType": "Business",
+        "geographicArea": {
+          "@type": "Country",
+          "name": ["Taiwan", "Vietnam", "China"]
+        }
+      }
     },
     {
       "@context": "https://schema.org",
@@ -132,9 +145,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       "datePublished": rawPost.date,
       "dateModified": rawPost.modified || rawPost.date,
       "url": `${baseUrl}/blog/${slug}`,
-      "keywords": post.tags && post.tags.length > 0 
-        ? `${post.category}, ${post.tags.join(", ")}, technology, business, consulting`
-        : `${post.category}, technology, business, consulting`,
+      "keywords": generateCountryKeywords([
+        post.category,
+        ...(post.tags || []),
+        'technology',
+        'business',
+        'consulting',
+      ]),
       "articleSection": post.category,
       "about": post.tags && post.tags.length > 0 
         ? post.tags.map((tag: string) => ({
@@ -142,6 +159,35 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             "name": tag
           }))
         : undefined
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Tecxmate",
+      "url": baseUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${baseUrl}/tecxmate-logo-cropped.png`
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "TW",
+        "addressLocality": "Taipei",
+      },
+      "areaServed": [
+        {
+          "@type": "Country",
+          "name": "Taiwan"
+        },
+        {
+          "@type": "Country",
+          "name": "Vietnam"
+        },
+        {
+          "@type": "Country",
+          "name": "China"
+        }
+      ]
     }
   ] : null
 
@@ -196,26 +242,27 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     // ignore
   }
 
+  // Generate country-specific keywords
+  const titleWords = post.title.toLowerCase().split(/\s+/).filter(w => w.length > 3).slice(0, 5)
+  const tags = post.tags && post.tags.length > 0 ? post.tags : []
+  const baseKeywords = [
+    post.category,
+    ...tags,
+    'technology',
+    'business',
+    'consulting',
+    ...titleWords,
+    'tecxmate',
+    'SME solutions',
+    'startup consulting',
+    'web development',
+    'digital transformation',
+  ]
+  
   return {
     title: `${post.title} | Tecxmate Blog`,
     description,
-    keywords: (() => {
-      const titleWords = post.title.toLowerCase().split(/\s+/).filter(w => w.length > 3).slice(0, 5)
-      const tags = post.tags && post.tags.length > 0 ? post.tags : []
-      return [
-        post.category,
-        ...tags,
-        'technology',
-        'business',
-        'consulting',
-        ...titleWords,
-        'tecxmate',
-        'SME solutions',
-        'startup consulting',
-        'web development',
-        'digital transformation'
-      ].join(', ')
-    })(),
+    keywords: generateCountryKeywords(baseKeywords),
     creator: 'Tecxmate',
     publisher: 'Tecxmate',
     authors: [{ name: 'Tecxmate', url: baseUrl }],
@@ -230,6 +277,20 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     metadataBase: new URL(baseUrl),
     alternates: {
       canonical: canonicalUrl,
+      languages: {
+        'en': canonicalUrl,
+        'en-TW': canonicalUrl,
+        'en-VN': canonicalUrl,
+        'en-CN': canonicalUrl,
+        // Note: Language routes (/vi/blog/, /zh/blog/) don't exist yet
+        // When implemented, update these URLs to point to actual language routes
+        'vi': canonicalUrl, // Will be `${baseUrl}/vi/blog/${slug}` when route exists
+        'vi-VN': canonicalUrl,
+        'zh': canonicalUrl, // Will be `${baseUrl}/zh/blog/${slug}` when route exists
+        'zh-TW': canonicalUrl,
+        'zh-CN': canonicalUrl,
+        'x-default': canonicalUrl,
+      },
       types: {
         'application/rss+xml': `${baseUrl}/feed.xml`,
       },
@@ -240,6 +301,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       url: canonicalUrl,
       siteName: 'Tecxmate',
       locale: 'en_US',
+      alternateLocale: ['en_TW', 'en_VN', 'en_CN', 'vi_VN', 'zh_TW', 'zh_CN'],
       type: 'article',
       publishedTime: publishedDate,
       modifiedTime: modifiedDate || publishedDate,

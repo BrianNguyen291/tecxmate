@@ -5,13 +5,14 @@ import { Brain, Zap, Bot, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 import Script from "next/script"
+import { generateCountryKeywords } from "@/lib/keywords"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
 export const metadata: Metadata = {
   title: "Our Services - AI Development, Business Automation & Tech Consulting | Tecxmate",
   description: "Discover Tecxmate's comprehensive technology services: AI application development, business automation, AI integration consulting, and digital transformation. Expert solutions for SMEs and startups.",
-  keywords: [
+  keywords: generateCountryKeywords([
     "AI development services",
     "business automation",
     "AI integration consulting",
@@ -22,9 +23,22 @@ export const metadata: Metadata = {
     "tech consulting services",
     "SME technology solutions",
     "startup tech consulting"
-  ].join(", "),
+  ]),
   alternates: {
     canonical: `${baseUrl}/services`,
+      languages: {
+        'en': `${baseUrl}/services`,
+        'en-TW': `${baseUrl}/services`,
+        'en-VN': `${baseUrl}/services`,
+        'en-CN': `${baseUrl}/services`,
+        // Note: Language routes don't exist yet - pointing to English for now
+        'vi': `${baseUrl}/services`, // Will be `${baseUrl}/vi/services` when route exists
+        'vi-VN': `${baseUrl}/services`,
+        'zh': `${baseUrl}/services`, // Will be `${baseUrl}/zh/services` when route exists
+        'zh-TW': `${baseUrl}/services`,
+        'zh-CN': `${baseUrl}/services`,
+        'x-default': `${baseUrl}/services`,
+      },
   },
   openGraph: {
     title: "Our Services - AI Development, Business Automation & Tech Consulting | Tecxmate",
@@ -32,6 +46,7 @@ export const metadata: Metadata = {
     url: `${baseUrl}/services`,
     siteName: "Tecxmate",
     locale: "en_US",
+    alternateLocale: ["en_TW", "en_VN", "en_CN", "vi_VN", "zh_TW", "zh_CN"],
     type: "website",
     images: [
       {

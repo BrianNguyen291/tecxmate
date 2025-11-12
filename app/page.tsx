@@ -126,10 +126,12 @@ export default function Home() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
+  const { generateCountryKeywords } = await import("@/lib/keywords")
+  
   return {
     title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups | AI Development & Web Solutions",
     description: "Transform your business with Tecxmate's cutting-edge technology solutions. Expert AI integration, web development, business automation, and digital transformation services. Fast delivery, innovative solutions for SMEs and founders. Book your free consultation today.",
-    keywords: [
+    keywords: generateCountryKeywords([
       "technology consultancy",
       "AI development",
       "business automation",
@@ -145,9 +147,22 @@ export async function generateMetadata(): Promise<Metadata> {
       "mobile app development",
       "enterprise solutions",
       "Taiwan tech consultancy"
-    ].join(", "),
+    ]),
     alternates: {
       canonical: baseUrl,
+      languages: {
+        'en': baseUrl,
+        'en-TW': baseUrl,
+        'en-VN': baseUrl,
+        'en-CN': baseUrl,
+        // Note: Language routes don't exist yet - pointing to English for now
+        'vi': baseUrl, // Will be `${baseUrl}/vi` when route exists
+        'vi-VN': baseUrl,
+        'zh': baseUrl, // Will be `${baseUrl}/zh` when route exists
+        'zh-TW': baseUrl,
+        'zh-CN': baseUrl,
+        'x-default': baseUrl,
+      },
     },
     openGraph: {
       title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups",
@@ -155,6 +170,7 @@ export async function generateMetadata(): Promise<Metadata> {
       url: baseUrl,
       siteName: "Tecxmate",
       locale: "en_US",
+      alternateLocale: ["en_TW", "en_VN", "en_CN", "vi_VN", "zh_TW", "zh_CN"],
       type: "website",
       images: [
         {

@@ -3,13 +3,14 @@ import { Footer } from "@/components/footer"
 import { DemoProductsSection } from "@/components/demo-products-section"
 import type { Metadata } from "next"
 import Script from "next/script"
+import { generateCountryKeywords } from "@/lib/keywords"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
 export const metadata: Metadata = {
   title: "Our Projects - Portfolio & Case Studies | Tecxmate",
   description: "Explore Tecxmate's portfolio of successful projects including CryptED, HealthMaxers, Chi Chi Vietnamese, IPRPSHIELD, and more. See how we've helped businesses transform with technology.",
-  keywords: [
+  keywords: generateCountryKeywords([
     "tecxmate portfolio",
     "technology projects",
     "case studies",
@@ -18,9 +19,22 @@ export const metadata: Metadata = {
     "business automation projects",
     "success stories",
     "client projects"
-  ].join(", "),
+  ]),
   alternates: {
     canonical: `${baseUrl}/projects`,
+      languages: {
+        'en': `${baseUrl}/projects`,
+        'en-TW': `${baseUrl}/projects`,
+        'en-VN': `${baseUrl}/projects`,
+        'en-CN': `${baseUrl}/projects`,
+        // Note: Language routes don't exist yet - pointing to English for now
+        'vi': `${baseUrl}/projects`, // Will be `${baseUrl}/vi/projects` when route exists
+        'vi-VN': `${baseUrl}/projects`,
+        'zh': `${baseUrl}/projects`, // Will be `${baseUrl}/zh/projects` when route exists
+        'zh-TW': `${baseUrl}/projects`,
+        'zh-CN': `${baseUrl}/projects`,
+        'x-default': `${baseUrl}/projects`,
+      },
   },
   openGraph: {
     title: "Our Projects - Portfolio & Case Studies | Tecxmate",
@@ -28,6 +42,7 @@ export const metadata: Metadata = {
     url: `${baseUrl}/projects`,
     siteName: "Tecxmate",
     locale: "en_US",
+    alternateLocale: ["en_TW", "en_VN", "en_CN", "vi_VN", "zh_TW", "zh_CN"],
     type: "website",
     images: [
       {

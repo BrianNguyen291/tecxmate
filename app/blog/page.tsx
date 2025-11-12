@@ -5,15 +5,39 @@ import type { Metadata } from "next"
 import Script from "next/script"
 import { wpGetAllPosts } from "@/lib/wordpress"
 import { Suspense } from "react"
+import { generateCountryKeywords } from "@/lib/keywords"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 
 export const metadata: Metadata = {
   title: "Blog - Technology Insights & Expert Articles | Tecxmate",
   description: "Insights, tutorials, and updates from our team of technology consultancy experts. Learn about web development, business technology, digital transformation, and SME solutions.",
-  keywords: "technology blog, web development, business technology, digital transformation, startup insights, SME solutions, tech consultancy, software development, business strategy",
+  keywords: generateCountryKeywords([
+    "technology blog",
+    "web development",
+    "business technology",
+    "digital transformation",
+    "startup insights",
+    "SME solutions",
+    "tech consultancy",
+    "software development",
+    "business strategy",
+  ]),
   alternates: {
     canonical: `${baseUrl}/blog`,
+    languages: {
+      'en': `${baseUrl}/blog`,
+      'en-TW': `${baseUrl}/blog`,
+      'en-VN': `${baseUrl}/blog`,
+      'en-CN': `${baseUrl}/blog`,
+      // Note: Language routes don't exist yet - pointing to English for now
+      'vi': `${baseUrl}/blog`, // Will be `${baseUrl}/vi/blog` when route exists
+      'vi-VN': `${baseUrl}/blog`,
+      'zh': `${baseUrl}/blog`, // Will be `${baseUrl}/zh/blog` when route exists
+      'zh-TW': `${baseUrl}/blog`,
+      'zh-CN': `${baseUrl}/blog`,
+      'x-default': `${baseUrl}/blog`,
+    },
     types: {
       'application/rss+xml': `${baseUrl}/feed.xml`,
     },
@@ -23,6 +47,8 @@ export const metadata: Metadata = {
     description: "Insights, tutorials, and updates from our team of technology consultancy experts. Learn about web development, business technology, and digital transformation.",
     url: `${baseUrl}/blog`,
     siteName: "Tecxmate",
+    locale: "en_US",
+    alternateLocale: ["en_TW", "en_VN", "en_CN", "vi_VN", "zh_TW", "zh_CN"],
     type: "website",
     images: [
       {

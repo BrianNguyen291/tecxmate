@@ -7,6 +7,7 @@ import { GoogleAnalytics } from "@/components/google-analytics"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Analytics } from '@vercel/analytics/react'
 import { LanguageProvider } from "@/components/language-provider"
+import { generateCountryKeywords } from "@/lib/keywords"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
 const gtmId = process.env.NEXT_PUBLIC_GTM_ID
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
   },
   description: "Transform your business with Tecxmate's cutting-edge technology solutions. Expert AI integration, web development, business automation, and digital transformation services. Fast delivery, innovative solutions for SMEs and founders. Book your free consultation today.",
   generator: 'Next.js',
-  keywords: [
+  keywords: generateCountryKeywords([
     "technology consultancy",
     "AI development",
     "business automation",
@@ -30,11 +31,10 @@ export const metadata: Metadata = {
     "AI integration",
     "tech consulting",
     "business technology",
-    "Taiwan tech consultancy",
     "blockchain development",
     "mobile app development",
     "enterprise solutions"
-  ].join(", "),
+  ]),
   authors: [{ name: 'Tecxmate', url: baseUrl }],
   creator: 'Tecxmate',
   publisher: 'Tecxmate',
@@ -46,6 +46,19 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: baseUrl,
+    languages: {
+      'en': baseUrl,
+      'en-TW': baseUrl,
+      'en-VN': baseUrl,
+      'en-CN': baseUrl,
+      // Note: Language routes don't exist yet - pointing to English for now
+      'vi': baseUrl, // Will be `${baseUrl}/vi` when route exists
+      'vi-VN': baseUrl,
+      'zh': baseUrl, // Will be `${baseUrl}/zh` when route exists
+      'zh-TW': baseUrl,
+      'zh-CN': baseUrl,
+      'x-default': baseUrl,
+    },
   },
   openGraph: {
     title: "Tecxmate - Premier Technology Consultancy for SMEs & Startups",
@@ -53,6 +66,7 @@ export const metadata: Metadata = {
     url: baseUrl,
     siteName: "Tecxmate",
     locale: "en_US",
+    alternateLocale: ["en_TW", "en_VN", "en_CN", "vi_VN", "zh_TW", "zh_CN"],
     type: "website",
     images: [
       {
@@ -94,10 +108,12 @@ export const metadata: Metadata = {
     telephone: false,
   },
   other: {
-    'theme-color': '#8c52ff', // Purple
+    'theme-color': '#8c52ff',
     'color-scheme': 'light',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'default',
+    // Note: Geo tags are in <head> section, not in metadata.other
+    // Next.js metadata.other doesn't support colons in keys like 'geo.region:VN'
   },
 }
 
@@ -112,8 +128,12 @@ export default function RootLayout({
         <meta name="language" content="English" />
         <meta name="geo.region" content="TW" />
         <meta name="geo.placename" content="Taipei" />
+        <meta name="geo.region:VN" content="VN" />
+        <meta name="geo.region:CN" content="CN" />
+        <meta name="geo.country" content="TW" />
         <meta name="rating" content="General" />
         <meta name="referrer" content="origin-when-cross-origin" />
+        {/* Note: Hreflang tags are automatically generated from metadata.alternates.languages */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
