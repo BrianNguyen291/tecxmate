@@ -4,9 +4,11 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { BackToTop } from "@/components/back-to-top"
 import { GoogleAnalytics } from "@/components/google-analytics"
+import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Analytics } from '@vercel/analytics/react'
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
+const gtmId = process.env.NEXT_PUBLIC_GTM_ID
 
 export const metadata: Metadata = {
   title: {
@@ -115,12 +117,35 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
+        <link rel="dns-prefetch" href="https://www.googleapis.com" />
+        <link rel="dns-prefetch" href="https://www.gstatic.com" />
         <link rel="preload" as="image" href="/tecxmate-logo-cropped.png" />
         <link rel="alternate" type="application/rss+xml" title="Tecxmate Blog RSS Feed" href={`${baseUrl}/feed.xml`} />
         <link rel="manifest" href="/manifest.json" />
+        {gtmId ? (
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `
+                (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                })(window,document,'script','dataLayer','${gtmId}');
+              `.trim(),
+            }}
+          />
+        ) : null}
       </head>
       <body>
+        {gtmId ? (
+          <noscript
+            dangerouslySetInnerHTML={{
+              __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=${gtmId}" height="0" width="0" style="display:none;visibility:hidden"></iframe>`.trim(),
+            }}
+          />
+        ) : null}
         <GoogleAnalytics />
+        <FirebaseAnalytics />
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           {children}
