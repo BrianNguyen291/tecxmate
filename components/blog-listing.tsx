@@ -9,6 +9,7 @@ import { Calendar, Clock, ArrowRight, Search, X, Eye, Star } from "lucide-react"
 import Link from "next/link"
 import { Input } from "@/components/ui/input"
 import type { WPBlogPost as BlogPost } from "@/lib/wordpress"
+import { useLanguage } from "@/components/language-provider"
 
 export function BlogListing() {
   const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
@@ -21,11 +22,14 @@ export function BlogListing() {
   const selectedCategory = searchParams.get("category")
   const selectedTag = searchParams.get("tag")
   const searchParam = searchParams.get("search")
+  const { language } = useLanguage()
 
   useEffect(() => {
     async function fetchPosts() {
+      setLoading(true)
+      setError(null)
       try {
-        const response = await fetch("/api/blog/posts")
+        const response = await fetch(`/api/blog/posts?lang=${encodeURIComponent(language)}`)
 
         if (!response.ok) {
           throw new Error(`Failed to fetch posts: ${response.status}`)
@@ -64,7 +68,7 @@ export function BlogListing() {
     }
 
     fetchPosts()
-  }, [])
+  }, [language])
 
   useEffect(() => {
     if (searchParam) {
