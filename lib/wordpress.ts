@@ -1,3 +1,5 @@
+import { useLanguage } from "@/components/language-provider"
+
 export type WPBlogPost = {
   id: number
   slug: string
@@ -70,9 +72,50 @@ function wpTags(post: any): string[] {
   return tags.map((tag: any) => tag.name || "").filter((name: string) => name.length > 0)
 }
 
-export async function wpGetAllPosts(): Promise<WPBlogPost[]> {
+const languageToTagSlug: Record<string, string> = {
+  en: "en",
+  vi: "vn",
+  zh: "zh",
+}
+
+export async function wpGetAllPosts(language: string = "en"): Promise<WPBlogPost[]> {
   try {
-    const url = `${WORDPRESS_API_URL}/posts?per_page=20&_embed=1`
+    const normalizedLanguage = language?.toLowerCase?.() || "en"
+    const tagSlug = languageToTagSlug[normalizedLanguage] || languageToTagSlug.en
+    let tagId: number | undefined
+
+    try {
+      const tagRes = await fetch(`${WORDPRESS_API_URL}/tags?slug=${encodeURIComponent(tagSlug)}`)
+
+      if (tagRes.ok) {
+        const tagData = await tagRes.json()
+        tagId = tagData?.[0]?.id
+
+        if (!tagId) {
+          console.warn("No WordPress tag found for language slug:", { language: normalizedLanguage, tagSlug })
+        }
+      } else {
+        console.warn("Failed to fetch WordPress tag for language:", {
+          language: normalizedLanguage,
+          tagSlug,
+          status: tagRes.status,
+          statusText: tagRes.statusText,
+        })
+      }
+    } catch (tagError) {
+      console.error("Error fetching WordPress tag:", { language: normalizedLanguage, tagSlug, error: tagError })
+    }
+
+    const params = new URLSearchParams({
+      per_page: "20",
+      _embed: "1",
+    })
+
+    if (tagId) {
+      params.append("tags", String(tagId))
+    }
+
+    const url = `${WORDPRESS_API_URL}/posts?${params.toString()}`
     console.log('🔍 Fetching WordPress posts from:', url)
     
     const res = await fetch(url, { 

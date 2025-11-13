@@ -35,10 +35,12 @@ const fallbackPosts = [
   },
 ]
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     console.log('📡 API route /api/blog/posts called')
-    const posts = await wpGetAllPosts()
+    const url = new URL(request.url)
+    const languageParam = url.searchParams.get("lang")?.toLowerCase() || "en"
+    const posts = await wpGetAllPosts(languageParam)
     console.log('📡 Posts fetched:', posts.length)
     
     if (posts && posts.length > 0) {
