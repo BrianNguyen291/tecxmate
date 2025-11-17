@@ -29,6 +29,7 @@ export function BlogListing() {
       setLoading(true)
       setError(null)
       try {
+        // const response = await fetch(`/api/blog/posts?category=${encodeURIComponent(language)}`)
         const response = await fetch(`/api/blog/posts?category=${encodeURIComponent(language)}`)
 
 
