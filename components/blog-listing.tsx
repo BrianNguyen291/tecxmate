@@ -29,7 +29,8 @@ export function BlogListing() {
       setLoading(true)
       setError(null)
       try {
-        const response = await fetch(`/api/blog/posts?lang=${encodeURIComponent(language)}`)
+        const response = await fetch(`/api/blog/posts?category=${encodeURIComponent(language)}`)
+
 
         if (!response.ok) {
           throw new Error(`Failed to fetch posts: ${response.status}`)
