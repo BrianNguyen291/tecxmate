@@ -30,7 +30,7 @@ export function BlogListing() {
       setError(null)
       try {
         // const response = await fetch(`/api/blog/posts?category=${encodeURIComponent(language)}`)
-        const response = await fetch(`/api/blog/posts?category=${encodeURIComponent(language)}`)
+        const response = await fetch(`/api/blog/posts?lang=${encodeURIComponent(language)}`)
 
 
         if (!response.ok) {

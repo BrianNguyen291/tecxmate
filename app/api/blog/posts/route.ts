@@ -39,7 +39,7 @@ export async function GET(request: Request) {
   try {
     console.log('📡 API route /api/blog/posts called')
     const url = new URL(request.url)
-    const categoryParam = url.searchParams.get("category")?.toLowerCase() || "all"
+    const categoryParam = url.searchParams.get("lang")?.toLowerCase() || "en"
     const posts = await wpGetAllPosts(categoryParam)
     console.log('📡 Posts fetched:', posts.length)
     
