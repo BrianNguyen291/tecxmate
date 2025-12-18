@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation"
 import { RelatedPosts } from "@/components/related-posts"
 import { BlogSidebar } from "@/components/blog-sidebar"
 import { BlogTags } from "@/components/blog-tags"
+import { BlogCitations } from "@/components/blog-citations"
 import { Button } from "@/components/ui/button"
 import { useToast } from "@/hooks/use-toast"
 import { trackBlogPostView } from "@/lib/keyword-tracking"
@@ -317,6 +318,9 @@ export function BlogPostContent({ slug }: BlogPostContentProps) {
                 <BlogTags tags={post.tags} />
               </div>
             )}
+
+            {/* Citations Section */}
+            <BlogCitations citations={post.citations} />
 
             {/* Like and Share Buttons */}
             <div className="mt-8 pt-8 border-t border-gray-200">

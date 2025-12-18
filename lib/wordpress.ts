@@ -11,6 +11,7 @@ export type WPBlogPost = {
   coverImage: string
   content?: string
   tags?: string[]
+  citations?: string
 }
 
 export type WPComment = {
@@ -191,8 +192,18 @@ export async function wpGetAllPosts(language: string = "en"): Promise<WPBlogPost
 export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> {
   try {
     // Try both encoded and decoded versions of the slug
+    // Include meta fields in the request to get custom fields
     const encodedSlug = encodeURIComponent(slug)
+    
+    // For WordPress.com, custom fields are accessible via meta field
+    // For self-hosted WordPress, we may need to explicitly request meta
+    // Note: WordPress REST API doesn't expose all meta by default for security
+    // Custom fields need to be registered to be accessible via REST API
     let url = `${WORDPRESS_API_URL}/posts?slug=${encodedSlug}&_embed=1`
+    
+    // If using ACF, we need to include acf fields in the request
+    // Note: This requires ACF to REST API plugin or ACF's REST API integration
+    // For custom fields, WordPress REST API includes meta by default with proper permissions
     
     console.log('🔍 Fetching post by slug:', { original: slug, encoded: encodedSlug })
     
@@ -228,6 +239,42 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
     
     console.log('✅ Post found:', { id: p.id, slug: decodedSlug, title: p.title?.rendered })
     
+    // Extract citations from custom fields or ACF
+    // Supports both WordPress native meta fields and ACF fields
+    // WordPress REST API stores custom fields in the 'meta' object
+    // Note: WordPress.com uses 'meta' field, self-hosted may use 'meta' or 'acf'
+    let citations: string | undefined = undefined
+    
+    // Try ACF field first (if ACF is installed with ACF to REST API plugin)
+    if (p.acf?.citations) {
+      citations = typeof p.acf.citations === 'string' ? p.acf.citations : p.acf.citations
+      console.log('✅ Found citations in ACF field')
+    } else if (p.acf?.citations_html) {
+      citations = p.acf.citations_html
+      console.log('✅ Found citations in ACF HTML field')
+    }
+    // Try WordPress native meta fields (custom fields)
+    // WordPress stores custom fields with the key as-is, but some may be prefixed with underscore
+    else if (p.meta?._citations) {
+      citations = p.meta._citations
+      console.log('✅ Found citations in meta._citations')
+    } else if (p.meta?.citations) {
+      citations = p.meta.citations
+      console.log('✅ Found citations in meta.citations')
+    }
+    // Try custom meta in _embedded format (if meta is embedded)
+    else if (p._embedded?.["meta"]?.[0]?.citations) {
+      citations = p._embedded.meta[0].citations
+      console.log('✅ Found citations in embedded meta')
+    }
+    // Debug: Log available meta keys to help troubleshoot
+    else if (p.meta) {
+      console.log('ℹ️ Available meta keys:', Object.keys(p.meta))
+      console.log('ℹ️ Meta object:', p.meta)
+    } else {
+      console.log('ℹ️ No meta object found in post')
+    }
+    
     return {
       id: p.id,
       slug: decodedSlug,
@@ -244,7 +291,8 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
       category: wpPrimaryCategory(p),
       coverImage: wpFeaturedImage(p),
       content: contentHtml,
-        tags: wpTags(p),
+      tags: wpTags(p),
+      citations: citations,
     }
   } catch (error) {
     console.error('❌ Error fetching post by slug:', error)
