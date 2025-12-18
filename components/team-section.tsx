@@ -49,6 +49,15 @@ export function TeamSection() {
       description: 'Media specialist focused on content strategy, digital marketing, and media production.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.tecxmate.com'
+    },
+    {
+      id: 'dipuislam',
+      name: 'N N Dipu Islam',
+      role: 'Senior Engineer',
+      photo: '/avatars/dipuislam_avatar.png',
+      description: 'Dedicated Mobile App Developer with expertise in Flutter, Java, and moderate problem-solving skills.',
+      twitter: 'https://github.com/NNDipuIslam',
+      linkedin: 'https://www.linkedin.com/in/nndipuislam19021'
     }
   ]
 
