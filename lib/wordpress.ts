@@ -247,7 +247,7 @@ export async function wpGetPostBySlug(slug: string): Promise<WPBlogPost | null> 
     
     // Try ACF field first (if ACF is installed with ACF to REST API plugin)
     if (p.acf?.citations) {
-      citations = typeof p.acf.citations === 'string' ? p.acf.citations : p.acf.citations
+      citations = typeof p.acf.citations === 'string' ? p.acf.citations : String(p.acf.citations)
       console.log('✅ Found citations in ACF field')
     } else if (p.acf?.citations_html) {
       citations = p.acf.citations_html
