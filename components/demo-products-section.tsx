@@ -212,7 +212,7 @@ export function DemoProductsSection() {
     <section id="portfolio" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28 border-t border-b border-[rgba(55,50,47,0.12)]">
       <div className="container px-4 md:px-6 max-w-6xl">
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
+          <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">Our Projects</h2>
         </div>
 
         <div className="relative">

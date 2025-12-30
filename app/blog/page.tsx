@@ -144,7 +144,7 @@ export default async function BlogPage() {
           <section className="bg-primary/5 py-16 md:py-24">
             <div className="container px-4 md:px-6">
               <div className="mx-auto max-w-2xl text-center">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">News & Insights</h1>
+                <h1 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">News & Insights</h1>
                 <p className="mt-4 text-gray-500 md:text-xl/relaxed">
                   Stay updated with the latest trends and insights in web development and design
                 </p>

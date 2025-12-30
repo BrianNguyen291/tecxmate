@@ -67,7 +67,7 @@ export function CampaignsSection() {
       <div className="container px-4 md:px-6 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-4 text-gray-900">
+          <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">
             News & Insights
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">

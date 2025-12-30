@@ -35,7 +35,7 @@ export function ServicesSection() {
     <section id="services" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28">
       <div className="container px-4 md:px-6 max-w-6xl">
             <div className="text-center mb-16">
-              <h2 className="text-3xl font-accent font-normal md:text-4xl lg:text-5xl mb-6">Our Services</h2>
+              <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">Our Services</h2>
             </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
