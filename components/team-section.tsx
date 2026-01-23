@@ -111,21 +111,23 @@ export function TeamSection() {
                           >
                             <Linkedin className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
                           </a>
-                          <a 
-                            href={member.twitter} 
-                            aria-label={member.id === 'brian' ? 'Company' : member.id === 'nikolas' ? 'Academic' : 'Author'} 
-                            className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                          >
-                            {member.id === 'brian' ? (
-                              <Building2 className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                            ) : member.id === 'nikolas' ? (
-                              <GraduationCap className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                            ) : (
-                              <PenTool className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
-                            )}
-                          </a>
+                          {member.id !== 'finnest' && (
+                            <a 
+                              href={member.twitter} 
+                              aria-label={member.id === 'brian' ? 'Company' : member.id === 'nikolas' ? 'Academic' : 'Author'} 
+                              className="p-2 rounded-full bg-alt-gray-100 hover:bg-alt-gray-200 transition-colors"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                            >
+                              {member.id === 'brian' ? (
+                                <Building2 className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                              ) : member.id === 'nikolas' ? (
+                                <GraduationCap className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                              ) : (
+                                <PenTool className="h-5 w-5 text-alt-gray-600" strokeWidth={1.25} />
+                              )}
+                            </a>
+                          )}
                         </div>
                       )}
                     </div>
