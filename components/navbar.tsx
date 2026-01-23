@@ -44,7 +44,7 @@ export function Navbar() {
       <div className="container flex h-16 items-center justify-between px-4 md:px-6">
         <Link href="/" className="flex items-center gap-2">
           <span className="text-2xl font-accent italic tracking-wide text-primary">
-            <span className="font-bold">tecx</span><span className="font-normal">mate</span>
+            <span className="font-thin">tecx</span><span className="font-thin">mate</span>
           </span>
           {language === 'zh' && (
             <span className="text-2xl font-accent italic tracking-wide text-primary">凰龜科技</span>

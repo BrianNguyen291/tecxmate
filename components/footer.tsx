@@ -14,7 +14,7 @@ export function Footer() {
           <div className="space-y-3">
             <Link href="/" className="flex items-center gap-2">
               <span className="text-2xl font-accent italic tracking-wide text-white">
-                <span className="font-bold">tecx</span><span className="font-normal">mate</span>
+                <span className="font-thin">tecx</span><span className="font-thin">mate</span>
               </span>
               {language === 'zh' && (
                 <span className="text-2xl font-accent italic tracking-wide text-white">凰龜科技</span>
@@ -102,8 +102,8 @@ export function Footer() {
             <h3 className="text-lg font-semibold text-white">{t("contact")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
-                <a href="mailto:hello@tecxmate.com" className="hover:text-white transition-colors duration-200">
-                  {t("email")}: hello@tecxmate.com
+                <a href="mailto:niko.tecx@gmail.com" className="hover:text-white transition-colors duration-200">
+                  {t("email")}: niko.tecx@gmail.com
                 </a>
               </li>
               <li>

@@ -26,9 +26,9 @@ export function TeamSection() {
     {
       id: 'finnest',
       name: 'Finnest Nguyen',
-      role: 'CFO',
+      role: 'Executive Consultant',
       photo: '/avatars/finnest_avatar.jpeg',
-      description: 'Finance leader overseeing strategy, planning, and fiscal operations.',
+      description: 'Executive consultant providing strategic guidance and business expertise.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.linkedin.com/in/hungnguyen1402/'
     },
@@ -53,9 +53,9 @@ export function TeamSection() {
     {
       id: 'edgar',
       name: 'Edgar Edffedi',
-      role: 'Head of Media',
+      role: 'System Architect',
       photo: '/avatars/edgar_avatar.jpeg',
-      description: 'Media specialist focused on content strategy, digital marketing, and media production.',
+      description: 'System architect designing scalable infrastructure and technical solutions.',
       twitter: 'https://www.tecxmate.com',
       linkedin: 'https://www.tecxmate.com'
     },

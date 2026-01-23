@@ -90,7 +90,7 @@ You have the following rights regarding your personal information:
 - **Objection**: Object to processing of your data for specific purposes
 - **Withdraw Consent**: Withdraw consent at any time where processing is based on consent
 
-To exercise these rights, please contact us at hello@tecxmate.com.
+To exercise these rights, please contact us at niko.tecx@gmail.com.
 
 ## 9. International Data Transfers
 
@@ -115,7 +115,7 @@ We encourage you to review this Privacy Policy periodically.
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
 **tecxmate**  
-Email: hello@tecxmate.com  
+Email: niko.tecx@gmail.com  
 Website: https://www.tecxmate.com
 
 We will respond to your inquiries within a reasonable timeframe.

@@ -45,7 +45,7 @@ export default function Home() {
             },
             "contactPoint": {
               "@type": "ContactPoint",
-              "email": "hello@tecxmate.com",
+              "email": "niko.tecx@gmail.com",
               "contactType": "Customer Service",
               "availableLanguage": ["English", "Chinese"]
             },

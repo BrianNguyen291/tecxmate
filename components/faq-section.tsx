@@ -33,7 +33,7 @@ export function FaqSection() {
     {
       question: "How can I get started with tecxmate?",
       answer:
-        "You can get started by contacting us through email at hello@tecxmate.com, messaging us on WhatsApp, Line, or WeChat at nikolasdoan, or booking a discovery call through our website. We'll discuss your project needs and guide you through our process.",
+        "You can get started by contacting us through email at niko.tecx@gmail.com, messaging us on WhatsApp, Line, or WeChat at nikolasdoan, or booking a discovery call through our website. We'll discuss your project needs and guide you through our process.",
     },
   ]
 

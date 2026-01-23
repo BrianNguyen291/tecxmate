@@ -164,7 +164,7 @@ These Terms, together with any Service Agreements, constitute the entire agreeme
 If you have any questions about these Terms of Service, please contact us:
 
 **tecxmate**  
-Email: hello@tecxmate.com  
+Email: niko.tecx@gmail.com  
 Website: https://www.tecxmate.com
 
 ---
