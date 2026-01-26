@@ -8,7 +8,7 @@ export function TeamSection() {
     {
       id: 'nikolas',
       name: 'Nikolas Doan',
-      role: 'CEO',
+      role: 'CEO & CFO',
       photo: '/avatars/niko_ava_color.jpg',
       description: 'MSc AI/Robotics (NTU, exp. \'26). Former Google Cloud Startups. CEO TECXMATE.COM',
       twitter: 'https://scholar.google.com/citations?hl=en&view_op=list_works&gmla=AH8HC4wBT4T5k1ixLLhNjPNv_RVi-PwijNu8oMXqf4mh7nL21PUT5zluCMjJkZyOBmcdy1_51pRTnYe7erhljl_XOl2nQ3XXV8TW7isW6-0&user=ffn9iV8AAAAJ',
@@ -17,7 +17,7 @@ export function TeamSection() {
     {
       id: 'brian',
       name: 'Brian Nguyen',
-      role: 'CTO',
+      role: 'CTO & COO',
       photo: '/avatars/brian_avatar.png',
       description: 'MS Gamification Engineering (NTUST, exp. \'27). Built 3+ apps on App Store. Specialist in game mechanics for learning.',
       twitter: 'https://www.tecxmate.com',
