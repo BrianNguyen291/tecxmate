@@ -3,9 +3,11 @@
 import Link from "next/link"
 import { Facebook, Twitter, Instagram, Linkedin, Video } from "lucide-react"
 import { useLanguage } from "@/components/language-provider"
+import { useContactForm } from "@/components/contact-form-provider"
 
 export function Footer() {
   const { language, t } = useLanguage()
+  const { openContactForm } = useContactForm()
   
   return (
     <footer id="footer" className="bg-alt-black py-12 md:py-14 border-0">
@@ -24,15 +26,14 @@ export function Footer() {
               {t("got_idea")}
             </p>
             <div className="flex flex-wrap items-center gap-3">
-              <a
-                href="https://cal.com/nikolasdoan/30min"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-200"
+              <button
+                type="button"
+                onClick={openContactForm}
+                className="inline-flex items-center gap-2 text-gray-400 hover:text-white transition-colors duration-200 cursor-pointer"
               >
                 <Video className="h-5 w-5" />
                 <span className="text-sm">{t("book_discovery_call")}</span>
-              </a>
+              </button>
             <div className="flex gap-3">
               <a 
                 href="https://www.facebook.com/tecxmate" 
@@ -101,20 +102,20 @@ export function Footer() {
           <div className="space-y-3">
             <h3 className="text-lg font-semibold text-white">{t("contact")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
+              <li className="text-gray-300">{t("address")}</li>
               <li>
                 <a href="mailto:niko.tecx@gmail.com" className="hover:text-white transition-colors duration-200">
                   {t("email")}: niko.tecx@gmail.com
                 </a>
               </li>
               <li>
-                <a
-                  href="https://cal.com/nikolasdoan/30min"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="hover:text-white transition-colors duration-200"
+                <button
+                  type="button"
+                  onClick={openContactForm}
+                  className="hover:text-white transition-colors duration-200 cursor-pointer text-left"
                 >
                   {t("book_discovery_call")}
-                </a>
+                </button>
               </li>
             </ul>
           </div>

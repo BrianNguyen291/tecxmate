@@ -171,8 +171,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       },
       "address": {
         "@type": "PostalAddress",
-        "addressCountry": "TW",
-        "addressLocality": "Taipei",
+        "streetAddress": "Villa Park Complex",
+        "addressLocality": "Ho Chi Minh City",
+        "addressCountry": "VN"
       },
       "areaServed": [
         {

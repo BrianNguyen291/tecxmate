@@ -75,19 +75,6 @@ export function Navbar() {
           >
             {t("news_insights")}
           </Link>
-          <Link
-            href="#footer"
-            className={`text-sm font-medium transition-colors hover:text-primary`}
-            onClick={(e) => {
-              e.preventDefault()
-              const footer = document.getElementById('footer')
-              if (footer) {
-                footer.scrollIntoView({ behavior: 'smooth' })
-              }
-            }}
-          >
-            {t("contact")}
-          </Link>
         </nav>
         <div className="flex items-center gap-4">
           <DropdownMenu>
@@ -150,20 +137,6 @@ export function Navbar() {
               onClick={closeMenu}
             >
               {t("news_insights")}
-            </Link>
-            <Link
-              href="#footer"
-              className={`text-sm font-medium transition-colors hover:text-primary`}
-              onClick={(e) => {
-                e.preventDefault()
-                closeMenu()
-                const footer = document.getElementById('footer')
-                if (footer) {
-                  footer.scrollIntoView({ behavior: 'smooth' })
-                }
-              }}
-            >
-              {t("contact")}
             </Link>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>

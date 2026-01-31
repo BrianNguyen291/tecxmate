@@ -39,9 +39,9 @@ export default function Home() {
             "description": "Premier technology consultancy providing AI development, web development, business automation, and digital transformation services for SMEs and startups.",
             "address": {
               "@type": "PostalAddress",
-              "addressLocality": "Taipei",
-              "addressRegion": "Taiwan",
-              "addressCountry": "TW"
+              "streetAddress": "Villa Park Complex",
+              "addressLocality": "Ho Chi Minh City",
+              "addressCountry": "VN"
             },
             "contactPoint": {
               "@type": "ContactPoint",

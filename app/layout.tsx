@@ -7,6 +7,7 @@ import { GoogleAnalytics } from "@/components/google-analytics"
 import { FirebaseAnalytics } from "@/components/firebase-analytics"
 import { Analytics } from '@vercel/analytics/react'
 import { LanguageProvider } from "@/components/language-provider"
+import { ContactFormProvider } from "@/components/contact-form-provider"
 import { generateCountryKeywords } from "@/lib/keywords"
 
 const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"
@@ -126,11 +127,11 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="language" content="English" />
-        <meta name="geo.region" content="TW" />
-        <meta name="geo.placename" content="Taipei" />
+        <meta name="geo.region" content="VN" />
+        <meta name="geo.placename" content="Ho Chi Minh City" />
         <meta name="geo.region:VN" content="VN" />
         <meta name="geo.region:CN" content="CN" />
-        <meta name="geo.country" content="TW" />
+        <meta name="geo.country" content="VN" />
         <meta name="rating" content="General" />
         <meta name="referrer" content="origin-when-cross-origin" />
         {/* Note: Hreflang tags are automatically generated from metadata.alternates.languages */}
@@ -140,6 +141,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://www.google-analytics.com" />
         <link rel="dns-prefetch" href="https://www.googleapis.com" />
         <link rel="dns-prefetch" href="https://www.gstatic.com" />
+        <link rel="dns-prefetch" href="https://assets.apollo.io" />
         <link rel="preload" as="image" href="/tecxmate-logo-cropped.png" />
         <link rel="alternate" type="application/rss+xml" title="Tecxmate Blog RSS Feed" href={`${baseUrl}/feed.xml`} />
         <link rel="manifest" href="/manifest.json" />
@@ -166,6 +168,53 @@ export default function RootLayout({
             `.trim(),
           }}
         />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function initApolloInbound() {
+                var TIMEOUT_MS = 15000;
+                var timeoutId;
+                var style = document.createElement('style');
+                style.id = 'apollo-form-prehide-css';
+                style.textContent = 'form:has(input[type="email" i]),form:has(input[name="email" i]),.hs-form-iframe{position:relative!important}form:has(input[type="email" i])::before,form:has(input[name="email" i])::before,.hs-form-iframe::before{content:"";position:absolute;inset:0;display:flex;align-items:center;justify-content:center;width:50px;height:50px;margin:auto;border:2.5px solid #e1e1e1;border-top:2.5px solid #9ea3a6;border-radius:50%;animation:spin 1s linear infinite;background-color:transparent;pointer-events:auto;z-index:999999;opacity:1}form:has(input[type="email" i]) *,form:has(input[name="email" i]) *,.hs-form-iframe *{opacity:0!important;user-select:none!important;pointer-events:none!important}@keyframes spin{0%{transform:rotate(0deg)}100%{transform:rotate(360deg)}}';
+                (document.head || document.documentElement).appendChild(style);
+                function cleanup() {
+                  var styleEl = document.getElementById('apollo-form-prehide-css');
+                  if (styleEl) styleEl.remove();
+                  if (timeoutId) clearTimeout(timeoutId);
+                }
+                timeoutId = setTimeout(function() {
+                  console.warn('[Apollo] Form enrichment timeout after 15s - revealing forms. Check network and console for errors.');
+                  cleanup();
+                }, TIMEOUT_MS);
+                var nocache = Math.random().toString(36).substring(7);
+                var script = document.createElement('script');
+                script.src = 'https://assets.apollo.io/js/apollo-inbound.js?nocache=' + nocache;
+                script.defer = true;
+                script.onerror = function() {
+                  console.error('[Apollo] Failed to load form enrichment script');
+                  cleanup();
+                };
+                script.onload = function() {
+                  try {
+                    window.ApolloInbound.formEnrichment.init({
+                      appId: '697e2150debbc30011588d61',
+                      onReady: function() { cleanup(); },
+                      onError: function(err) {
+                        console.error('[Apollo] Form enrichment init error:', err);
+                        cleanup();
+                      }
+                    });
+                  } catch (err) {
+                    console.error('[Apollo] Error initializing form enrichment:', err);
+                    cleanup();
+                  }
+                };
+                document.head.appendChild(script);
+              })();
+            `.trim(),
+          }}
+        />
       </head>
       <body>
         {gtmId ? (
@@ -180,8 +229,10 @@ export default function RootLayout({
         <Analytics />
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
           <LanguageProvider>
-            {children}
-            <BackToTop />
+            <ContactFormProvider>
+              {children}
+              <BackToTop />
+            </ContactFormProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

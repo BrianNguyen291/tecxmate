@@ -1,6 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Button } from "@/components/ui/button"
+import { ContactFormTrigger } from "@/components/contact-form-trigger"
 import { Brain, Zap, Bot, ArrowLeft, Check } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
@@ -295,11 +295,12 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
 
               <div className="mt-12 text-center">
-                <Button size="lg" className="bg-primary hover:bg-primary-dark text-white" asChild>
-                  <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
-                    Get Started with {service.title}
-                  </a>
-                </Button>
+                <ContactFormTrigger
+                  size="lg"
+                  className="bg-primary hover:bg-primary-dark text-white"
+                >
+                  Get Started with {service.title}
+                </ContactFormTrigger>
               </div>
             </div>
           </section>

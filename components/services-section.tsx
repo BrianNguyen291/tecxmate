@@ -1,14 +1,10 @@
 "use client"
 
-import { useState } from "react"
 import Link from "next/link"
-import { Dialog, DialogContent } from "@/components/ui/dialog"
-import { ComprehensiveOnboardingForm } from "@/components/comprehensive-onboarding-form"
 import { Button } from "@/components/ui/button"
 import { Brain, Zap, Bot } from "lucide-react"
 
 export function ServicesSection() {
-  const [showDemoForm, setShowDemoForm] = useState(false)
 
   const services = [
     {
@@ -76,12 +72,6 @@ export function ServicesSection() {
           </Button>
         </div>
       </div>
-
-      <Dialog open={showDemoForm} onOpenChange={setShowDemoForm}>
-        <DialogContent className="sm:max-w-[800px] p-0">
-          <ComprehensiveOnboardingForm onClose={() => setShowDemoForm(false)} />
-        </DialogContent>
-      </Dialog>
     </section>
   )
 }

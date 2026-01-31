@@ -56,9 +56,9 @@ export default function AboutPage() {
       "foundingDate": "2025",
       "address": {
         "@type": "PostalAddress",
-        "addressLocality": "Taipei",
-        "addressRegion": "Taiwan",
-        "addressCountry": "TW"
+        "streetAddress": "Villa Park Complex",
+        "addressLocality": "Ho Chi Minh City",
+        "addressCountry": "VN"
       },
       "description": "Premier technology consultancy specializing in AI development, business automation, and digital transformation for SMEs and startups.",
       "url": baseUrl,
