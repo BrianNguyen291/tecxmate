@@ -95,7 +95,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         "audienceType": "Business",
         "geographicArea": {
           "@type": "Country",
-          "name": ["Taiwan", "Vietnam", "China"]
+          "name": ["Taiwan", "United States", "Vietnam"]
         }
       }
     },
@@ -171,7 +171,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
       },
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "Villa Park Complex",
+        "streetAddress": "Villa Park Complex, Phu Huu Ward",
         "addressLocality": "Ho Chi Minh City",
         "addressCountry": "VN"
       },
@@ -182,11 +182,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         },
         {
           "@type": "Country",
-          "name": "Vietnam"
+          "name": "United States"
         },
         {
           "@type": "Country",
-          "name": "China"
+          "name": "Vietnam"
         }
       ]
     }

@@ -4,7 +4,7 @@
 
 ## 1. Introduction
 
-Welcome to tecxmate. We are an independent development team providing technology consultancy and solutions to clients worldwide. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our services.
+Welcome to Tecxmate. We are TECXMATE Corporation Ltd. (CÔNG TY TNHH TECXMATE), a Limited Liability Company headquartered in Ho Chi Minh City, Vietnam, providing technology consultancy and solutions to clients in Taiwan, the US, and Vietnam. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or engage our services.
 
 By using our website or services, you consent to the data practices described in this policy.
 
@@ -114,7 +114,8 @@ We encourage you to review this Privacy Policy periodically.
 
 If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
-**tecxmate**  
+**TECXMATE Corporation Ltd.** (CÔNG TY TNHH TECXMATE / 達盟科技有限公司)  
+Villa Park Complex, Phu Huu Ward, Ho Chi Minh City, Vietnam  
 Email: niko.tecx@gmail.com  
 Website: https://www.tecxmate.com
 
@@ -122,7 +123,7 @@ We will respond to your inquiries within a reasonable timeframe.
 
 ---
 
-**Governing Law**: This Privacy Policy is governed by the laws of Taiwan, Republic of China.
+**Governing Law**: This Privacy Policy is governed by the laws of Vietnam.
 
 By using our website or services, you acknowledge that you have read and understood this Privacy Policy.
 

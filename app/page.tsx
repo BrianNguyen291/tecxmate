@@ -32,23 +32,41 @@ export default function Home() {
             "@context": "https://schema.org",
             "@type": "ProfessionalService",
             "name": "Tecxmate",
-            "alternateName": "tecxmate",
+            "alternateName": ["tecxmate", "TECXMATE Corporation Ltd.", "CÔNG TY TNHH TECXMATE", "達盟科技有限公司"],
             "url": process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com",
             "logo": `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"}/tecxmate-logo-cropped.png`,
             "image": `${process.env.NEXT_PUBLIC_SITE_URL || "https://www.tecxmate.com"}/tecxmate-logo-cropped.png`,
             "description": "Premier technology consultancy providing AI development, web development, business automation, and digital transformation services for SMEs and startups.",
             "address": {
               "@type": "PostalAddress",
-              "streetAddress": "Villa Park Complex",
+              "streetAddress": "Villa Park Complex, Phu Huu Ward",
               "addressLocality": "Ho Chi Minh City",
               "addressCountry": "VN"
             },
-            "contactPoint": {
-              "@type": "ContactPoint",
-              "email": "niko.tecx@gmail.com",
-              "contactType": "Customer Service",
-              "availableLanguage": ["English", "Chinese"]
-            },
+            "contactPoint": [
+              {
+                "@type": "ContactPoint",
+                "email": "niko.tecx@gmail.com",
+                "telephone": "+1-617-272-9992",
+                "contactType": "Customer Service",
+                "areaServed": "US",
+                "availableLanguage": ["English", "Chinese"]
+              },
+              {
+                "@type": "ContactPoint",
+                "telephone": "+886-966-860-2602",
+                "contactType": "Customer Service",
+                "areaServed": "TW",
+                "availableLanguage": ["English", "Chinese"]
+              },
+              {
+                "@type": "ContactPoint",
+                "telephone": "+84-33-746-0602",
+                "contactType": "Customer Service",
+                "areaServed": "VN",
+                "availableLanguage": ["English", "Vietnamese"]
+              }
+            ],
             "sameAs": [
               "https://www.facebook.com/tecxmate",
               "https://x.com/tecxmate",

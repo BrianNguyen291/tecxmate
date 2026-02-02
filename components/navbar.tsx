@@ -46,9 +46,7 @@ export function Navbar() {
           <span className="text-2xl font-accent italic tracking-wide text-primary">
             <span className="font-thin">tecx</span><span className="font-thin">mate</span>
           </span>
-          {language === 'zh' && (
-            <span className="text-2xl font-accent italic tracking-wide text-primary">凰龜科技</span>
-          )}
+          <span className="text-2xl font-accent italic tracking-wide text-primary">達盟科技</span>
         </Link>
         <nav className="hidden md:flex gap-6">
           <Link
@@ -56,12 +54,6 @@ export function Navbar() {
             className={`text-sm font-medium transition-colors ${isActive("/") ? "text-primary" : "hover:text-primary"}`}
           >
             {t("home")}
-          </Link>
-          <Link 
-            href="/projects" 
-            className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
-          >
-            {t("projects")}
           </Link>
           <Link 
             href="/services" 
@@ -116,13 +108,6 @@ export function Navbar() {
               onClick={closeMenu}
             >
               {t("home")}
-            </Link>
-            <Link
-              href="/projects"
-              className={`text-sm font-medium transition-colors ${isActive("/projects") ? "text-primary" : "hover:text-primary"}`}
-              onClick={closeMenu}
-            >
-              {t("projects")}
             </Link>
             <Link
               href="/services"

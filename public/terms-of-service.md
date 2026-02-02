@@ -4,7 +4,7 @@
 
 ## 1. Introduction
 
-Welcome to tecxmate. We are an independent development team providing premier technology consultancy and solutions to clients worldwide. These Terms of Service ("Terms") govern your access to and use of our website, services, and any related agreements between you and tecxmate.
+Welcome to Tecxmate. We are TECXMATE Corporation Ltd. (CÔNG TY TNHH TECXMATE), a Limited Liability Company headquartered in Ho Chi Minh City, Vietnam, providing premier technology consultancy and solutions to clients in Taiwan, the US, and Vietnam. These Terms of Service ("Terms") govern your access to and use of our website, services, and any related agreements between you and tecxmate.
 
 By accessing our website or engaging our services, you agree to be bound by these Terms. If you do not agree to these Terms, please do not use our website or services.
 
@@ -163,13 +163,14 @@ These Terms, together with any Service Agreements, constitute the entire agreeme
 
 If you have any questions about these Terms of Service, please contact us:
 
-**tecxmate**  
+**TECXMATE Corporation Ltd.** (CÔNG TY TNHH TECXMATE / 達盟科技有限公司)  
+Villa Park Complex, Phu Huu Ward, Ho Chi Minh City, Vietnam  
 Email: niko.tecx@gmail.com  
 Website: https://www.tecxmate.com
 
 ---
 
-**Governing Law**: These Terms of Service are governed by the laws of Taiwan, Republic of China.
+**Governing Law**: These Terms of Service are governed by the laws of Vietnam.
 
 By using our website or services, you acknowledge that you have read, understood, and agree to be bound by these Terms of Service.
 
