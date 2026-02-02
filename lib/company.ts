@@ -24,7 +24,7 @@ export const company = {
   /** US address */
   addressUS: "30 N Gould St Ste N, Sheridan, WY 82801, USA",
   /** Taiwan address */
-  addressTW: "No. 43, Section 4, Keelung Road, Daan District, Taipei 106335, Taiwan",
+  addressTW: "No. 93, Wansheng Street, Wenshan District, Taipei 116059, Taiwan",
   /** Operating markets */
   operatingMarkets: ["Taiwan", "US", "Vietnam"],
   /** Contact email */
@@ -32,7 +32,7 @@ export const company = {
   /** Phone numbers by region (display + tel link format) */
   phone: {
     us: { display: "(+1) 6172729992", tel: "+16172729992" },
-    tw: { display: "(+886) 9668602602", tel: "+8869668602602" },
+    tw: { display: "(+886) 966860602", tel: "+886966860602" },
     vn: { display: "(+84) 0337460602", tel: "+840337460602" },
   },
   /** Website URL */
