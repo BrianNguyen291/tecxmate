@@ -365,30 +365,4 @@
     color: white !important;
   }
 
-  /* Mobile-only frosted glass (hero card, etc.) */
-  @media (max-width: 767px) {
-    .frosted-glass-mobile {
-      position: relative;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.62);
-      border: 1px solid rgba(255, 255, 255, 0.55);
-      box-shadow:
-        0 12px 32px rgba(0, 0, 0, 0.10),
-        0 0 0 1px rgba(0, 0, 0, 0.04) inset;
-      -webkit-backdrop-filter: blur(18px) saturate(160%);
-      backdrop-filter: blur(18px) saturate(160%);
-    }
-
-    .frosted-glass-mobile::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      opacity: 0.10;
-      mix-blend-mode: overlay;
-      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='120' height='120' filter='url(%23n)' opacity='.35'/%3E%3C/svg%3E");
-      background-repeat: repeat;
-      background-size: 160px 160px;
-    }
-  }
 }
