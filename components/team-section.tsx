@@ -24,15 +24,6 @@ export function TeamSection() {
       linkedin: 'https://www.linkedin.com/in/brian-nguyen-587825235/'
     },
     {
-      id: 'finnest',
-      name: 'Finnest Nguyen',
-      role: 'Executive Consultant',
-      photo: '/avatars/finnest_avatar.jpeg',
-      description: 'Executive consultant providing strategic guidance and business expertise.',
-      twitter: 'https://www.tecxmate.com',
-      linkedin: 'https://www.linkedin.com/in/hungnguyen1402/'
-    },
-    {
       id: 'ellis',
       name: 'Ellis Wu',
       role: 'Business Developer',

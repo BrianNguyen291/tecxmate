@@ -11,7 +11,7 @@ export default function ShaderBackground({ children }: ShaderBackgroundProps) {
   return (
     <div 
       id="hero" 
-      className="min-h-[100dvh] bg-white relative overflow-hidden snap-start -mt-16 pt-16"
+      className="min-h-screen bg-white relative overflow-hidden -mt-16 pt-16"
       style={{
         transform: 'translateZ(0)', // Force hardware acceleration
         backfaceVisibility: 'hidden',
