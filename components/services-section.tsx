@@ -28,22 +28,25 @@ export function ServicesSection() {
   ]
 
   return (
-    <section id="services" className="bg-alt-gray-100 py-20 md:py-24 lg:py-28">
+    <section id="services" className="bg-white py-24 md:py-28 lg:py-32">
       <div className="container px-4 md:px-6 max-w-6xl">
-            <div className="text-center mb-16">
-              <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">Our Services</h2>
+            <div className="text-center mb-20 max-w-3xl mx-auto">
+              <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-4 tracking-tight text-gray-900">Our Services</h2>
+              <p className="text-lg text-gray-600 leading-relaxed">
+                Technology solutions designed to work for you—from AI applications to streamlined operations.
+              </p>
             </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-14">
           {services.map((service) => {
             const IconComponent = service.icon
             return (
               <div
                 key={service.id}
-                className="bg-white p-8 rounded-lg border border-alt-gray-200 shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 group flex flex-col h-full"
+                className="bg-gray-50/50 p-8 rounded-2xl border border-gray-100 hover:border-primary/30 hover:shadow-lg transition-all duration-300 group flex flex-col h-full"
               >
                 <div className="mb-6 flex-1">
-                  <div className="w-12 h-12 bg-alt-gray-100 rounded-lg flex items-center justify-center mb-4 group-hover:bg-primary/10 transition-colors duration-200">
+                  <div className="w-14 h-14 bg-white rounded-xl flex items-center justify-center mb-5 group-hover:bg-primary/10 shadow-sm transition-all duration-200">
                     <IconComponent className="w-6 h-6 text-alt-gray-600 group-hover:text-primary transition-colors duration-200" />
                   </div>
                   <h3 className="text-xl font-semibold text-alt-black mb-3">{service.title}</h3>

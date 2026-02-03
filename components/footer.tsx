@@ -85,7 +85,6 @@ export function Footer() {
 
           {/* Quick Links */}
           <div className="space-y-3 md:col-span-2">
-            <h3 className="text-lg font-semibold text-white">{t("team")}</h3>
             <ul className="space-y-2 text-sm text-gray-300">
               <li>
                 <Link href="/about" className="hover:text-white transition-colors duration-200">
@@ -112,40 +111,39 @@ export function Footer() {
 
           {/* Legal & Contact - organized by country */}
           <div className="space-y-4 md:col-span-6">
-            <h3 className="text-lg font-semibold text-white">{t("footer_legal_contact")}</h3>
             <div className="space-y-4 text-sm text-gray-300">
-              <div className="grid gap-4 sm:grid-cols-3">
+              <div className="grid grid-cols-1 gap-4 sm:gap-6 lg:gap-8">
                 {/* US */}
-                <div className="space-y-1 rounded-lg border border-gray-700/50 p-3">
-                  <p className="font-medium text-white">{company.legalName.en}</p>
-                  <p className="text-white text-xs leading-relaxed">{company.addressUS}</p>
+                <div className="space-y-2 rounded-lg border border-gray-700/50 p-4 sm:p-5 lg:p-6">
+                  <p className="font-medium text-white text-sm sm:text-base">{company.legalName.en}</p>
+                  <p className="text-white text-xs sm:text-sm leading-relaxed">{company.addressUS}</p>
                   <a
                     href={`tel:${company.phone.us.tel}`}
-                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs"
+                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs sm:text-sm mt-1"
                   >
                     <Phone className="h-4 w-4 shrink-0" />
                     {company.phone.us.display}
                   </a>
                 </div>
                 {/* Taiwan */}
-                <div className="space-y-1 rounded-lg border border-gray-700/50 p-3">
-                  <p className="font-medium text-white">{company.legalName.zh}</p>
-                  <p className="text-white text-xs leading-relaxed">{company.addressTW}</p>
+                <div className="space-y-2 rounded-lg border border-gray-700/50 p-4 sm:p-5 lg:p-6">
+                  <p className="font-medium text-white text-sm sm:text-base">{company.legalName.zh}</p>
+                  <p className="text-white text-xs sm:text-sm leading-relaxed">{company.addressTW}</p>
                   <a
                     href={`tel:${company.phone.tw.tel}`}
-                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs"
+                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs sm:text-sm mt-1"
                   >
                     <Phone className="h-4 w-4 shrink-0" />
                     {company.phone.tw.display}
                   </a>
                 </div>
                 {/* Vietnam */}
-                <div className="space-y-1 rounded-lg border border-gray-700/50 p-3">
-                  <p className="font-medium text-white">{company.legalName.vi}</p>
-                  <p className="text-white text-xs leading-relaxed">{t("address")}</p>
+                <div className="space-y-2 rounded-lg border border-gray-700/50 p-4 sm:p-5 lg:p-6">
+                  <p className="font-medium text-white text-sm sm:text-base">{company.legalName.vi}</p>
+                  <p className="text-white text-xs sm:text-sm leading-relaxed">{t("address")}</p>
                   <a
                     href={`tel:${company.phone.vn.tel}`}
-                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs"
+                    className="inline-flex items-center gap-1.5 text-white hover:text-primary transition-colors duration-200 text-xs sm:text-sm mt-1"
                   >
                     <Phone className="h-4 w-4 shrink-0" />
                     {company.phone.vn.display}

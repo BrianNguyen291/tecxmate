@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ContactFormTrigger } from "@/components/contact-form-trigger"
-import { Brain, Zap, Bot, ArrowLeft, Check } from "lucide-react"
+import { Brain, Zap, Bot, ArrowLeft, Check, TrendingUp, Users } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 import Script from "next/script"
@@ -16,6 +16,18 @@ const services = {
     title: "AI Application Development",
     description: "Build intelligent applications powered by machine learning, natural language processing, and computer vision. From chatbots to predictive analytics, we create AI solutions that drive business value.",
     longDescription: "Transform your business with cutting-edge AI applications. Our team specializes in developing intelligent solutions that leverage machine learning, natural language processing, and computer vision to solve real-world business challenges. Whether you need chatbots, predictive analytics, or custom AI solutions, we deliver applications that drive measurable business value.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Reach and convert more leads with 24/7 AI chatbots and personalized experiences that don’t scale with headcount.",
+        "Keep more customers with smarter recommendations, faster support, and experiences that feel tailored to each user.",
+        "Win new segments by launching digital products and intelligent features that set you apart from competitors.",
+      ],
+      moreRevenue: [
+        "Increase conversion and average order value through personalization, smart recommendations, and frictionless flows.",
+        "Turn data into new revenue streams—predictive insights, premium features, or automated services that customers pay for.",
+        "Grow revenue without growing cost linearly; scale to many more users with the same or smaller team.",
+      ],
+    },
     features: [
       "Machine Learning & Deep Learning Models",
       "Natural Language Processing (NLP)",
@@ -48,6 +60,18 @@ const services = {
     title: "Business Automation",
     description: "Automate repetitive workflows, streamline operations, and integrate systems to boost efficiency. Reduce manual work and focus on what matters most to your business.",
     longDescription: "Streamline your business operations with intelligent automation solutions. We help you identify repetitive tasks, automate workflows, and integrate systems to maximize efficiency. From data entry automation to complex workflow orchestration, our solutions reduce manual work and free up your team to focus on strategic initiatives.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Serve more customers without adding staff—automate onboarding, follow-ups, and support so every lead gets a fast, consistent experience.",
+        "Win and retain more accounts by responding faster, reducing errors, and delivering a professional, reliable impression at scale.",
+        "Reallocate your team to high-value activities (sales, relationships, strategy) that directly grow your customer base.",
+      ],
+      moreRevenue: [
+        "Cut operational cost and errors so more of every dollar becomes profit; typical projects deliver 20–40% time savings on automated processes.",
+        "Handle higher volume without proportional headcount—grow revenue while keeping margins healthy.",
+        "Scale repeatably: once workflows are automated, adding new customers or orders costs far less per unit.",
+      ],
+    },
     features: [
       "Workflow Automation & Orchestration",
       "System Integration & API Development",
@@ -80,6 +104,18 @@ const services = {
     title: "AI Integration & Consulting",
     description: "Integrate existing AI tools into your workflow or get expert guidance on AI strategy. We help you identify automation opportunities and implement the right solutions.",
     longDescription: "Get expert guidance on AI strategy and implementation. Whether you want to integrate existing AI tools into your workflow or develop a comprehensive AI roadmap, our consultants help you identify opportunities, evaluate solutions, and implement the right AI technologies for your business needs.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Deploy AI that actually gets used—we align tools with your sales and marketing flow so you convert and retain more leads.",
+        "Differentiate with AI-powered experiences (support, content, recommendations) that attract and keep customers.",
+        "Build a clear roadmap so your team can sell and deliver AI-backed value without guesswork or wasted effort.",
+      ],
+      moreRevenue: [
+        "Get to revenue faster: we help you pick and implement the right AI so you see ROI in months, not years.",
+        "Avoid costly mistakes—wrong tools, underused licenses, or dead-end pilots; our guidance maximizes return on every AI dollar.",
+        "Turn AI into a repeatable advantage: better margins, higher throughput, and offerings that justify premium pricing.",
+      ],
+    },
     features: [
       "AI Strategy Consulting & Planning",
       "AI Tool Evaluation & Selection",
@@ -254,6 +290,51 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </div>
             </div>
           </section>
+
+          {"valueOutcomes" in service && service.valueOutcomes && (
+            <section className="py-12 md:py-16 bg-gray-50 border-y border-gray-200">
+              <div className="container px-4 md:px-6 max-w-6xl">
+                <h2 className="text-2xl font-semibold mb-2 text-center">What You Get</h2>
+                <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
+                  We focus on outcomes: more customers and more revenue. Here’s how this service creates value for you.
+                </p>
+                <div className="grid gap-8 md:grid-cols-2">
+                  <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <Users className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold">More Customers</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      {service.valueOutcomes.moreCustomers.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-gray-700">
+                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                  <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                        <TrendingUp className="w-5 h-5 text-primary" />
+                      </div>
+                      <h3 className="text-xl font-semibold">More Revenue</h3>
+                    </div>
+                    <ul className="space-y-3">
+                      {service.valueOutcomes.moreRevenue.map((item, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-gray-700">
+                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>{item}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
 
           <section className="py-12 md:py-16">
             <div className="container px-4 md:px-6 max-w-6xl">

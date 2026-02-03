@@ -7,18 +7,26 @@ import { Button } from "@/components/ui/button"
 export function HeroSection() {
   return (
     <ShaderBackground>
-      <LogoCarousel />
-      <div className="absolute left-4 right-4 md:left-8 bottom-4 md:bottom-6 z-20 flex flex-wrap gap-3">
-        <Button
-          size="lg"
-          className="bg-primary hover:bg-primary/90 text-white"
-          asChild
-        >
+      <div className="absolute inset-0 flex flex-col items-start justify-center px-4 md:px-8 pt-20 pb-24 z-10">
+        <div className="rounded-2xl bg-white/95 backdrop-blur-xl md:bg-white/70 md:backdrop-blur-md px-8 py-10 md:px-12 md:py-12 shadow-[0_0_40px_rgba(255,255,255,0.6)] max-w-xl text-left">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold tracking-tight text-gray-900 leading-[1.1] mb-6 text-left [text-shadow:0_1px_2px_rgba(255,255,255,0.8)] md:[text-shadow:none]">
+            Build the future
+          </h1>
+          <p className="text-lg md:text-xl text-gray-700 max-w-lg mb-8 leading-relaxed text-left md:text-gray-600 [text-shadow:0_1px_2px_rgba(255,255,255,0.9)] md:[text-shadow:none]">
+            AI development, business automation, and digital transformation—from your first project to scale.
+          </p>
+          <Button
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-white text-base px-8 py-6 rounded-full shadow-lg hover:shadow-xl transition-all duration-200 self-start"
+            asChild
+          >
           <a href="https://cal.com/nikolasdoan/30min" target="_blank" rel="noopener noreferrer">
-            Book a Call
-          </a>
-        </Button>
+              Book a Call
+            </a>
+          </Button>
+        </div>
       </div>
+      <LogoCarousel />
     </ShaderBackground>
   )
 }

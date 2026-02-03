@@ -52,7 +52,7 @@ export function LogoCarousel() {
         </div>
         <div className="h-10 md:h-16 w-0.5 bg-gray-400"></div>
         <InfiniteSlider
-          duration={30}
+          duration={55}
           gap={32}
           className="py-2 md:py-4 flex-1"
         >

@@ -21,7 +21,7 @@ const TeamSection = dynamic(() => import("@/components/team-section").then(mod =
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-[#F6F3F1]">
+    <main className="min-h-screen bg-white">
       <Navbar />
       <Script
         id="org-jsonld"

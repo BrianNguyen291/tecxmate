@@ -72,10 +72,11 @@ export function TeamSection() {
 
   return (
     <>
-      <section id="team" className="bg-alt-gray-100 py-20 snap-start border-t border-b border-[rgba(55,50,47,0.12)]">
+      <section id="team" className="bg-white py-24 md:py-28 lg:py-32">
         <div className="container px-4 md:px-6 max-w-6xl">
-          <div className="flex flex-col items-center justify-center space-y-4 text-center">
-            <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl">Meet Our Experts</h2>
+          <div className="flex flex-col items-center justify-center space-y-4 text-center mb-16">
+            <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl tracking-tight text-gray-900">Meet Our Experts</h2>
+            <p className="text-lg text-gray-600 max-w-2xl mx-auto">The people behind Tecxmate—building technology solutions for your success.</p>
           </div>
 
           <div className="mt-16 overflow-x-auto overflow-y-hidden scrollbar-hide">

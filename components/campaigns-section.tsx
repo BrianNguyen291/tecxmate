@@ -52,7 +52,7 @@ export function CampaignsSection() {
 
   if (loading) {
     return (
-      <section id="campaigns" className="bg-gradient-to-b from-white to-gray-50/50 py-20 md:py-24 lg:py-28">
+      <section id="campaigns" className="bg-gray-50/80 py-24 md:py-28 lg:py-32">
         <div className="container px-4 md:px-6 max-w-7xl">
           <div className="text-center">
             <div className="h-8 w-8 animate-spin rounded-full border-4 border-primary border-t-transparent mx-auto"></div>
@@ -63,15 +63,15 @@ export function CampaignsSection() {
   }
 
   return (
-    <section id="campaigns" className="bg-gradient-to-b from-white to-gray-50/50 py-20 md:py-24 lg:py-28">
+    <section id="campaigns" className="bg-gray-50/80 py-24 md:py-28 lg:py-32">
       <div className="container px-4 md:px-6 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-16">
-          <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-6">
+        <div className="text-center mb-16 max-w-3xl mx-auto">
+          <h2 className="text-3xl font-semibold md:text-4xl lg:text-5xl mb-4 tracking-tight text-gray-900">
             News & Insights
           </h2>
-          <p className="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-            Stay updated with our latest articles, insights, and industry news
+          <p className="text-gray-600 text-lg leading-relaxed">
+            Stay updated with our latest articles, insights, and industry news.
           </p>
         </div>
 
