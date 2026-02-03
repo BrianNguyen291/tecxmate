@@ -22,6 +22,8 @@ const MARKERS = [
   { location: [-6.2088, 106.8456] as [number, number], size: 0.04 }, // Jakarta
   { location: [37.7749, -122.4194] as [number, number], size: 0.04 }, // San Francisco
   { location: [40.7128, -74.0060] as [number, number], size: 0.04 }, // New York
+  { location: [22.3193, 114.1694] as [number, number], size: 0.04 }, // Hong Kong
+  { location: [-7.2575, 112.7521] as [number, number], size: 0.04 }, // Surabaya
 ]
 
 export function GlobeBackground() {
