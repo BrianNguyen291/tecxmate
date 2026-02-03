@@ -228,14 +228,11 @@ export function DemoProductsSection() {
 
           <div 
             ref={scrollContainerRef}
-            className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll" 
+            className="overflow-x-auto pb-4 scrollbar-hide -mx-4 md:mx-0 px-4 md:px-0 carousel-scroll"
             style={{ 
               WebkitOverflowScrolling: 'touch',
-              touchAction: 'pan-y pan-x pinch-zoom',
               transform: 'translateZ(0)',
               WebkitTapHighlightColor: 'transparent',
-              overscrollBehaviorY: 'auto',
-              overscrollBehaviorX: 'contain',
               scrollbarWidth: 'none',
               msOverflowStyle: 'none'
             }}
@@ -290,8 +287,6 @@ export function DemoProductsSection() {
         }
         .carousel-scroll {
           -webkit-overflow-scrolling: touch;
-          overscroll-behavior-x: contain;
-          overscroll-behavior-y: auto;
           scroll-padding-left: 1rem;
           scroll-padding-right: 1rem;
         }
@@ -304,7 +299,6 @@ export function DemoProductsSection() {
         /* Mobile: Enable native touch scrolling */
         @media (max-width: 768px) {
           .carousel-scroll {
-            touch-action: pan-y pan-x pinch-zoom;
             -webkit-overflow-scrolling: touch;
             overflow-x: auto;
             cursor: default;
