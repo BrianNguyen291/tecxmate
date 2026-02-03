@@ -214,12 +214,6 @@
         visibility: visible;
       }
       
-      /* Reserve space for above-the-fold content */
-      #hero {
-        min-height: 100vh;
-        min-height: 100dvh;
-      }
-      
       /* Optimize animations */
       @media (prefers-reduced-motion: reduce) {
         *,

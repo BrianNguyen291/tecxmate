@@ -5,7 +5,7 @@ const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
   : null
 
-const TO_EMAIL = process.env.CONTACT_EMAIL || "niko.tecx@gmail.com"
+const TO_EMAIL = process.env.CONTACT_EMAIL || "ceo@tecxmate.com"
 const FROM_EMAIL =
   process.env.RESEND_FROM_EMAIL || "onboarding@resend.dev"
 
