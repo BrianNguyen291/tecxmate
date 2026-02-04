@@ -28,7 +28,7 @@ const experts: Expert[] = [
     image: "/placeholder.svg?height=100&width=100",
   },
   {
-    name: "Brian Nguyen",
+    name: "Brian Nguyen 阮文貴",
     role: "Founder & CTO",
     expertise: ["Technical Architecture", "Software Development", "Digital Solutions"],
     image: "/placeholder.svg?height=100&width=100",
