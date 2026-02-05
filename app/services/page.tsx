@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { Button } from "@/components/ui/button"
-import { Brain, Zap, Bot, ArrowRight } from "lucide-react"
+import { Brain, Zap, Bot, Leaf, MonitorSmartphone, ServerCog, ArrowRight } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 import Script from "next/script"
@@ -112,6 +112,51 @@ const services = [
       "AI Roadmap Planning"
     ],
   },
+  {
+    id: "esg-tech",
+    slug: "esg-carbon-footprint",
+    icon: Leaf,
+    title: "ESG Tech & Carbon Footprint",
+    description: "Support traditional manufacturers with carbon footprint calculations and compliance-ready ESG data for the latest EU reporting requirements.",
+    features: [
+      "Product & process carbon footprint calculations",
+      "Emission factor and material library setup",
+      "Dashboards for plant- and job-level CO2e",
+      "Customer-ready carbon footprint certificates",
+      "Data exports aligned with EU reporting formats",
+      "Integration hooks for ERP/MES data sources"
+    ],
+  },
+  {
+    id: "web-dev",
+    slug: "website-design-development",
+    icon: MonitorSmartphone,
+    title: "Company Website Design & Development",
+    description: "Design and build modern company websites that feel premium, convert visitors, and are simple for your team to update without a full-time developer.",
+    features: [
+      "Brand-aligned UX/UI design",
+      "High-performance, mobile-first implementation",
+      "Optimized landing pages for lead generation",
+      "CMS setup so non-technical staff can edit content",
+      "Analytics and tracking baked into the site",
+      "SEO-friendly structure and technical setup",
+    ],
+  },
+  {
+    id: "custom-erp",
+    slug: "custom-erp-solutions",
+    icon: ServerCog,
+    title: "Custom ERP & Operations Systems",
+    description: "Build lightweight, custom ERP-style systems that match how your team actually works—from production tracking to inventory, purchasing, and approvals.",
+    features: [
+      "Requirements discovery and workflow mapping",
+      "Modular ERP-style system design",
+      "Production, inventory, and order tracking modules",
+      "Role-based access and approval flows",
+      "Integrations with existing tools (Excel, accounting, MES)",
+      "Dashboards and reports tailored to leadership KPIs",
+    ],
+  },
 ]
 
 export default function ServicesPage() {
@@ -188,14 +233,80 @@ export default function ServicesPage() {
               <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
                 {services.map((service) => {
                   const IconComponent = service.icon
+                  const accentClasses =
+                    service.id === "ai-applications"
+                      ? {
+                          iconBg: "bg-primary/10",
+                          iconColor: "text-primary",
+                          bullet: "text-primary",
+                          button: "border-primary text-primary",
+                        }
+                      : service.id === "business-automation"
+                      ? {
+                          iconBg: "bg-amber-50",
+                          iconColor: "text-amber-500",
+                          bullet: "text-amber-500",
+                          button: "border-amber-400 text-amber-600",
+                        }
+                      : service.id === "ai-integration"
+                      ? {
+                          iconBg: "bg-sky-50",
+                          iconColor: "text-sky-500",
+                          bullet: "text-sky-500",
+                          button: "border-sky-400 text-sky-600",
+                        }
+                      : service.id === "esg-tech"
+                      ? {
+                          iconBg: "bg-emerald-50",
+                          iconColor: "text-emerald-600",
+                          bullet: "text-emerald-600",
+                          button: "border-emerald-400 text-emerald-700",
+                        }
+                      : service.id === "web-dev"
+                      ? {
+                          iconBg: "bg-indigo-50",
+                          iconColor: "text-indigo-500",
+                          bullet: "text-indigo-500",
+                          button: "border-indigo-400 text-indigo-600",
+                        }
+                      : service.id === "custom-erp"
+                      ? {
+                          iconBg: "bg-rose-50",
+                          iconColor: "text-rose-500",
+                          bullet: "text-rose-500",
+                          button: "border-rose-400 text-rose-600",
+                        }
+                      : {
+                          iconBg: "bg-primary/10",
+                          iconColor: "text-primary",
+                          bullet: "text-primary",
+                          button: "border-primary text-primary",
+                        }
                   return (
                     <div
                       key={service.id}
-                      className="bg-white p-8 rounded-lg border border-gray-200 shadow-sm hover:border-primary hover:shadow-md transition-all duration-300 flex flex-col"
+                      className={`bg-white p-8 rounded-lg border border-gray-200 shadow-sm transition-all duration-300 flex flex-col
+                        ${
+                          service.id === "ai-applications"
+                            ? "hover:border-primary/40 hover:shadow-[0_0_40px_rgba(139,92,246,0.28)]"
+                            : service.id === "business-automation"
+                            ? "hover:border-amber-400/60 hover:shadow-[0_0_40px_rgba(245,158,11,0.25)]"
+                            : service.id === "ai-integration"
+                            ? "hover:border-sky-400/60 hover:shadow-[0_0_40px_rgba(56,189,248,0.25)]"
+                            : service.id === "esg-tech"
+                            ? "hover:border-emerald-400/60 hover:shadow-[0_0_40px_rgba(52,211,153,0.25)]"
+                            : service.id === "web-dev"
+                            ? "hover:border-indigo-400/60 hover:shadow-[0_0_40px_rgba(129,140,248,0.25)]"
+                            : service.id === "custom-erp"
+                            ? "hover:border-rose-400/60 hover:shadow-[0_0_40px_rgba(244,114,182,0.25)]"
+                            : "hover:border-primary hover:shadow-md"
+                        }`}
                     >
                       <div className="mb-6">
-                        <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-                          <IconComponent className="w-6 h-6 text-primary" />
+                        <div
+                          className={`w-12 h-12 rounded-lg flex items-center justify-center mb-4 ${accentClasses.iconBg}`}
+                        >
+                          <IconComponent className={`w-6 h-6 ${accentClasses.iconColor}`} />
                         </div>
                         <h2 className="text-2xl font-semibold text-gray-900 mb-3">{service.title}</h2>
                         <p className="text-gray-600 leading-relaxed mb-4">{service.description}</p>
@@ -204,14 +315,14 @@ export default function ServicesPage() {
                         <ul className="space-y-2">
                           {service.features.map((feature, idx) => (
                             <li key={idx} className="flex items-start text-sm text-gray-600">
-                              <span className="text-primary mr-2">•</span>
+                              <span className={`${accentClasses.bullet} mr-2`}>•</span>
                               {feature}
                             </li>
                           ))}
                         </ul>
                       </div>
                       <Link href={`/services/${service.slug}`}>
-                        <Button variant="outline" className="w-full group">
+                        <Button variant="outline" className={`w-full group ${accentClasses.button}`}>
                           Learn More
                           <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                         </Button>

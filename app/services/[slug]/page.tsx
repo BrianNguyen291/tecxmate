@@ -1,7 +1,7 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { ContactFormTrigger } from "@/components/contact-form-trigger"
-import { Brain, Zap, Bot, ArrowLeft, Check, TrendingUp, Users } from "lucide-react"
+import { Brain, Zap, Bot, Leaf, MonitorSmartphone, ServerCog, ArrowLeft, Check, TrendingUp, Users } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
 import Script from "next/script"
@@ -142,6 +142,129 @@ const services = {
       "Building AI capabilities within your team"
     ],
   },
+  "esg-carbon-footprint": {
+    id: "esg-tech",
+    icon: Leaf,
+    title: "ESG Tech & Carbon Footprint",
+    description: "Help traditional manufacturers calculate product and process carbon footprints and prepare compliance-ready data for the latest EU carbon reporting requirements.",
+    longDescription:
+      "Stay ahead of fast-changing ESG and carbon regulations without drowning in spreadsheets. We design and implement carbon footprint systems for traditional manufacturers—especially metal and CNC shops—that turn your production data into compliant, audit-friendly CO2e metrics. From data collection and emission factor modeling to dashboards and customer-facing certificates, we make it practical to respond to EU carbon laws and buyer requests.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Win RFQs from EU and global buyers that now require product-level carbon data as part of vendor qualification.",
+        "Differentiate from low-cost competitors by offering transparent, verifiable carbon footprint reports with every quote.",
+        "Build trust with existing customers by proactively providing ESG data instead of waiting for them to chase you."
+      ],
+      moreRevenue: [
+        "Protect and expand export revenue by staying compliant with emerging EU carbon disclosure rules and buyer scorecards.",
+        "Turn ESG from a cost center into a sales asset—use carbon data to justify premium positioning and long-term contracts.",
+        "Reduce the internal cost of ESG reporting by automating repeat data pulls and calculations instead of manual Excel workflows."
+      ]
+    },
+    features: [
+      "Product and process-level carbon footprint modeling (energy, materials, overhead)",
+      "Configurable emission factor library for common materials and machine types",
+      "Dashboards for plant, line, and job-level CO2e trends",
+      "Customer- and auditor-ready carbon footprint certificates",
+      "Data exports aligned with EU-style carbon reporting structures",
+      "Integration hooks for ERP/MES and CSV-based production data"
+    ],
+    benefits: [
+      "Stay compliant with fast-evolving EU and buyer carbon reporting expectations",
+      "Answer carbon footprint questions in minutes instead of weeks of manual work",
+      "Create a single source of truth for emissions across machines, materials, and jobs",
+      "Equip sales and account teams with ESG data they can confidently share",
+      "Lay the groundwork for broader ESG and sustainability initiatives"
+    ],
+    useCases: [
+      "CNC or metal shop needing part-level CO2e to respond to EU customer RFQs",
+      "Tier-1 or Tier-2 automotive supplier preparing product carbon footprint files",
+      "Industrial manufacturer consolidating energy, material, and production data into a single ESG view",
+      "Factory building a lightweight carbon dashboard ahead of full ESG transformation"
+    ]
+  },
+  "website-design-development": {
+    id: "web-dev",
+    icon: MonitorSmartphone,
+    title: "Company Website Design & Development",
+    description:
+      "Design and build modern, conversion-focused company websites that look premium, load fast, and are easy for your team to keep up to date.",
+    longDescription:
+      "Your website is often the first serious conversation customers have with your company. We design and build modern, founder-friendly websites that tell your story clearly, look premium on every device, and are simple for your team to update without relying on a full-time developer. From structure and messaging to performance and analytics, we treat your website as a core sales asset, not just a brochure.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Make a strong first impression with a premium, on-brand website that builds trust with international partners and buyers.",
+        "Increase conversions with clear messaging, focused landing pages, and obvious next steps for visitors.",
+        "Support more markets with multilingual-ready structures and content layouts.",
+      ],
+      moreRevenue: [
+        "Turn your website into a pipeline driver—optimize for demo bookings, quote requests, and discovery calls.",
+        "Reduce developer dependency and content bottlenecks so marketing and leadership can ship updates faster.",
+        "Use analytics and tracking to understand which pages and campaigns actually move revenue.",
+      ],
+    },
+    features: [
+      "UX and information architecture tailored to founders and B2B buyers",
+      "Responsive, high-performance implementation for mobile and desktop",
+      "CMS setup (e.g. headless or WordPress) so non-technical staff can edit content",
+      "Conversion-focused landing pages and forms",
+      "Analytics, basic SEO, and tracking integrated from day one",
+      "Design system and components that can grow with new pages",
+    ],
+    benefits: [
+      "Professional, modern brand presence that supports sales conversations",
+      "Faster time from idea to live page without heavy engineering involvement",
+      "Better insight into which content and campaigns work",
+      "A website foundation that can be extended as you add products and markets",
+    ],
+    useCases: [
+      "SME upgrading from a legacy or DIY website to a professional presence",
+      "Founders needing a credible English-language site for overseas partners",
+      "Companies launching a new product line and needing focused landing pages",
+      "Teams wanting a CMS-driven site so marketing can ship updates independently",
+    ],
+  },
+  "custom-erp-solutions": {
+    id: "custom-erp",
+    icon: ServerCog,
+    title: "Custom ERP & Operations Systems",
+    description:
+      "Design and implement lightweight, custom ERP-style systems that match how your factory or team actually works.",
+    longDescription:
+      "Off-the-shelf ERPs are often too heavy, too rigid, or too expensive for growing manufacturers and service teams. We design and build custom ERP-style systems that match your real workflows—from orders and production tracking to inventory, purchasing, and approvals. The result is an operations backbone that your team actually adopts, because it fits how they work instead of forcing them into someone else’s template.",
+    valueOutcomes: {
+      moreCustomers: [
+        "Serve more customers with the same team by reducing manual coordination, status chasing, and spreadsheet work.",
+        "Deliver a more consistent, reliable experience across orders and projects, improving customer trust and retention.",
+        "Onboard new staff faster with clear, systemized processes.",
+      ],
+      moreRevenue: [
+        "Reduce leakage and errors (lost orders, wrong quantities, missed follow-ups) that quietly destroy margin.",
+        "Unlock real-time visibility into production, inventory, and WIP so leadership can make faster decisions.",
+        "Scale to higher order volumes without needing to scale headcount at the same rate.",
+      ],
+    },
+    features: [
+      "Process discovery and system design tailored to your factory or team",
+      "Order, production, and inventory tracking modules",
+      "Role-based access, approvals, and audit trails",
+      "Integrations with existing tools (accounting, spreadsheets, MES, chat)",
+      "Dashboards and reports focused on utilization, throughput, and bottlenecks",
+      "Cloud-hosted or on-premise deployment options",
+    ],
+    benefits: [
+      "A system your team actually uses because it fits your workflow",
+      "Less time lost to searching, reconciling, and double entry",
+      "Higher data accuracy for planning, purchasing, and sales",
+      "Stronger operational foundation for future automation and analytics",
+    ],
+    useCases: [
+      "Factory replacing spreadsheet-based production and inventory tracking",
+      "Service team needing a tailored job/engagement tracking system",
+      "Operations leaders wanting a lighter alternative to big-name ERPs",
+      "Companies planning future automation and needing a clean system of record first",
+    ],
+  },
 }
 
 export async function generateStaticParams() {
@@ -210,6 +333,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
   }
 
   const IconComponent = service.icon
+  const isESG = service.id === "esg-tech"
 
   const serviceStructuredData = {
     "@context": "https://schema.org",
@@ -269,7 +393,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
       <div className="min-h-screen bg-white">
         <Navbar />
         <main>
-          <section className="bg-primary/5 py-16 md:py-24">
+          <section className={isESG ? "bg-emerald-50 py-16 md:py-24" : "bg-primary/5 py-16 md:py-24"}>
             <div className="container px-4 md:px-6">
               <Link href="/services" className="inline-flex items-center gap-2 text-primary hover:underline mb-8">
                 <ArrowLeft className="h-4 w-4" />
@@ -277,8 +401,8 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               </Link>
               <div className="mx-auto max-w-3xl">
                 <div className="flex items-center gap-4 mb-6">
-                  <div className="w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center">
-                    <IconComponent className="w-8 h-8 text-primary" />
+                  <div className={isESG ? "w-16 h-16 bg-emerald-100 rounded-lg flex items-center justify-center" : "w-16 h-16 bg-primary/10 rounded-lg flex items-center justify-center"}>
+                    <IconComponent className={isESG ? "w-8 h-8 text-emerald-600" : "w-8 h-8 text-primary"} />
                   </div>
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl">
                     {service.title}
@@ -309,7 +433,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     <ul className="space-y-3">
                       {service.valueOutcomes.moreCustomers.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <Check className={isESG ? "h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mt-0.5 flex-shrink-0"} />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -325,7 +449,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                     <ul className="space-y-3">
                       {service.valueOutcomes.moreRevenue.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <Check className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
+                          <Check className={isESG ? "h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mt-0.5 flex-shrink-0"} />
                           <span>{item}</span>
                         </li>
                       ))}
@@ -344,7 +468,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <ul className="space-y-3">
                     {service.features.map((feature, idx) => (
                       <li key={idx} className="flex items-start">
-                        <Check className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <Check className={isESG ? "h-5 w-5 text-emerald-600 mr-3 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0"} />
                         <span className="text-gray-700">{feature}</span>
                       </li>
                     ))}
@@ -356,7 +480,7 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
                   <ul className="space-y-3">
                     {service.benefits.map((benefit, idx) => (
                       <li key={idx} className="flex items-start">
-                        <Check className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <Check className={isESG ? "h-5 w-5 text-emerald-600 mr-3 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0"} />
                         <span className="text-gray-700">{benefit}</span>
                       </li>
                     ))}
@@ -378,9 +502,9 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
               <div className="mt-12 text-center">
                 <ContactFormTrigger
                   size="lg"
-                  className="bg-primary hover:bg-primary-dark text-white"
+                  className={isESG ? "bg-emerald-500 hover:bg-emerald-600 text-white" : "bg-primary hover:bg-primary-dark text-white"}
                 >
-                  Get Started with {service.title}
+                  Book a Call
                 </ContactFormTrigger>
               </div>
             </div>
