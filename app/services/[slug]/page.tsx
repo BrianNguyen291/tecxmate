@@ -415,51 +415,6 @@ export default async function ServicePage({ params }: { params: Promise<{ slug: 
             </div>
           </section>
 
-          {"valueOutcomes" in service && service.valueOutcomes && (
-            <section className="py-12 md:py-16 bg-gray-50 border-y border-gray-200">
-              <div className="container px-4 md:px-6 max-w-6xl">
-                <h2 className="text-2xl font-semibold mb-2 text-center">What You Get</h2>
-                <p className="text-gray-600 text-center mb-10 max-w-2xl mx-auto">
-                  We focus on outcomes: more customers and more revenue. Here’s how this service creates value for you.
-                </p>
-                <div className="grid gap-8 md:grid-cols-2">
-                  <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <Users className="w-5 h-5 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-semibold">More Customers</h3>
-                    </div>
-                    <ul className="space-y-3">
-                      {service.valueOutcomes.moreCustomers.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <Check className={isESG ? "h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mt-0.5 flex-shrink-0"} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                  <div className="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
-                        <TrendingUp className="w-5 h-5 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-semibold">More Revenue</h3>
-                    </div>
-                    <ul className="space-y-3">
-                      {service.valueOutcomes.moreRevenue.map((item, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-gray-700">
-                          <Check className={isESG ? "h-5 w-5 text-emerald-600 mt-0.5 flex-shrink-0" : "h-5 w-5 text-primary mt-0.5 flex-shrink-0"} />
-                          <span>{item}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </section>
-          )}
-
           <section className="py-12 md:py-16">
             <div className="container px-4 md:px-6 max-w-6xl">
               <div className="grid gap-12 md:grid-cols-2">
